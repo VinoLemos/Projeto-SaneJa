@@ -1,3 +1,4 @@
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -21,5 +22,11 @@ namespace Projeto_SaneJa.Models
         public string? Login { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         [Required]
         public string? Senha { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public ICollection<Imovel>? Imoveis { get; set; }
+
+        public Cliente()
+        {
+            Imoveis = new Collection<Imovel>();
+        }
     }
 }
