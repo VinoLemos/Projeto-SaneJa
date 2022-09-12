@@ -20,8 +20,8 @@ namespace Projeto_SaneJa.Models
         [Required(ErrorMessage = "Telefone é obrigatório")]
         public int Telefone { get; set; }
         [Required]
-        public string? Login { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string? Login { get; set; }
         [Required]
-        public string? Senha { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string? Senha { get; set; }
     }
 }

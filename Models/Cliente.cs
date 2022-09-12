@@ -10,7 +10,7 @@ namespace Projeto_SaneJa.Models
         [Required(ErrorMessage = "O nome é obrigatório!")]
         [StringLength(80, ErrorMessage = "O nome deve ter entre 5 e 80 caracteres", MinimumLength = 5)]
         public string? Nome { get; set; }
-         [Required(ErrorMessage = "RG é obrigatório!")]
+        [Required(ErrorMessage = "RG é obrigatório!")]
         [StringLength(9)]
         public string? Rg { get; set; }
         [Key]
@@ -19,9 +19,9 @@ namespace Projeto_SaneJa.Models
          [Required(ErrorMessage = "Telefone é obrigatório")]
         public int Telefone { get; set; }
         [Required]
-        public string? Login { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string? Login { get; set; }
         [Required]
-        public string? Senha { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string? Senha { get; set; }
         public ICollection<Imovel>? Imoveis { get; set; }
 
         public Cliente()

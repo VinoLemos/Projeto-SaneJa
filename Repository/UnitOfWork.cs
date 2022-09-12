@@ -25,7 +25,7 @@ namespace Projeto_SaneJa.Repository
                 return _imovelRepo = _imovelRepo ?? new ImovelRepository(_context);
             }
         }
-        public IAgenteRepository Agente
+        public IAgenteRepository AgenteRepository
         {
             get
             {

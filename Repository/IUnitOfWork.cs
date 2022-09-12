@@ -4,7 +4,7 @@ namespace Projeto_SaneJa.Repository
     {
          IClienteRepository ClienteRepository { get; }
          IImovelRepository ImovelRepository { get; }
-         IAgenteRepository Agente { get; }
+         IAgenteRepository AgenteRepository { get; }
          IVisitaTecnicaRepository VisitaTecnicaRepository { get; }
          void Commit();
     }
