@@ -7,17 +7,39 @@ namespace Projeto_SaneJa.Repository
         private ClienteRepository? _clienteRepo;
         private AgenteRepository? _agenteRepo;
         private ImovelRepository? _imovelRepo;
-        private VisitaTecnicaRepository? _visita;
+        private VisitaTecnicaRepository? _visitaRepo;
         public AppDbContext? _context;
 
-        public IClienteRepository ClienteRepository => throw new NotImplementedException();
+        public IClienteRepository ClienteRepository 
+        {
+            get 
+            {
+                return _clienteRepo = _clienteRepo ?? new ClienteRepository(_context);
+            }    
+        }
 
-        public IImovelRepository ImovelRepository => throw new NotImplementedException();
+        public IImovelRepository ImovelRepository
+        {
+            get
+            {
+                return _imovelRepo = _imovelRepo ?? new ImovelRepository(_context);
+            }
+        }
+        public IAgenteRepository Agente
+        {
+            get
+            {
+                return _agenteRepo = _agenteRepo ?? new AgenteRepository(_context);
+            }
+        }
 
-        public IAgenteRepository Agente => throw new NotImplementedException();
-
-        public IVisitaTecnicaRepository VisitaTecnicaRepository => throw new NotImplementedException();
-
+        public IVisitaTecnicaRepository VisitaTecnicaRepository
+        {
+            get
+            {
+                return _visitaRepo = _visitaRepo ?? new VisitaTecnicaRepository(_context);
+            }
+        }
         public UnitOfWork(AppDbContext context)
         {
             _context = context;
