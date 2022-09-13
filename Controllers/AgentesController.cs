@@ -1,4 +1,6 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Projeto_SaneJa.Dtos;
 using Projeto_SaneJa.Models;
 using Projeto_SaneJa.Repository;
 
@@ -8,19 +10,22 @@ namespace Projeto_SaneJa.Controllers
     public class AgentesController : ControllerBase
     {
         private readonly IUnitOfWork _uof;
-        public AgentesController(IUnitOfWork context)
+        private readonly IMapper _mapper;
+        public AgentesController(IUnitOfWork context, IMapper mapper)
         {
             _uof = context;
+            _mapper = mapper;
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<AgenteDeSaneamento>> Get()
+        public ActionResult<IEnumerable<AgenteDTO>> Get()
         {
             try
             {
                 var agentes = _uof.AgenteRepository?.Get().ToList();
-                return agentes == null ?
-                NotFound("Não foram encontrados agentes") : agentes;
+                var agentesDto = _mapper.Map<List<AgenteDTO>>(agentes);
+                return agentesDto == null ?
+                NotFound("Não foram encontrados agentes") : agentesDto;
             }
             catch (System.Exception)
             {
@@ -29,13 +34,14 @@ namespace Projeto_SaneJa.Controllers
             }
         }
 
-        [HttpGet("{cpf:long}", Name = "ObterAgente")]
-        public ActionResult<AgenteDeSaneamento> Get(long cpf)
+        [HttpGet("{matricula:int}", Name = "ObterAgente")]
+        public ActionResult<AgenteDTO> Get(int matricula)
         {
             try
             {
-                var agente = _uof.AgenteRepository?.GetById(c => c.Cpf == cpf);
-                return agente == null ? NotFound("Agente não encontrado no sistema.") : agente;
+                var agente = _uof.AgenteRepository?.GetById(c => c.Matricula == matricula);
+                var agenteDto = _mapper.Map<AgenteDTO>(agente);
+                return agenteDto == null ? NotFound("Agente não encontrado no sistema.") : agenteDto;
             }
             catch (System.Exception)
             {
@@ -45,16 +51,18 @@ namespace Projeto_SaneJa.Controllers
         }
 
         [HttpPost]
-        public ActionResult Post(AgenteDeSaneamento agente)
+        public ActionResult Post(AgenteDTO agenteDto)
         {
             try
             {
-                if (agente is null) return BadRequest("Agente inválido");
+                var agente = _mapper.Map<AgenteDeSaneamento>(agenteDto);
                 _uof.AgenteRepository.Add(agente);
                 _uof.Commit();
 
+                agenteDto = _mapper.Map<AgenteDTO>(agente);
+
                 return new CreatedAtRouteResult("ObterAgente",
-                        new { cpf = agente.Cpf }, agente);
+                        new { cpf = agente.Cpf }, agenteDto);
             }
             catch (System.Exception)
             {
@@ -63,15 +71,18 @@ namespace Projeto_SaneJa.Controllers
             }
         }
 
-        [HttpPut("{cpf:long}")]
-        public ActionResult Put(long cpf, AgenteDeSaneamento agente)
+        [HttpPut("{matricula:int}")]
+        public ActionResult Put(int matricula, [FromBody]AgenteDTO agenteDto)
         {
             try
             {
-                if (cpf != agente.Cpf) return BadRequest();
+                if (matricula != agenteDto.Matricula) return BadRequest();
+
+                var agente = _mapper.Map<AgenteDeSaneamento>(agenteDto);
+
                 _uof.AgenteRepository.Update(agente);
                 _uof.Commit();
-                return Ok(agente);
+                return Ok();
             }
             catch (System.Exception)
             {
@@ -80,12 +91,12 @@ namespace Projeto_SaneJa.Controllers
             }
         }
 
-        [HttpDelete("{cpf:long}")]
-        public ActionResult Delete(long cpf)
+        [HttpDelete("{matricula:int}")]
+        public ActionResult<AgenteDTO> Delete(int matricula)
         {
             try
             {
-                var agente = _uof.AgenteRepository?.GetById(c => c.Cpf == cpf);
+                var agente = _uof.AgenteRepository?.GetById(c => c.Matricula == matricula);
                 if (agente is null)
                 {
                     return NotFound("Agente não encontrado no sistema");
@@ -93,7 +104,9 @@ namespace Projeto_SaneJa.Controllers
                 _uof.AgenteRepository?.Delete(agente);
                 _uof.Commit();
 
-                return Ok(agente);
+                var agenteDto = _mapper.Map<AgenteDTO>(agente);
+
+                return Ok(agenteDto);
             }
             catch (System.Exception)
             {

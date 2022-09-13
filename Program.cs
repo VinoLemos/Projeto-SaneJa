@@ -1,5 +1,7 @@
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Projeto_SaneJa.Context;
+using Projeto_SaneJa.Mappings;
 using Projeto_SaneJa.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,6 +18,13 @@ string mySqlConnection = builder.Configuration.GetConnectionString("DefaultConne
 builder.Services.AddDbContext<AppDbContext>(options =>
         options.UseMySql(mySqlConnection,
             ServerVersion.AutoDetect(mySqlConnection)));
+
+var mappingConfig = new MapperConfiguration( mc => 
+{
+    mc.AddProfile(new MappingProfile());
+});
+IMapper mapper = mappingConfig.CreateMapper();
+builder.Services.AddSingleton(mapper);
 
 var app = builder.Build();
 

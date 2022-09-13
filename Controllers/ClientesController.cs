@@ -1,4 +1,6 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Projeto_SaneJa.Dtos;
 using Projeto_SaneJa.Models;
 using Projeto_SaneJa.Repository;
 
@@ -8,19 +10,22 @@ namespace Projeto_SaneJa.Controllers
     public class ClientesController : ControllerBase
     {
         private readonly IUnitOfWork _uof;
-        public ClientesController(IUnitOfWork context)
+        private readonly IMapper _mapper;
+        public ClientesController(IUnitOfWork context, IMapper mapper)
         {
             _uof = context;
+            _mapper = mapper;
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<Cliente>> Get()
+        public ActionResult<IEnumerable<ClienteDTO>> Get()
         {
             try
             {
                 var clientes = _uof.ClienteRepository?.Get().ToList();
-                return clientes == null ?
-                NotFound("Não foram encontrados clientes") : clientes;
+                var clientesDto = _mapper.Map<List<ClienteDTO>>(clientes);
+                return clientesDto == null ?
+                NotFound("Não foram encontrados clientes") : clientesDto;
             }
             catch (System.Exception)
             {
@@ -30,12 +35,13 @@ namespace Projeto_SaneJa.Controllers
         }
 
         [HttpGet("{cpf:long}", Name = "ObterCliente")]
-        public ActionResult<Cliente> Get(long cpf)
+        public ActionResult<ClienteDTO> Get(long cpf)
         {
             try
             {
                 var cliente = _uof.ClienteRepository?.GetById(c => c.Cpf == cpf);
-                return cliente == null ? NotFound("Cliente não encontrado no sistema.") : cliente;
+                var clienteDto = _mapper.Map<ClienteDTO>(cliente);
+                return clienteDto == null ? NotFound("Cliente não encontrado no sistema.") : clienteDto;
             }
             catch (System.Exception)
             {
@@ -45,13 +51,16 @@ namespace Projeto_SaneJa.Controllers
         }
 
         [HttpPost]
-        public ActionResult Post(Cliente cliente)
+        public ActionResult Post(ClienteDTO clienteDto)
         {
             try
             {
-                if (cliente is null) return BadRequest("Cliente inválido");
+                if (clienteDto is null) return BadRequest("Cliente inválido");
+                var cliente = _mapper.Map<Cliente>(clienteDto);
                 _uof.ClienteRepository.Add(cliente);
                 _uof.Commit();
+
+                clienteDto = _mapper.Map<ClienteDTO>(cliente);
 
                 return new CreatedAtRouteResult("ObterCliente",
                         new { cpf = cliente.Cpf }, cliente);
@@ -64,14 +73,17 @@ namespace Projeto_SaneJa.Controllers
         }
 
         [HttpPut("{cpf:long}")]
-        public ActionResult Put(long cpf, Cliente cliente)
+        public ActionResult Put(long cpf, [FromBody]ClienteDTO clienteDto)
         {
             try
             {
-                if (cpf != cliente.Cpf) return BadRequest();
+                if (cpf != clienteDto.Cpf) return BadRequest();
+
+                var cliente = _mapper.Map<Cliente>(clienteDto);
+
                 _uof.ClienteRepository.Update(cliente);
                 _uof.Commit();
-                return Ok(cliente);
+                return Ok(clienteDto);
             }
             catch (System.Exception)
             {
@@ -81,7 +93,7 @@ namespace Projeto_SaneJa.Controllers
         }
 
         [HttpDelete("{cpf:long}")]
-        public ActionResult Delete(long cpf)
+        public ActionResult<ClienteDTO> Delete(long cpf)
         {
             try
             {
@@ -93,7 +105,9 @@ namespace Projeto_SaneJa.Controllers
                 _uof.ClienteRepository?.Delete(cliente);
                 _uof.Commit();
 
-                return Ok(cliente);
+                var clienteDto = _mapper.Map<ClienteDTO>(cliente);
+
+                return Ok(clienteDto);
             }
             catch (System.Exception)
             {

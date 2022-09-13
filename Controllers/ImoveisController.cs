@@ -1,4 +1,6 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Projeto_SaneJa.Dtos;
 using Projeto_SaneJa.Models;
 using Projeto_SaneJa.Repository;
 
@@ -8,19 +10,22 @@ namespace Projeto_SaneJa.Controllers
     public class ImoveisController : ControllerBase
     {
         private readonly IUnitOfWork _uof;
-        public ImoveisController(IUnitOfWork context)
+        private readonly IMapper _mapper;
+        public ImoveisController(IUnitOfWork context, IMapper mapper)
         {
             _uof = context;
+            _mapper = mapper;
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<Imovel>> Get()
+        public ActionResult<IEnumerable<ImovelDTO>> Get()
         {
             try
             {
                 var imoveis = _uof.ImovelRepository?.Get().ToList();
-                return imoveis == null ?
-                NotFound("Não foram encontrados imoveis") : imoveis;
+                var imoveisDto = _mapper.Map<List<ImovelDTO>>(imoveis);
+                return imoveisDto == null ?
+                NotFound("Não foram encontrados imoveis") : imoveisDto;
             }
             catch (System.Exception)
             {
@@ -30,12 +35,13 @@ namespace Projeto_SaneJa.Controllers
         }
 
         [HttpGet("{rgi:int}", Name = "ObterImovel")]
-        public ActionResult<Imovel> Get(int rgi)
+        public ActionResult<ImovelDTO> Get(int rgi)
         {
             try
             {
                 var imovel = _uof.ImovelRepository?.GetById(c => c.Rgi == rgi);
-                return imovel == null ? NotFound("Imovel não encontrado no sistema.") : imovel;
+                var imovelDto = _mapper.Map<ImovelDTO>(imovel);
+                return imovelDto == null ? NotFound("Imovel não encontrado no sistema.") : imovelDto;
             }
             catch (System.Exception)
             {
@@ -45,16 +51,20 @@ namespace Projeto_SaneJa.Controllers
         }
 
         [HttpPost]
-        public ActionResult Post(Imovel imovel)
+        public ActionResult Post(ImovelDTO imovelDto)
         {
             try
             {
-                if (imovel is null) return BadRequest("Imovel inválido");
+                if (imovelDto is null) return BadRequest("Imovel inválido");
+
+                var imovel = _mapper.Map<Imovel>(imovelDto);
                 _uof.ImovelRepository.Add(imovel);
                 _uof.Commit();
 
+                imovelDto = _mapper.Map<ImovelDTO>(imovel);
+
                 return new CreatedAtRouteResult("ObterImovel",
-                        new { rgi = imovel.Rgi }, imovel);
+                        new { rgi = imovel.Rgi }, imovelDto);
             }
             catch (System.Exception)
             {
@@ -64,14 +74,17 @@ namespace Projeto_SaneJa.Controllers
         }
 
         [HttpPut("{rgi:int}")]
-        public ActionResult Put(int rgi, Imovel imovel)
+        public ActionResult Put(int rgi, [FromBody]ImovelDTO imovelDto)
         {
             try
             {
-                if (rgi != imovel.Rgi) return BadRequest();
+                if (rgi != imovelDto.Rgi) return BadRequest();
+
+                var imovel = _mapper.Map<Imovel>(imovelDto);
+
                 _uof.ImovelRepository.Update(imovel);
                 _uof.Commit();
-                return Ok(imovel);
+                return Ok(imovelDto);
             }
             catch (System.Exception)
             {
@@ -81,7 +94,7 @@ namespace Projeto_SaneJa.Controllers
         }
 
         [HttpDelete("{rgi:int}")]
-        public ActionResult Delete(int rgi)
+        public ActionResult<ImovelDTO> Delete(int rgi)
         {
             try
             {
@@ -93,7 +106,9 @@ namespace Projeto_SaneJa.Controllers
                 _uof.ImovelRepository?.Delete(imovel);
                 _uof.Commit();
 
-                return Ok(imovel);
+                var imovelDto = _mapper.Map<ImovelDTO>(imovel);
+
+                return Ok(imovelDto);
             }
             catch (System.Exception)
             {

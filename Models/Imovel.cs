@@ -1,7 +1,6 @@
-using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
 namespace Projeto_SaneJa.Models
 {
@@ -25,6 +24,8 @@ namespace Projeto_SaneJa.Models
         public int Rgi { get; set; }
         [Required(ErrorMessage = "RGI é obrigatório")]
         public int Hidrometro { get; set; }
+        [Required]
+        public long CpfProprietario { get; set; }
         [JsonIgnore]
         public Cliente? Proprietario { get; set; }
     }
