@@ -15,7 +15,9 @@ namespace Projeto_SaneJa.Models
         [StringLength(9)]
         public string? Rg { get; set; }
         [Required]
-        public long Cpf{ get; set; }
+        public long Cpf { get; set; }
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [DataType(DataType.Date)]
         public DateTime DataNascimento { get; set; }
         [Required(ErrorMessage = "Telefone é obrigatório")]
         public int Telefone { get; set; }
