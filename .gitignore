@@ -1,2 +1,7 @@
 bin/
 obj/
+
+Front/node_modules/
+Front/ios/Pods/
+
+Front/package-lock.json
