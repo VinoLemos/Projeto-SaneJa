@@ -15,9 +15,8 @@ class App extends Component {
 const style = StyleSheet.create({
   App: {
     flexGrow: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 
   Titulo: {
@@ -28,9 +27,9 @@ const style = StyleSheet.create({
   Logo: {
     flex: 1,
     alignSelf: 'center',
-    height: 100,
-    width: 355,
-    padding: 40,
+    resizeMode: 'contain',
+    height: '20%',
+    width: '20%',
   }
 })
 
