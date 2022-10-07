@@ -1,12 +1,15 @@
-import saneja from './saneja.png';
 import './App.css';
+import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
+import Index from './pages/Index.js';
 
 function App() {
   return (
     <div className="App">
-      
-        <img src={saneja} className="App-logo" alt="logo" />
-        <h1>Hello World!</h1>
+      <Router>
+          <Routes>
+            <Route path="/" element={<Index/>} exact/>
+          </Routes>
+      </Router>
     </div>
   );
 }
