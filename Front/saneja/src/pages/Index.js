@@ -15,7 +15,7 @@ function Index() {
 
             <div>
                 <p>Não tem uma conta?</p>
-                <a href='#'>Cadastre-se</a>
+                <a href='/'>Cadastre-se</a>
             </div>
         </div>
     )
