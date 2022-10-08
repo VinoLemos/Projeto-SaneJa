@@ -1,4 +1,6 @@
 * {
+  margin: 0;
+  padding: 0;
   font-family: 'Quicksand', sans-serif;
 }
 
@@ -26,6 +28,11 @@
   box-shadow: 5px 5px 5px #BBC4C5;
 }
 
+.botao:hover {
+  background-color: #cbeff1;
+  cursor: pointer;
+}
+
 .App p {
   padding-top: 30px;
   font-size: 12px;
@@ -36,6 +43,24 @@
   text-decoration: none;
   font-size: 12px;
   color: #6F9CB5;
+}
+
+.Logo-nome {
+  width: 15%;
+  height: 10%;
+}
+
+.div-login {
+  margin-left: 35%;
+  padding: 30px;
+  width: 350px;
+  height: fit-content;
+  background-color: #BBC4C5;
+  border-radius: 5px;
+}
+
+.div-login label {
+  font-size: 12px;
 }
 
 @keyframes App-logo-spin {

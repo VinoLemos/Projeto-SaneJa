@@ -1,4 +1,5 @@
 import saneja from '../img/logo.png'
+import {Link} from 'react-router-dom';
 
 function Index() {
     return(
@@ -10,7 +11,9 @@ function Index() {
             <img src={saneja} className="index-logo" alt="Logo" />
 
             <div>
-                <input type="button" value="Faça Login" className='botao' onClick="#"/>
+                <Link to="/login">
+                    <input type="button" value="Faça Login" className='botao'/>
+                </Link>
             </div>
 
             <div>
