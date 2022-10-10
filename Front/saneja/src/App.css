@@ -82,7 +82,7 @@
 .data-input {
   width: 15em;
   height: 2em;
-  border: 0.2em solid #CFC6C5;
+  border: 0.1em solid #CFC6C5;
   border-radius: 0.5em;
 }
 
@@ -111,4 +111,70 @@
   margin-top: 4rem;
   width: 150%;
   height: 2rem;
+}
+
+.form-cadastro {
+  display: grid;
+}
+
+.form-cadastro h1 {
+  padding-top: 0.5em;
+  font-size: 1rem;
+  color: #1A618A;
+}
+.form-cadastro p {
+  margin-top: 0;
+  padding-top: 0;
+  font-size: 0.7rem;
+  color: #1A618A;
+  font-weight: 600;
+}
+
+.form-data-input {
+  margin-bottom: 1rem;
+  width: 23em;
+  height: 2em;
+  border: 0.1em solid #CFC6C5;
+  border-radius: 0.5em;
+}
+
+.form-data-input::placeholder {
+  color: #1A618A;
+  font-weight: 500;
+}
+
+.div-phone-nasc {
+  display: flex;
+}
+
+.div-phone-nasc input {
+  border: 0.1em solid #CFC6C5;
+  width: 10.7em;
+  border-radius: 0.5em;
+  margin-bottom: 1rem;
+  margin-right: 1rem;
+}
+
+.div-phone-nasc input::placeholder {
+  color: #1A618A;
+  font-weight: 500;
+}
+
+.div-botao {
+  display: grid;
+  place-items: center;
+}
+
+.botao-cadastro {
+  width: 10rem;
+  height: 2rem;
+  border-style: none;
+  border-radius: 0.5rem;
+  background-color: #DFE8E9;
+  box-shadow: 5px 5px 5px #AFB3B5;
+}
+
+.botao-cadastro:hover {
+  background-color: #ebf6f7;
+  cursor: pointer;
 }
