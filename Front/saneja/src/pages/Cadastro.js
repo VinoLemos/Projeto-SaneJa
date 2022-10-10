@@ -17,16 +17,9 @@ function Cadastro() {
                 </div>
                 <input type="email" name="email" placeholder="Email" className="form-data-input"/>
                 <input type="password" name="senha" placeholder="Senha" className="form-data-input"/>
-                <h1>Dados do Imóvel</h1>
-                <input type="text" name="rua" placeholder="Rua" className="form-data-input"/>
-                <input type="number" name="numero" placeholder="Nº" className="form-data-input"/>
-                <input type="number" name="cep" placeholder="CEP" className="form-data-input"/>
-                <input type="text" name="complemento" placeholder="Complemento" className="form-data-input"/>
-                <input type="text" name="bairro" placeholder="Bairro" className="form-data-input"/>
-                <input type="number" name="rgi" placeholder="RGI" className="form-data-input"/>
-                <input type="number" name="hidRelogio" placeholder="Hidrômetro/Relógio" className="form-data-input"/>
+                
                 <div className='div-botao'>
-                    <input type="button" value="Cadastrar" className='botao-cadastro' onClick="#"/>
+                    <input type="button" value="Cadastrar" className='botao-cadastro' />
                 </div>
             </div>
             <Footer/>
