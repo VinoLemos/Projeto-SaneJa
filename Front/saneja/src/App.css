@@ -1,31 +1,42 @@
 * {
-  margin: 0;
-  padding: 0;
   font-family: 'Quicksand', sans-serif;
 }
 
-.App {
-  text-align: center;
+.main-container {
+  padding: 0 1em;
+  margin: 0 auto;
+  max-width: 60rem;
+  display: grid;
+  place-items: center;
 }
 
-.App-logo {
+.index-logo {
   height: 40vmin;
   pointer-events: none;
 }
 
-.App h1 {
-  padding-top: 50px;
-  font-size: 20px;
+@keyframes index-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.main-container h1 {
+  padding-top: 4rem;
+  font-size: 1rem;
   color: #444343;
 }
 
 .botao {
-  width: 200px;
-  height: 40px;
+  width: 10rem;
+  height: 2rem;
   border-style: none;
-  border-radius: 5px;
+  border-radius: 0.5rem;
   background-color: #A7D9DC;
-  box-shadow: 5px 5px 5px #BBC4C5;
+  box-shadow: 5px 5px 5px #AFB3B5;
 }
 
 .botao:hover {
@@ -33,41 +44,71 @@
   cursor: pointer;
 }
 
-.App p {
-  padding-top: 30px;
-  font-size: 12px;
+.main-container p {
+  padding-top: 3rem;
+  font-size: 0.8rem;
   color: #444343;
 }
 
-.App a {
+.bottom-div {
+  text-align: center;
+}
+
+.bottom-div a {
   text-decoration: none;
-  font-size: 12px;
+  font-size: 0.8rem;
   color: #6F9CB5;
 }
 
-.Logo-nome {
-  width: 15%;
-  height: 10%;
+.bottom-div a:hover {
+  color: #96c1d8;
+}
+
+.logo-nome {
+  width: 10rem;
+  height: 10rem;
 }
 
 .div-login {
-  margin-left: 35%;
-  padding: 30px;
-  width: 350px;
-  height: fit-content;
-  background-color: #BBC4C5;
+  margin-left: 0.5rem;
+  padding: 3rem;
+  max-width: 25rem;
+  display: grid;
+  place-items: center;
+  background-color: #D1D0D2;
   border-radius: 5px;
 }
 
-.div-login label {
-  font-size: 12px;
+.data-input {
+  width: 15em;
+  height: 2em;
+  border: 0.2em solid #CFC6C5;
+  border-radius: 0.5em;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.div-login label {
+  justify-self: left;
+}
+
+.div-login a {
+  text-decoration: none;
+  padding-bottom: 2rem;
+  font-size: 0.8rem;
+  color: #477C9E;
+  justify-self: right;
+}
+
+.div-login a:hover {
+  color: #69a0c2;
+}
+
+.header-img {
+  width: 150%;
+  height: 2rem;
+}
+
+.footer-img {
+  margin-top: 4rem;
+  width: 150%;
+  height: 2rem;
 }

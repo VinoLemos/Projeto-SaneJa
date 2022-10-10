@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 
 function Index() {
     return(
-        <div className="App">
+        <div className="main-container">
             <div>
                 <h1>Bem-vindo</h1>
             </div>
@@ -16,7 +16,7 @@ function Index() {
                 </Link>
             </div>
 
-            <div>
+            <div className='bottom-div'>
                 <p>Não tem uma conta?</p>
                 <a href='/'>Cadastre-se</a>
             </div>
