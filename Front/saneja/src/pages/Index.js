@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 function Index() {
     return(
         <div className="main-container">
-            <div>
+            <div className="index-container">
                 <h1>Bem-vindo</h1>
             </div>
 

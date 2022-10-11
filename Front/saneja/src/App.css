@@ -15,6 +15,10 @@
   pointer-events: none;
 }
 
+.index-container {
+  padding-top: 30;
+}
+
 @keyframes index-logo-spin {
   from {
     transform: rotate(0deg);
@@ -104,6 +108,7 @@
 
 .header-img {
   position: fixed;
+  left: -50%;
   top: 0;
   width: 150%;
   height: 2rem;
@@ -111,6 +116,7 @@
 
 .footer-img {
   position: fixed;
+  left: -50%;
   bottom: 0;
   width: 150%;
   height: 2rem;
@@ -118,6 +124,7 @@
 
 .form-cadastro {
   display: grid;
+  margin-top: 50%;
   flex: 1;
   padding-top: 10%;
 }
