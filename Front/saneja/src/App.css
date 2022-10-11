@@ -103,18 +103,23 @@
 }
 
 .header-img {
+  position: fixed;
+  top: 0;
   width: 150%;
   height: 2rem;
 }
 
 .footer-img {
-  margin-top: 4rem;
+  position: fixed;
+  bottom: 0;
   width: 150%;
   height: 2rem;
 }
 
 .form-cadastro {
   display: grid;
+  flex: 1;
+  padding-top: 10%;
 }
 
 .form-cadastro h1 {
