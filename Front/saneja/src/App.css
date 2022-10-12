@@ -71,6 +71,10 @@
 .logo-nome {
   width: 10rem;
   height: 10rem;
+  position: fixed;
+  top: 13%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .div-login {
@@ -81,6 +85,10 @@
   place-items: center;
   background-color: #D1D0D2;
   border-radius: 5px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .data-input {
@@ -107,7 +115,7 @@
 }
 
 .header-img {
-  position: fixed;
+  position: absolute;
   left: -50%;
   top: 0;
   width: 150%;
@@ -123,10 +131,10 @@
 }
 
 .form-cadastro {
-  display: grid;
-  margin-top: 50%;
-  flex: 1;
-  padding-top: 10%;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .form-cadastro h1 {
