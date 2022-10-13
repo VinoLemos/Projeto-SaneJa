@@ -1,0 +1,31 @@
+.index-logo {
+    height: 40vmin;
+    pointer-events: none;
+  }
+  
+  .index-container {
+    padding-top: 30;
+  }
+  
+  @keyframes index-logo-spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .botao {
+    width: 10rem;
+    height: 2rem;
+    border-style: none;
+    border-radius: 0.5rem;
+    background-color: #A7D9DC;
+    box-shadow: 5px 5px 5px #AFB3B5;
+  }
+  
+  .botao:hover {
+    background-color: #cbeff1;
+    cursor: pointer;
+  }

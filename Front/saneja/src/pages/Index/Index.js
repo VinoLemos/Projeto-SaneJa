@@ -1,4 +1,5 @@
-import saneja from '../img/logo.png'
+import saneja from '../../img/logo.png'
+import './Index.css';
 import {Link} from 'react-router-dom';
 
 function Index() {

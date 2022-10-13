@@ -1,6 +1,7 @@
-import logo from '../img/logo-nome.png'
-import Header from '../components/Header'
-import Footer from '../components/Footer'
+import logo from '../../img/logo-nome.png'
+import './Login.css'
+import Header from '../../components/Header'
+import Footer from '../../components/Footer'
 
 function Login() {
     return(
