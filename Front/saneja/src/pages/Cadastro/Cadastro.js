@@ -11,6 +11,7 @@ import * as yup from "yup";
 import InputMask from 'react-input-mask';
 
 import swal from 'sweetalert';
+import { Link } from 'react-router-dom';
 
 const schema = yup.object({
     nome: yup.string().required('Nome é obrigatório'),
@@ -34,7 +35,7 @@ function Cadastro() {
             title: "Cadastro realizado com sucesso!",
             text: "Verifique seu email para confirmar seu cadastro",
             button: "Ir para a página de login" 
-        }).then(() => {window.location.href = ('/login')});
+        }).then(() => {window.location.href = <Link to="/login"/>});
     }
 
     return (
