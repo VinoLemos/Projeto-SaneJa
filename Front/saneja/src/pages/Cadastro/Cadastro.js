@@ -34,11 +34,10 @@ function Cadastro() {
             icon: 'success',
             title: "Cadastro realizado com sucesso!",
             text: "Verifique seu email para confirmar o seu cadastro.",
-            showConfirmButton: false,
-            html: 
-                "<Link to='/login'>" +
-                    "<a href='/login'>Ir para a página de login</a>" +
-                "</Link>"
+            confirmButtonText: 'Ir para a página de login',
+            confirmButtonColor: '#6F9CB5',
+        }).then(function () {
+            window.location.pathname = "/login";
         })
     }
 
