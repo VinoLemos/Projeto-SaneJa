@@ -10,7 +10,7 @@ import * as yup from "yup";
 
 import InputMask from 'react-input-mask';
 
-import swal from 'sweetalert';
+import swal from 'sweetalert2';
 
 const schema = yup.object({
     nome: yup.string().required('Nome é obrigatório'),
@@ -30,11 +30,13 @@ function Cadastro() {
     })
 
     const handleCreateUser = () => {
-        swal({
+        swal.fire({
+            icon: 'success',
             title: "Cadastro realizado com sucesso!",
-            text: "Verifique seu email para confirmar seu cadastro",
-            button: "Ir para a página de login" 
-        }).then(() => {window.location.href = "/login"});
+            text: "Verifique seu email para confirmar o seu cadastro.",
+            showConfirmButton: false,
+            footer: '<a href="/login">Ir para a página de login</a>'
+        })
     }
 
     return (
