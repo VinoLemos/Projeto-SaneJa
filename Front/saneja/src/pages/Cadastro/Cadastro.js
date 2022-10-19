@@ -11,7 +11,6 @@ import * as yup from "yup";
 import InputMask from 'react-input-mask';
 
 import swal from 'sweetalert2';
-import { Link } from 'react-router-dom';
 
 const schema = yup.object({
     nome: yup.string().required('Nome é obrigatório'),
