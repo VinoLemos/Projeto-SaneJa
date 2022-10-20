@@ -61,8 +61,7 @@ namespace Projeto_SaneJa.Controllers
 
                 agenteDto = _mapper.Map<AgenteDTO>(agente);
 
-                return new CreatedAtRouteResult("ObterAgente",
-                        new { cpf = agente.Cpf }, agenteDto);
+                return Ok(agenteDto);
             }
             catch (System.Exception)
             {
@@ -72,7 +71,7 @@ namespace Projeto_SaneJa.Controllers
         }
 
         [HttpPut("{matricula:int}")]
-        public ActionResult Put(int matricula, [FromBody]AgenteDTO agenteDto)
+        public ActionResult Put(int matricula, [FromBody] AgenteDTO agenteDto)
         {
             try
             {

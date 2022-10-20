@@ -63,8 +63,7 @@ namespace Projeto_SaneJa.Controllers
 
                 visitaDto = _mapper.Map<VisitaTecnicaDTO>(visita);
 
-                return new CreatedAtRouteResult("ObterImovel",
-                        new { codigoVisita = visita.CodigoVisita }, visitaDto);
+                return Ok(visitaDto);
             }
             catch (System.Exception)
             {
