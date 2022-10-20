@@ -24,6 +24,8 @@
 .form-data-input {
   width: 18rem;
   height: 2em;
+  display: flex;
+  margin-bottom: 1rem;
   border: 0.1em solid #CFC6C5;
   border-radius: 0.5em;
   color: #1A618A;
@@ -64,7 +66,13 @@
   font-size: 0.6rem;
 }
 
+.link-login {
+  padding-top: 1rem;
+  text-align: center;
+}
+
 a {
   text-decoration: none;
+  font-size: 0.8rem;
   color: #6F9CB5;
 }
