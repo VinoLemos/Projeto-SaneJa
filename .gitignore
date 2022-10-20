@@ -1,6 +1,8 @@
 bin/
 obj/
 
+appsettings.Development.json
+
 Front/node_modules/
 Front/ios/Pods/
 
