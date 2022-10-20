@@ -22,11 +22,5 @@ namespace Projeto_SaneJa.Models
         public string? Login { get; set; }
         [Required]
         public string? Senha { get; set; }
-        public ICollection<Imovel>? Imoveis { get; set; }
-
-        public Cliente()
-        {
-            Imoveis = new Collection<Imovel>();
-        }
     }
 }

@@ -14,7 +14,7 @@ namespace Projeto_SaneJa.Repository
         {
             get 
             {
-                return _clienteRepo = _clienteRepo ?? new ClienteRepository(_context);
+                return _clienteRepo = _clienteRepo ?? new ClienteRepository(_context!);
             }    
         }
 
@@ -22,14 +22,14 @@ namespace Projeto_SaneJa.Repository
         {
             get
             {
-                return _imovelRepo = _imovelRepo ?? new ImovelRepository(_context);
+                return _imovelRepo = _imovelRepo ?? new ImovelRepository(_context!);
             }
         }
         public IAgenteRepository AgenteRepository
         {
             get
             {
-                return _agenteRepo = _agenteRepo ?? new AgenteRepository(_context);
+                return _agenteRepo = _agenteRepo ?? new AgenteRepository(_context!);
             }
         }
 
@@ -37,7 +37,7 @@ namespace Projeto_SaneJa.Repository
         {
             get
             {
-                return _visitaRepo = _visitaRepo ?? new VisitaTecnicaRepository(_context);
+                return _visitaRepo = _visitaRepo ?? new VisitaTecnicaRepository(_context!);
             }
         }
         public UnitOfWork(AppDbContext context)
