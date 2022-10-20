@@ -7,10 +7,12 @@ namespace Projeto_SaneJa.Models
     [Table("Visitas")]
     public class VisitaTecnica
     {
-        [JsonIgnore]
-        public Imovel? Imovel { get; set; }
-        [JsonIgnore]
-        public AgenteDeSaneamento? Agente { get; set; }
+        [Required]
+        public int rgiImovel { get; set; }
+        [Required]
+        public int matriculaAgente { get; set; }
+        [Required]
+        public int cpfProprietario { get; set; }
         [Required]
         public DateTime DataSolicitacao { get; set; }
         [Required]
