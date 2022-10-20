@@ -51,3 +51,11 @@
   width: 150%;
   height: 2rem;
 }
+
+.logo-img {
+  width: 8rem;
+  position: absolute;
+  top: 10%;
+  left: 92%;
+  transform: translate(-50%, -50%);
+}

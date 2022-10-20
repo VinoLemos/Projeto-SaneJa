@@ -2,8 +2,34 @@ import logo from '../../img/logo-nome.png'
 import './Login.css'
 import Header from '../../components/Header'
 import Footer from '../../components/Footer'
+import { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import useAuth from '../../hooks/useAuth'
 
-function Login() {
+const Login = () => {
+    const {signin} = useAuth();
+    const navigate = useNavigate();
+
+    const [email, setEmail] = useState("");
+    const [senha, setSenha] = useState("");
+    const [error, setError] = useState("");
+
+    const handleLogin = () => {
+        if (!email | !senha) {
+            setError("Preencha todos os campos");
+            return;
+        }
+
+        const res = signin(email, senha);
+
+        if (res) {
+            setError(res);
+            return;
+        }
+
+        navigate("/home");
+    }
+    
     return(
         <div className='main-container'>
             <Header/>
@@ -11,12 +37,21 @@ function Login() {
 
             <div className="div-login">
                 <label>Email</label> <br/>
-                <input type="email" name="email" className='data-input' /> <br/>
+                <input type="email" className='data-input' 
+                    value={email}
+                    onChange={(e) => [setEmail(e.target.value), setError("")]}
+                /> <br/>
                 <label>Senha</label> <br/>
-                <input type="password" name="senha" className='data-input' />
-                <a href='/' >Esqueci minha senha</a>
+                <input type="password" className='data-input' 
+                    value={senha}
+                    onChange={(e) => [setSenha(e.target.value), setError("")]}
+                />
+                <span className='alerta-campos'>{error}</span>
+                <Link to="/cadastro">
+                    <a href='/cadastro'>Não tem uma conta?</a>
+                </Link>
                 <div>
-                    <input type="button" value="Entrar" className='botao'/>
+                    <input type="button" value="Entrar" className='botao' onClick={handleLogin}/>
                 </div>
             </div>
             <Footer/>
