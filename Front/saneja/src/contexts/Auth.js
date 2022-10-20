@@ -16,7 +16,7 @@ export const AuthProvider = ({children}) => {
 
             if (hasUser) setUser(hasUser[0]);
         }
-    })
+    }, []);
 
     const signin = (email, senha) => {
         const usersStorage = JSON.parse(localStorage.getItem("users_db"));
