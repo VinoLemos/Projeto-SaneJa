@@ -1,5 +1,29 @@
 .home-h1 h1 {
     padding-top: 5rem;
-    font-size: 1.5rem;
+    font-size: 1rem;
     color: #1A618A;
+}
+
+.menu-linha {
+    display: inline;
+    justify-content: center;
+}
+
+.menu-botao {
+    width: 7rem;
+    height: 5rem;
+    padding-top: 1em;
+    margin-right: 1em;
+    margin-left: 1em;
+    margin-bottom: 2em;
+    text-align: center;
+    background-color: #94B3B7;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+}
+
+.menu-botao:hover {
+    cursor: pointer;
+    background-color: #90bec2;
 }

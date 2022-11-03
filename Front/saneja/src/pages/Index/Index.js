@@ -20,7 +20,7 @@ function Index() {
             <div className='bottom-div'>
                 <p>Não tem uma conta?</p>
                 <Link to="/cadastro">
-                    <a href='/cadastro'>Cadastre-se</a>
+                    Cadastre-se
                 </Link>
             </div>
         </div>

@@ -5,10 +5,11 @@ import Footer from '../../components/Footer'
 
 import InputMask from 'react-input-mask';
 import {Link, useNavigate} from 'react-router-dom';
-import useAuth from '../../hooks/useAuth';
 import swal from 'sweetalert2';
+import validator from 'validator';
+import axios from 'axios';
 
-const Cadastro = () => {
+function Cadastro() {
 
     const [nome, setNome] = useState("");
     const [cpf, setCpf] = useState("");
@@ -19,9 +20,14 @@ const Cadastro = () => {
     const [senha, setSenha] = useState("");
     const [senhaConf, setSenhaConf] = useState("");
     const [error, setError] = useState("");
+    
     const navigate = useNavigate();
 
-    const {signup} = useAuth();
+    const baseUrl = "https://sanejaapi.azurewebsites.net/clientes";
+
+    const [data, setData]=useState([]);
+
+    const [cliente] = (nome, cpf, rg, dataNasc, email, senha);
 
     const handleSignup = () => {
         if (!nome | !cpf | !rg | !dataNasc | !telefone | !email | !senha) {
@@ -30,29 +36,47 @@ const Cadastro = () => {
         } else if (senha !== senhaConf) {
             setError("As senhas devem ser iguais");
             return;
+        } else if (!validator.isEmail(email)) {
+            setError("Digite um email válido");
         }
 
-        const res = signup(email, senha);
+        
 
-        if (res) {
-            setError(res);
-            return;
+        const requestPost=async()=>{
+            axios.defaults.headers.post['Content-Type'] ='application/json;charset=utf-8';
+            axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
+            await axios.post(baseUrl, cliente)
+    
+            .then(response=>{
+                setData(data.concat(response.data));
+                swal.fire({
+                    icon: 'success',
+                    title: "Cadastro realizado com sucesso!",
+                    confirmButtonText: "Ir para página de login",
+                    confirmButtonColor: "#6F9CB5"
+                })
+                navigate("/login");
+            }).catch(error=>{
+                console.log(error);
+                swal.fire({
+                    icon: 'error',
+                    title: "Algo deu errado",
+                    confirmButtonText: "Refazer cadastro",
+                    confirmButtonColor: "#6F9CB5"
+                })
+                navigate("/cadastro");
+            })
         }
 
-        swal.fire({
-            icon: 'success',
-            title: "Cadastro realizado com sucesso!",
-            confirmButtonText: "Ir para página de login",
-            confirmButtonColor: "#6F9CB5"
-        })
-        navigate("/login");
+        requestPost();
+
     }
 
     return (
         <div className="main-container">
             <Header/>
             <div className="form-cadastro">
-                <form >
+                <form>
                     <h1>Dados Pessoais</h1>
                     <input 
                         type="text" 
@@ -65,7 +89,7 @@ const Cadastro = () => {
                     <InputMask className="form-data-input"
                         type="text" 
                         value={cpf}
-                        onChange={(e) => [setCpf(e.target.value), setError("")]}
+                        onChange={(e) => [setCpf(e.target.value.replace(/[^0-9]/g, "")), setError("")]} // o replace está dizendo que o campo só vai considerar numeros e o que for caractere, ele vai substituir por vazio
                         placeholder="CPF"
                         mask="999.999.999-99"
                     /> 
@@ -73,7 +97,7 @@ const Cadastro = () => {
                     <InputMask className="form-data-input"
                         type="text" 
                         value={rg}
-                        onChange={(e) => [setRg(e.target.value), setError("")]}
+                        onChange={(e) => [setRg(e.target.value.replace(/[^0-9]/g, "")), setError("")]}
                         mask="99.999.999-9"
                         placeholder="RG"
                     /> 
@@ -86,16 +110,16 @@ const Cadastro = () => {
                         className="form-data-input"
                     /> 
                     
-                    
                     <InputMask className="form-data-input"
                         value={telefone}
-                        onChange={(e) => [setTelefone(e.target.value), setError("")]}
+                        onChange={(e) => [setTelefone(e.target.value.replace(/[^0-9]/g, "")), setError("")]}
                         mask="(99) 99999-9999"
                         placeholder="Telefone"
                     /> 
                     
                     <input 
                         type="text" 
+                        autoComplete="username"
                         value={email} 
                         onChange={(e) => [setEmail(e.target.value), setError("")]}
                         placeholder="Email" 
@@ -104,6 +128,7 @@ const Cadastro = () => {
                     
                     <input 
                         type="password" 
+                        autoComplete="new-password"
                         value={senha} 
                         onChange={(e) => [setSenha(e.target.value), setError("")]}
                         placeholder="Senha" 
@@ -112,6 +137,7 @@ const Cadastro = () => {
 
                     <input 
                         type="password" 
+                        autoComplete="new-password"
                         value={senhaConf} 
                         onChange={(e) => [setSenhaConf(e.target.value), setError("")]}
                         placeholder="Confirmar senha" 
@@ -125,10 +151,9 @@ const Cadastro = () => {
                     </div>
                     <div className='link-login'>
                         <Link to="/login">
-                            <a href='/login'>Já tem uma conta?</a>
+                            Já tem uma conta?
                         </Link>
                     </div>
-                    
                 </form>
             </div>
             <Footer/>
