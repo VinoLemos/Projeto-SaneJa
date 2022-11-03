@@ -23,7 +23,7 @@ function Cadastro() {
     
     const navigate = useNavigate();
 
-    const baseUrl = "https://sanejaapi.azurewebsites.net/clientes";
+    const baseUrl = ("https://sanejaapi.azurewebsites.net/clientes", {mode:'cors'});
 
     const [data, setData]=useState([]);
 
@@ -40,11 +40,8 @@ function Cadastro() {
             setError("Digite um email válido");
         }
 
-        
+        const requestPost = async()=> {
 
-        const requestPost=async()=>{
-            axios.defaults.headers.post['Content-Type'] ='application/json;charset=utf-8';
-            axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
             await axios.post(baseUrl, cliente)
     
             .then(response=>{
