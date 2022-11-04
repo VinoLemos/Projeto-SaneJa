@@ -21,28 +21,43 @@ function Cadastro() {
     const [senhaConf, setSenhaConf] = useState("");
     const [error, setError] = useState("");
     
-    const navigate = useNavigate();
+    //const navigate = useNavigate();
 
-    const baseUrl = ("https://sanejaapi.azurewebsites.net/clientes", {mode:'cors'});
+    //const baseUrl = ("https://sanejaapi.azurewebsites.net/clientes", {mode:'cors'});
 
-    const [data, setData]=useState([]);
+    //const [data, setData]=useState([]);
 
-    const [cliente] = (nome, cpf, rg, dataNasc, email, senha);
-
+    const cliente = [nome, cpf, rg, dataNasc, telefone, email, senha];
+    
     const handleSignup = () => {
-        if (!nome | !cpf | !rg | !dataNasc | !telefone | !email | !senha) {
-            setError("Preencha todos os campos");
-            return;
-        } else if (senha !== senhaConf) {
-            setError("As senhas devem ser iguais");
-            return;
-        } else if (!validator.isEmail(email)) {
-            setError("Digite um email válido");
-        }
+        // if (!nome | !cpf | !rg | !dataNasc | !telefone | !email | !senha) {
+        //     setError("Preencha todos os campos");
+        //     return;
+        // } else if (senha !== senhaConf) {
+        //     setError("As senhas devem ser iguais");
+        //     return;
+        // } else if (!validator.isEmail(email)) {
+        //     setError("Digite um email válido");
+        // }
 
-        const requestPost = async()=> {
+        const response = () => {
 
-            await axios.post(baseUrl, cliente)
+         fetch("https://sanejaapi.azurewebsites.net/clientes", {
+            method: "POST",
+            mode: "no-cors",
+            headers: {
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "POST",
+                "Access-Control-Allow-Headers": "*"
+            },
+            body: JSON.stringify(cliente)
+        });
+    }
+    console.log(response);
+
+        /*const requestPost = async()=> {
+
+            await axios.post("https://sanejaapi.azurewebsites.net/clientes", {Nome:"Talita", Cpf:11111111111, Rg:"22222222", DataNascimento:"1998-12-12", Login:"talita@gmail.com", Senha:"1234"}, {mode:'cors'})
     
             .then(response=>{
                 setData(data.concat(response.data));
@@ -65,7 +80,7 @@ function Cadastro() {
             })
         }
 
-        requestPost();
+        requestPost();*/
 
     }
 
