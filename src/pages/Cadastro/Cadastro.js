@@ -22,7 +22,7 @@ function Cadastro() {
 
   //const navigate = useNavigate();
 
-  const baseUrl = "/api/clientes";
+  const baseUrl = "https://sanejaapi.azurewebsites.net/clientes";
 
   //const [data, setData]=useState([]);
 
