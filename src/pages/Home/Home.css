@@ -1,7 +1,12 @@
 .home-h1 h1 {
-    padding-top: 5rem;
+    padding-top: 10rem;
     font-size: 1rem;
     color: #1A618A;
+}
+
+.menu-box {
+    display: grid;
+    margin-top: 5%;
 }
 
 .menu-linha {

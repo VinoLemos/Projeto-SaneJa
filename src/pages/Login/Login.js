@@ -2,23 +2,29 @@ import logo from '../../img/logo-nome.png'
 import './Login.css'
 import Header from '../../components/Header'
 import Footer from '../../components/Footer'
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { AuthContext } from '../../context/auth'
 
 const Login = () => {
-    const navigate = useNavigate();
+    const { login } = useContext(AuthContext);
+
+    //const navigate = useNavigate();
 
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
     const [error, setError] = useState("");
 
-    const handleLogin = () => {
+    const handleLogin = (e) => {
+        e.preventDefault();
+
         if (!email | !senha) {
             setError("Preencha todos os campos");
             return;
         }
 
-        navigate("/home");
+        console.log("submit", {email, senha});
+        login(email,senha);
     }
     
     return(

@@ -56,11 +56,27 @@
   width: 8rem;
   position: absolute;
   top: 10%;
-  left: 92%;
+  left: 90%;
   transform: translate(-50%, -50%);
 }
 
 .botao-voltar {
   background-color: transparent;
   border: none;
+  position: absolute;
+  top: 90%;
+  right: 85%;
+}
+
+.botao-logout {
+  background-color: transparent;
+  border: none;
+  position: absolute;
+  top: 15%;
+  right: 0%;
+
+}
+
+.botao-voltar, .botao-logout:hover {
+  cursor: pointer;
 }
