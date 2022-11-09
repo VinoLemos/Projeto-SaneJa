@@ -10,6 +10,7 @@ import {AiOutlineHome} from 'react-icons/ai'
 import {FaRegEdit} from 'react-icons/fa'
 import {IoMdHammer} from 'react-icons/io'
 import Logout from '../../components/Logout'
+import { Link } from 'react-router-dom'
 
 function Home() {
     return(
@@ -37,10 +38,12 @@ function Home() {
                         <AiOutlineHome size='25px'/> <br/> 
                         Editar Dados do Imóvel
                     </button>
-                    <button className='menu-botao'> 
-                        <FaRegEdit size='25px'/> <br/> 
-                        Atualizar Dados Cadastrais
-                    </button>
+                    <Link to={"/dados-cadastrais"}>
+                        <button className='menu-botao'> 
+                            <FaRegEdit size='25px'/> <br/> 
+                            Atualizar Dados Cadastrais
+                        </button>
+                    </Link>
                 </div>
                 
                 <div className='menu-linha'>

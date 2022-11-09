@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import api from "../../api/saneja";
 import "./Cadastro.css";
 
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
+import Back from "../../components/Back";
 
 import Swal from "sweetalert2";
 import InputMask from "react-input-mask";
-import axios from "axios";
 import validator from "validator";
 
 function Cadastro() {
@@ -22,10 +23,8 @@ function Cadastro() {
   const [error, setError] = useState("");
 
   const navigate = useNavigate();
-
-  const baseUrl = "https://sanejaapi.azurewebsites.net/clientes";
-
-  const [data, setData] = useState();
+  const { pathname } = useLocation();
+  const isUpdate = pathname === '/dados-cadastrais';
 
   const cliente = {
     cpf: cpf,
@@ -37,36 +36,64 @@ function Cadastro() {
     imoveis: null,
   };
 
-  const config = {
-    headers: {
-      "Content-Type": "application/json",
-      "Access-Control-Allow-Origin": "https://www.saneja.com.br/cadastro, *",
-      "Access-Control-Allow-Headers": "*",
-      "Access-Control-Allow-Methods": "GET,POST",
-    },
-  };
-
   useEffect(() => {
-    axios.get(`${baseUrl}`).then((response) => {
-      setData(response.data);
-    });
+    if (isUpdate) {
+      const { cpf: userCpf } = JSON.parse(localStorage.getItem("user"));
+      setCpf(userCpf);
+
+      api.get(`/clientes/${userCpf}`).then((response) => {
+        setNome(response.data.nome);
+        setCpf(response.data.cpf);
+        setRg(response.data.rg);
+        setLogin(response.data.login);
+        setSenha(response.data.senha);
+        setDataNasc(response.data.dataNascimento.split("T")[0]);
+      });
+    }
   }, []);
 
-  const handleSignup = () => {
+  const isFormValid = () => {
     if (!nome | !cpf | !rg | !dataNasc | !telefone | !login | !senha) {
       setError("Preencha todos os campos");
-      return;
+      return false;
     } else if (senha !== senhaConf) {
       setError("As senhas devem ser iguais");
-      return;
+      return false;
     } else if (!validator.isEmail(login)) {
       setError("Digite um login válido");
+      return false;
     }
+    return true;
+  }
 
-    axios
-      .post(baseUrl, cliente, config)
-      .then((response) => {
-        setData(data.concat(response.data));
+  const handleUpdate = () => {
+    if (!isFormValid()) return;
+
+    api.put(`/clientes/${cpf}`, cliente)
+      .then(() => {
+        Swal.fire({
+          icon: "success",
+          title: "Dados cadastrais atualizados com sucesso!",
+          confirmButtonText: "Confirmar",
+          confirmButtonColor: "#6F9CB5",
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+        Swal.fire({
+          icon: "error",
+          title: "Algo deu errado",
+          confirmButtonText: "Corrigir dados cadastrais",
+          confirmButtonColor: "#6F9CB5",
+        });
+      });
+  } 
+
+  const handleSignup = () => {
+    if (!isFormValid()) return;
+
+    api.post('/clientes', cliente)
+      .then(() => {
         Swal.fire({
           icon: "success",
           title: "Cadastro realizado com sucesso!",
@@ -166,16 +193,17 @@ function Cadastro() {
           <div className="div-botao">
             <input
               type="button"
-              value="Cadastrar"
+              value={isUpdate ? "Atualizar" : "Cadastrar"}
               className="botao-cadastro"
-              onClick={handleSignup}
+              onClick={isUpdate ? handleUpdate : handleSignup}
             />
           </div>
-          <div className="link-login">
+          {!isUpdate && <div className="link-login">
             <Link to="/login">Já tem uma conta?</Link>
-          </div>
+          </div>}
         </form>
       </div>
+      <Back />
       <Footer />
     </div>
   );
