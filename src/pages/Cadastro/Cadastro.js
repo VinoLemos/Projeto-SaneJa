@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "./Cadastro.css";
+
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 
+import Swal from "sweetalert2";
 import InputMask from "react-input-mask";
-import { Link, useNavigate } from "react-router-dom";
-import swal from "sweetalert2";
-import validator from "validator";
 import axios from "axios";
+import validator from "validator";
 
 function Cadastro() {
   const [nome, setNome] = useState("");
@@ -15,20 +16,35 @@ function Cadastro() {
   const [rg, setRg] = useState("");
   const [dataNasc, setDataNasc] = useState("");
   const [telefone, setTelefone] = useState("");
-  const [email, setEmail] = useState("");
+  const [login, setLogin] = useState("");
   const [senha, setSenha] = useState("");
   const [senhaConf, setSenhaConf] = useState("");
   const [error, setError] = useState("");
 
-  //const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const baseUrl = "https://sanejaapi.azurewebsites.net/clientes";
 
-  //const [data, setData]=useState([]);
-
-  //const cliente = [nome, cpf, rg, dataNasc, telefone, email, senha];
-
   const [data, setData] = useState();
+
+  const cliente = {
+    cpf: cpf,
+    rg: rg,
+    nome: nome,
+    login: login,
+    senha: senha,
+    dataNascimento: dataNasc,
+    imoveis: null,
+  };
+
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "https://www.saneja.com.br/cadastro, *",
+      "Access-Control-Allow-Headers": "*",
+      "Access-Control-Allow-Methods": "GET,POST",
+    },
+  };
 
   useEffect(() => {
     axios.get(`${baseUrl}`).then((response) => {
@@ -37,68 +53,39 @@ function Cadastro() {
   }, []);
 
   const handleSignup = () => {
+    if (!nome | !cpf | !rg | !dataNasc | !telefone | !login | !senha) {
+      setError("Preencha todos os campos");
+      return;
+    } else if (senha !== senhaConf) {
+      setError("As senhas devem ser iguais");
+      return;
+    } else if (!validator.isEmail(login)) {
+      setError("Digite um login válido");
+    }
+
     axios
-      .post(baseUrl, {
-        cpf: cpf,
-        rg: rg,
-        nome: nome,
-        login: email,
-        senha: senha,
-        dataNascimento: dataNasc,
-        imoveis: null,
+      .post(baseUrl, cliente, config)
+      .then((response) => {
+        setData(data.concat(response.data));
+        Swal.fire({
+          icon: "success",
+          title: "Cadastro realizado com sucesso!",
+          confirmButtonText: "Ir para página de login",
+          confirmButtonColor: "#6F9CB5",
+        });
+        navigate("/login");
       })
-      .then((response) => setData(response.data));
+      .catch((error) => {
+        console.log(error);
+        Swal.fire({
+          icon: "error",
+          title: "Algo deu errado",
+          confirmButtonText: "Refazer cadastro",
+          confirmButtonColor: "#6F9CB5",
+        });
+        navigate("/cadastro");
+      });
   };
-
-  // const handleSignup = () => {
-
-  //     fetch("/api/clientes", {
-  //        method: "POST",
-  //        headers: {
-  //            "accepts": "application/json"
-  //        },
-  //        body: JSON.stringify(cliente)
-  //    });
-  //    }
-
-  // if (!nome | !cpf | !rg | !dataNasc | !telefone | !email | !senha) {
-  //     setError("Preencha todos os campos");
-  //     return;
-  // } else if (senha !== senhaConf) {
-  //     setError("As senhas devem ser iguais");
-  //     return;
-  // } else if (!validator.isEmail(email)) {
-  //     setError("Digite um email válido");
-  // }
-
-  /*
-       
-        const requestPost = async()=> {
-
-            await axios.post("https://sanejaapi.azurewebsites.net/clientes", {Nome:"Talita", Cpf:11111111111, Rg:"22222222", DataNascimento:"1998-12-12", Login:"talita@gmail.com", Senha:"1234"}, {mode:'cors'})
-    
-            .then(response=>{
-                setData(data.concat(response.data));
-                swal.fire({
-                    icon: 'success',
-                    title: "Cadastro realizado com sucesso!",
-                    confirmButtonText: "Ir para página de login",
-                    confirmButtonColor: "#6F9CB5"
-                })
-                navigate("/login");
-            }).catch(error=>{
-                console.log(error);
-                swal.fire({
-                    icon: 'error',
-                    title: "Algo deu errado",
-                    confirmButtonText: "Refazer cadastro",
-                    confirmButtonColor: "#6F9CB5"
-                })
-                navigate("/cadastro");
-            })
-        }
-
-        requestPost();*/
 
   return (
     <div className="main-container">
@@ -154,9 +141,8 @@ function Cadastro() {
           />
           <input
             type="text"
-            autoComplete="username"
-            value={email}
-            onChange={(e) => [setEmail(e.target.value), setError("")]}
+            value={login}
+            onChange={(e) => [setLogin(e.target.value), setError("")]}
             placeholder="Email"
             className="form-data-input"
           />
