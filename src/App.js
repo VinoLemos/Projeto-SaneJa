@@ -37,6 +37,13 @@ function App() {
                 <Home/>
               </Private>}
             />
+            <Route 
+              path="/dados-cadastrais" 
+              element={
+              <Private>
+                <Cadastro/>
+              </Private>}
+            />
           </Routes>
         </AuthProvider>
       </Router>

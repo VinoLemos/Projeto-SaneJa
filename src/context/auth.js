@@ -26,7 +26,7 @@ export const AuthProvider = ({children}) => {
   const login = (email, senha) => {
     console.log("login auth", {email, senha});
 
-    const baseUrl = `https://localhost:7250/clientes/${email}`;
+    const baseUrl = `https://sanejaapi.azurewebsites.net/clientes/${email}`;
 
     const config = {
       headers: {
