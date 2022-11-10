@@ -1,6 +1,7 @@
-import {AiOutlineImport} from 'react-icons/ai'
 import React, {useContext} from 'react'
 import {AuthContext} from '../context/auth'
+
+import {AiOutlineImport} from 'react-icons/ai'
 
 export default function Logout() {
 
@@ -11,8 +12,8 @@ export default function Logout() {
     };
 
     return(
-        <button onClick={handleLogout} className='botao-logout'>
-            <AiOutlineImport/> Sair
+        <button onClick={handleLogout} className='btn-logout'> 
+            <AiOutlineImport size='30px' style={{paddingRight: '20px'}}/>Sair
         </button>
     )
 }

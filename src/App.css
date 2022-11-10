@@ -68,14 +68,17 @@
   right: 85%;
 }
 
-.botao-logout {
+.btn-logout {
   background-color: transparent;
   border: none;
-  position: absolute;
-  top: 15%;
-  right: 0%;
+  font-size: 15px;
+  color: #d8d8d8;
+  transition: color 0.2s;
+ }
 
-}
+ .btn-logout:hover {
+  color: white;
+ }
 
 .botao-voltar, .botao-logout:hover {
   cursor: pointer;
