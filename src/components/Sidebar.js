@@ -25,7 +25,7 @@ export default props => {
                 <IoMdHammer size='30px' style={{paddingRight: '20px'}}/> 
                 Agendar Visita Técnica
             </Link>
-            <Link to='/dadoscadastrais' className='menu-item'>
+            <Link to='/dados-cadastrais' className='menu-item'>
                 <FaRegEdit size='30px' style={{paddingRight: '20px'}}/>
                 Atualizar Dados Cadastrais
             </Link>
