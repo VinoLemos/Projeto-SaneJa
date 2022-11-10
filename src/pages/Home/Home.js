@@ -35,6 +35,28 @@ function Home() {
                             </button>
                         </div>
 
+                <div className='menu-linha'>
+                    <button className='menu-botao'> 
+                        <AiOutlineHome size='25px'/> <br/> 
+                        Editar Dados do Imóvel
+                    </button>
+                    <Link to={"/dados-cadastrais"}>
+                        <button className='menu-botao'> 
+                            <FaRegEdit size='25px'/> <br/> 
+                            Atualizar Dados Cadastrais
+                        </button>
+                    </Link>
+                </div>
+                
+                <div className='menu-linha'>
+                    <button className='menu-botao'> 
+                        <FiSettings size='25px'/> <br/> 
+                        Configurações
+                    </button>
+                    <button className='menu-botao'> 
+                        <AiOutlineMessage size='25px'/> <br/> 
+                        Fale Conosco
+                    </button>
                         <div className='menu-linha'>
                             <button className='menu-botao'> 
                                 <AiOutlineHome size='25px'/> <br/> 
@@ -59,7 +81,7 @@ function Home() {
                     </div>
                 </div>
             </div>
-            
+            </div>
             <Back/>
             <Footer/>
         </div>
