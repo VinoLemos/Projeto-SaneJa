@@ -63,7 +63,6 @@ function Home() {
                 </div>
             </div>
             </div>
-            <Back/>
             <Footer/>
         </div>
     )

@@ -1,5 +1,5 @@
 import axios from "axios";
 
 export default axios.create({
-    baseURL: "https://sanejaapi.azurewebsites.net",
+  baseURL: "https://sanejaapi.azurewebsites.net",
 });

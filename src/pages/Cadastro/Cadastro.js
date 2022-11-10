@@ -1,15 +1,15 @@
-import { useEffect, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import api from "../../api/saneja";
-import "./Cadastro.css";
+import { useContext, useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import InputMask from "react-input-mask";
+import validator from "validator";
 
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import Back from "../../components/Back";
-
-import Swal from "sweetalert2";
-import InputMask from "react-input-mask";
-import validator from "validator";
+import { AuthContext } from "../../context/auth";
+import api from "../../api/saneja";
+import "./Cadastro.css";
 
 function Cadastro() {
   const [nome, setNome] = useState("");
@@ -22,9 +22,8 @@ function Cadastro() {
   const [senhaConf, setSenhaConf] = useState("");
   const [error, setError] = useState("");
 
+  const { authenticated, user } = useContext(AuthContext);
   const navigate = useNavigate();
-  const { pathname } = useLocation();
-  const isUpdate = pathname === '/dados-cadastrais';
 
   const cliente = {
     cpf: cpf,
@@ -37,11 +36,10 @@ function Cadastro() {
   };
 
   useEffect(() => {
-    if (isUpdate) {
-      const { cpf: userCpf } = JSON.parse(localStorage.getItem("user"));
-      setCpf(userCpf);
+    if (authenticated) {
+      setCpf(user.cpf);
 
-      api.get(`/clientes/${userCpf}`).then((response) => {
+      api.get(`/clientes/${user.cpf}`).then((response) => {
         setNome(response.data.nome);
         setCpf(response.data.cpf);
         setRg(response.data.rg);
@@ -193,12 +191,12 @@ function Cadastro() {
           <div className="div-botao">
             <input
               type="button"
-              value={isUpdate ? "Atualizar" : "Cadastrar"}
+              value={authenticated ? "Atualizar" : "Cadastrar"}
               className="botao-cadastro"
-              onClick={isUpdate ? handleUpdate : handleSignup}
+              onClick={authenticated ? handleUpdate : handleSignup}
             />
           </div>
-          {!isUpdate && <div className="link-login">
+          {!authenticated && <div className="link-login">
             <Link to="/login">Já tem uma conta?</Link>
           </div>}
         </form>
