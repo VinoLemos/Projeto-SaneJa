@@ -74,10 +74,12 @@
   font-size: 15px;
   color: #d8d8d8;
   transition: color 0.2s;
+  padding-left: 0;
  }
 
  .btn-logout:hover {
   color: white;
+  cursor: pointer;
  }
 
 .botao-voltar, .botao-logout:hover {

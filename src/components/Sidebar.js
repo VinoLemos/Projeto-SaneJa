@@ -1,16 +1,23 @@
 import { slide as Menu } from 'react-burger-menu';
 import {Link} from 'react-router-dom'
+import React, {useContext} from 'react'
+import {AuthContext} from '../context/auth'
 
 import {BiFile} from 'react-icons/bi'
 import {FiSettings} from 'react-icons/fi'
 import {AiOutlineHome} from 'react-icons/ai'
+import {AiOutlineImport} from 'react-icons/ai'
 import {FaRegEdit} from 'react-icons/fa'
 import {IoMdHammer} from 'react-icons/io'
 
 import './Sidebar.css'
-import Logout from '../components/Logout'
 
 export default props => {
+    const { logout } = useContext(AuthContext);
+
+    const handleLogout = () => {
+        logout();
+    };
     return (
         <Menu>
             <Link to='/solicitacoes' className='menu-item'>
@@ -33,7 +40,10 @@ export default props => {
                 <FiSettings size='30px' style={{paddingRight: '20px'}}/>
                 Configurações
             </Link>
-            <Logout/>
+            <button onClick={handleLogout} className='btn-logout'> 
+                <AiOutlineImport size='30px' style={{paddingRight: '20px'}}/>
+                Sair
+            </button>
         </Menu>
     )
 }
