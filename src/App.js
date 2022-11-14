@@ -2,7 +2,7 @@ import './App.css';
 import { BrowserRouter as Router, Routes, Route, Navigate} from "react-router-dom";
 import Index from './pages/Index/Index';
 import Login from './pages/Login/Login';
-import Cadastro from './pages/Cadastro/Cadastro';
+import Cadastro from './pages/CadastroCliente/Cadastro';
 import Home from './pages/Home/Home';
 import {AuthProvider, AuthContext} from './context/auth';
 import React, { useContext} from 'react';
