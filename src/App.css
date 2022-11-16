@@ -60,12 +60,17 @@
   transform: translate(-50%, -50%);
 }
 
-.botao-voltar {
+.btn-voltar {
   background-color: transparent;
   border: none;
   position: absolute;
-  top: 90%;
+  color: #1A618A;
+  cursor: pointer;
+  top: 85%;
   right: 85%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .btn-logout {
