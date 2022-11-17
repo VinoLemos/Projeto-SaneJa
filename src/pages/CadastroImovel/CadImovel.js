@@ -22,7 +22,9 @@ function CadImovel() {
   const [hidro, setHidro] = useState("");
   const [error, setError] = useState("");
 
-  const { authenticated, user } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
+  const cadastrar = '/cadastro-imovel';
+  const atualizar = '/dados-imovel';
   const navigate = useNavigate();
 
   const imovel = {
@@ -185,9 +187,9 @@ function CadImovel() {
           <div className="div-botao">
             <input
               type="button"
-              value={authenticated ? "Atualizar" : "Cadastrar"}
+              value={atualizar ? "Atualizar" : "Cadastrar"}
               className="botao-cadastro"
-              onClick={authenticated ? handleUpdate : handleSubmit}
+              onClick={atualizar ? handleUpdate : handleSubmit}
             />
           </div>
         </form>
