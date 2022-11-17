@@ -23,8 +23,7 @@ function CadImovel() {
   const [error, setError] = useState("");
 
   const { user } = useContext(AuthContext);
-  const cadastrar = '/cadastro-imovel';
-  const atualizar = '/dados-imovel';
+  const url = window.location;
   const navigate = useNavigate();
 
   const imovel = {
@@ -187,9 +186,9 @@ function CadImovel() {
           <div className="div-botao">
             <input
               type="button"
-              value={atualizar ? "Atualizar" : "Cadastrar"}
+              value={url === '/dados-imovel' ? "Atualizar" : "Cadastrar"}
               className="botao-cadastro"
-              onClick={atualizar ? handleUpdate : handleSubmit}
+              onClick={url === 'dados-imovel' ? handleUpdate : handleSubmit}
             />
           </div>
         </form>
