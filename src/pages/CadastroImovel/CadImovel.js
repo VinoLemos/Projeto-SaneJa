@@ -39,6 +39,8 @@ function CadImovel() {
     cpfProprietario: user.cpf
   };
 
+  console.log(imovel);
+
   useEffect(() => {
 
     api.get(`/imoveis/${rgi}`).then((response) => {
