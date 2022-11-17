@@ -23,7 +23,9 @@ function CadImovel() {
   const [error, setError] = useState("");
 
   const { user } = useContext(AuthContext);
-  const url = window.location;
+  const url = window.location.href;
+  url = url.split(".br");
+  url = url[1];
   const navigate = useNavigate();
 
   const imovel = {
