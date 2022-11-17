@@ -29,6 +29,7 @@ function Cadastro() {
     cpf: cpf,
     rg: rg,
     nome: nome,
+    telefone: telefone,
     login: login,
     senha: senha,
     dataNascimento: dataNasc,
@@ -41,6 +42,7 @@ function Cadastro() {
 
       api.get(`/clientes/${user.cpf}`).then((response) => {
         setNome(response.data.nome);
+        setTelefone(response.data.telefone);
         setCpf(response.data.cpf);
         setRg(response.data.rg);
         setLogin(response.data.login);
