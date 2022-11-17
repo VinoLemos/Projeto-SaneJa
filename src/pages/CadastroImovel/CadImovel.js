@@ -2,18 +2,17 @@ import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import InputMask from "react-input-mask";
-import validator from "validator";
 
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import Back from "../../components/Back";
 import { AuthContext } from "../../context/auth";
 import api from "../../api/saneja";
-import "./Cadastro.css";
+import "../CadastroCliente/Cadastro.css";
 
-function Cadastro() {
+function CadImovel() {
   const [rua, setRua] = useState("");
-  const [numero, setNumero] = useState("");o
+  const [numero, setNumero] = useState("");
   const [complemento, setComplemento] = useState("");
   const [cep, setCep] = useState("");
   const [bairro, setBairro] = useState("");
@@ -40,7 +39,7 @@ function Cadastro() {
 
   useEffect(() => {
 
-    api.get(`/imoveis`).then((response) => {
+    api.get(`/imoveis/${rgi}`).then((response) => {
       setRua(response.data.rua);
       setNumero(response.data.numero);
       setComplemento(response.data.complemento);
@@ -55,27 +54,21 @@ function Cadastro() {
   }, []);
 
   const isFormValid = () => {
-    if (!nome | !cpf | !rg | !dataNasc | !telefone | !login | !senha) {
+    if (!rua | !numero | !complemento | !cep | !bairro | !cidade | !estado | !rgi | !hidro ) {
       setError("Preencha todos os campos");
       return false;
-    } else if (senha !== senhaConf) {
-      setError("As senhas devem ser iguais");
-      return false;
-    } else if (!validator.isEmail(login)) {
-      setError("Digite um login válido");
-      return false;
-    }
+    } 
     return true;
   }
 
   const handleUpdate = () => {
     if (!isFormValid()) return;
 
-    api.put(`/clientes/${cpf}`, cliente)
+    api.put(`/imoveis/${rgi}`, imovel)
       .then(() => {
         Swal.fire({
           icon: "success",
-          title: "Dados cadastrais atualizados com sucesso!",
+          title: "Dados do imóvel atualizados com sucesso!",
           confirmButtonText: "Confirmar",
           confirmButtonColor: "#6F9CB5",
         });
@@ -85,24 +78,24 @@ function Cadastro() {
         Swal.fire({
           icon: "error",
           title: "Algo deu errado",
-          confirmButtonText: "Corrigir dados cadastrais",
+          confirmButtonText: "Corrigir dados do imóvel",
           confirmButtonColor: "#6F9CB5",
         });
       });
   } 
 
-  const handleSignup = () => {
+  const handleSubmit = () => {
     if (!isFormValid()) return;
 
-    api.post('/clientes', cliente)
+    api.post('/imoveis', imovel, user.cpf)
       .then(() => {
         Swal.fire({
           icon: "success",
           title: "Cadastro realizado com sucesso!",
-          confirmButtonText: "Ir para página de login",
+          confirmButtonText: "Ir para página inicial",
           confirmButtonColor: "#6F9CB5",
         });
-        navigate("/login");
+        navigate("/home");
       })
       .catch((error) => {
         console.log(error);
@@ -112,7 +105,7 @@ function Cadastro() {
           confirmButtonText: "Refazer cadastro",
           confirmButtonColor: "#6F9CB5",
         });
-        navigate("/cadastro");
+        navigate("/cadastro-imovel");
       });
   };
 
@@ -121,74 +114,71 @@ function Cadastro() {
       <Header />
       <div className="form-cadastro">
         <form>
-          <h1>Dados Pessoais</h1>
+          <h1>Dados do Imóvel</h1>
           <input
             type="text"
-            value={nome}
-            onChange={(e) => [setNome(e.target.value), setError("")]}
-            placeholder="Nome Completo"
+            value={rua}
+            onChange={(e) => [setRua(e.target.value), setError("")]}
+            placeholder="Rua"
             className="form-data-input"
           />
-          <InputMask
-            className="form-data-input"
-            type="text"
-            value={cpf}
-            onChange={(e) => [
-              setCpf(e.target.value.replace(/[^0-9]/g, "")),
-              setError(""),
-            ]} // o replace está dizendo que o campo só vai considerar numeros e o que for caractere, ele vai substituir por vazio
-            placeholder="CPF"
-            mask="999.999.999-99"
-          />
-          <InputMask
-            className="form-data-input"
-            type="text"
-            value={rg}
-            onChange={(e) => [
-              setRg(e.target.value.replace(/[^0-9]/g, "")),
-              setError(""),
-            ]}
-            mask="99.999.999-9"
-            placeholder="RG"
-          />
-          <label>Data Nascimento</label> <br />
           <input
-            type="date"
-            value={dataNasc}
-            onChange={(e) => [setDataNasc(e.target.value), setError("")]}
             className="form-data-input"
+            type="text"
+            value={numero}
+            onChange={(e) => [setNumero(e.target.value), setError("")]}
+            placeholder="Nº"
+          />
+          <input
+            className="form-data-input"
+            type="text"
+            value={complemento}
+            onChange={(e) => [setComplemento(e.target.value), setError("")]}
+            placeholder="Complemento"
           />
           <InputMask
             className="form-data-input"
-            value={telefone}
+            value={cep}
             onChange={(e) => [
-              setTelefone(e.target.value.replace(/[^0-9]/g, "")),
+              setCep(e.target.value.replace(/[^0-9]/g, "")),
               setError(""),
             ]}
-            mask="(99) 99999-9999"
-            placeholder="Telefone"
+            mask="99999-999"
+            placeholder="CEP"
           />
           <input
             type="text"
-            value={login}
-            onChange={(e) => [setLogin(e.target.value), setError("")]}
-            placeholder="Email"
+            value={bairro}
+            onChange={(e) => [setBairro(e.target.value), setError("")]}
+            placeholder="Bairro"
             className="form-data-input"
           />
           <input
-            type="password"
-            autoComplete="new-password"
-            value={senha}
-            onChange={(e) => [setSenha(e.target.value), setError("")]}
-            placeholder="Senha"
+            type="text"
+            value={cidade}
+            onChange={(e) => [setCidade(e.target.value), setError("")]}
+            placeholder="Cidade"
             className="form-data-input"
           />
           <input
-            type="password"
-            autoComplete="new-password"
-            value={senhaConf}
-            onChange={(e) => [setSenhaConf(e.target.value), setError("")]}
-            placeholder="Confirmar senha"
+            type="text"
+            value={estado}
+            onChange={(e) => [setEstado(e.target.value), setError("")]}
+            placeholder="Estado"
+            className="form-data-input"
+          />
+          <input
+            type="text"
+            value={rgi}
+            onChange={(e) => [setRgi(e.target.value), setError("")]}
+            placeholder="RGI"
+            className="form-data-input"
+          />
+          <input
+            type="text"
+            value={hidro}
+            onChange={(e) => [setHidro(e.target.value), setError("")]}
+            placeholder="Hidrômetro"
             className="form-data-input"
           />
           <span className="alerta-campos">{error}</span>
@@ -197,12 +187,9 @@ function Cadastro() {
               type="button"
               value={authenticated ? "Atualizar" : "Cadastrar"}
               className="botao-cadastro"
-              onClick={authenticated ? handleUpdate : handleSignup}
+              onClick={authenticated ? handleUpdate : handleSubmit}
             />
           </div>
-          {!authenticated && <div className="link-login">
-            <Link to="/login">Já tem uma conta?</Link>
-          </div>}
         </form>
       </div>
       <Back />
@@ -211,4 +198,4 @@ function Cadastro() {
   );
 }
 
-export default Cadastro;
+export default CadImovel;

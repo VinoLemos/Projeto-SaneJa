@@ -1,8 +1,8 @@
 import {BiFile} from 'react-icons/bi'
-import {FiSettings} from 'react-icons/fi'
 import {AiOutlineMessage} from 'react-icons/ai'
 import {AiOutlineHome} from 'react-icons/ai'
 import {FaRegEdit} from 'react-icons/fa'
+import {FaHouseUser} from 'react-icons/fa';
 import {IoMdHammer} from 'react-icons/io'
 import { Link } from 'react-router-dom'
 
@@ -37,10 +37,12 @@ function Home() {
                         </div>
 
                 <div className='menu-linha'>
-                    <button className='menu-botao'> 
-                        <AiOutlineHome size='25px'/> <br/> 
-                        Editar Dados do Imóvel
-                    </button>
+                    <Link to="/cadastro-imovel">
+                        <button className='menu-botao'> 
+                            <AiOutlineHome size='25px'/> <br/> 
+                            Cadastrar Imóvel
+                        </button>
+                    </Link>
                     <Link to={"/dados-cadastrais"}>
                         <button className='menu-botao'> 
                             <FaRegEdit size='25px'/> <br/> 
@@ -50,13 +52,16 @@ function Home() {
                 </div>
                 
                 <div className='menu-linha'>
-                    <button className='menu-botao'> 
-                        <FiSettings size='25px'/> <br/> 
-                        Configurações
-                    </button>
+                    <Link to="/dados-imovel">
+                        <button className='menu-botao'> 
+                            <FaHouseUser size='25px'/> <br/> 
+                            Atualizar Dados do Imóvel
+                        </button>
+                    </Link>
+                    
                     <button className='menu-botao'> 
                         <AiOutlineMessage size='25px'/> <br/> 
-                        Fale Conosco
+                        Fale <br/> Conosco
                     </button>
                         
                     </div>

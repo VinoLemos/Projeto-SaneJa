@@ -4,10 +4,10 @@ import React, {useContext} from 'react'
 import {AuthContext} from '../context/auth'
 
 import {BiFile} from 'react-icons/bi'
-import {FiSettings} from 'react-icons/fi'
 import {AiOutlineHome} from 'react-icons/ai'
 import {AiOutlineImport} from 'react-icons/ai'
 import {FaRegEdit} from 'react-icons/fa'
+import {FaHouseUser} from 'react-icons/fa';
 import {IoMdHammer} from 'react-icons/io'
 
 import './Sidebar.css'
@@ -20,15 +20,15 @@ export default props => {
     };
     return (
         <Menu>
-            <Link to='/solicitacoes' className='menu-item'>
+            <Link to='/minhas-solicitacoes' className='menu-item'>
                 <BiFile size='30px' style={{paddingRight: '20px'}}/>
                 Minhas Solicitações
             </Link>
-            <Link to='/dadosimovel' className='menu-item'>
+            <Link to='/cadastro-imovel' className='menu-item'>
                 <AiOutlineHome size='30px' style={{paddingRight: '20px'}}/>
-                Editar Dados do Imóvel
+                Cadastrar imóvel
             </Link>
-            <Link to='/agendarvisita' className='menu-item'>
+            <Link to='/agendar-visita' className='menu-item'>
                 <IoMdHammer size='30px' style={{paddingRight: '20px'}}/> 
                 Agendar Visita Técnica
             </Link>
@@ -36,9 +36,9 @@ export default props => {
                 <FaRegEdit size='30px' style={{paddingRight: '20px'}}/>
                 Atualizar Dados Cadastrais
             </Link>
-            <Link to='/configuracoes' className='menu-item'>
-                <FiSettings size='30px' style={{paddingRight: '20px'}}/>
-                Configurações
+            <Link to='/dados-imovel' className='menu-item'>
+                <FaHouseUser size='30px' style={{paddingRight: '20px'}}/>
+                Editar Dados do Imóvel
             </Link>
             <button onClick={handleLogout} className='btn-logout'> 
                 <AiOutlineImport size='30px' style={{paddingRight: '20px'}}/>

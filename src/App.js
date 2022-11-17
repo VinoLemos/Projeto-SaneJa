@@ -6,6 +6,7 @@ import Cadastro from './pages/CadastroCliente/Cadastro';
 import Home from './pages/Home/Home';
 import {AuthProvider, AuthContext} from './context/auth';
 import React, { useContext} from 'react';
+import CadImovel from './pages/CadastroImovel/CadImovel';
 
 function App() {
   const Private = ({children}) => {
@@ -42,6 +43,20 @@ function App() {
               element={
               <Private>
                 <Cadastro/>
+              </Private>}
+            />
+            <Route 
+              path="/cadastro-imovel" 
+              element={
+              <Private>
+                <CadImovel/>
+              </Private>}
+            />
+            <Route 
+              path="/dados-imovel" 
+              element={
+              <Private>
+                <CadImovel/>
               </Private>}
             />
           </Routes>
