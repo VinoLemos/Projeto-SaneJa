@@ -35,7 +35,8 @@ function CadImovel() {
     cidade: cidade,
     estado: estado,
     rgi: rgi,
-    hidro: hidro
+    hidrometro: hidro,
+    cpfProprietario: user.cpf
   };
 
   useEffect(() => {
@@ -88,7 +89,7 @@ function CadImovel() {
   const handleSubmit = () => {
     if (!isFormValid()) return;
 
-    api.post('/imoveis', imovel, user.cpf)
+    api.post('/imoveis', imovel)
       .then(() => {
         Swal.fire({
           icon: "success",
@@ -188,7 +189,7 @@ function CadImovel() {
               type="button"
               value={url === '/dados-imovel' ? "Atualizar" : "Cadastrar"}
               className="botao-cadastro"
-              onClick={url === 'dados-imovel' ? handleUpdate : handleSubmit}
+              onClick={url === '/dados-imovel' ? handleUpdate : handleSubmit}
             />
           </div>
         </form>
