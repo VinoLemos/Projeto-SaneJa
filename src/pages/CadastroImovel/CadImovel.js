@@ -39,8 +39,6 @@ function CadImovel() {
     cpfProprietario: user.cpf
   };
 
-  console.log(imovel);
-
   useEffect(() => {
 
     api.get(`/imoveis/${rgi}`).then((response) => {
@@ -189,9 +187,9 @@ function CadImovel() {
           <div className="div-botao">
             <input
               type="button"
-              value={url === '/dados-imovel' ? "Atualizar" : "Cadastrar"}
+              value={url == '/dados-imovel' ? "Atualizar" : "Cadastrar"}
               className="botao-cadastro"
-              onClick={url === '/dados-imovel' ? handleUpdate : handleSubmit}
+              onClick={url == '/dados-imovel' ? handleUpdate : handleSubmit}
             />
           </div>
         </form>
