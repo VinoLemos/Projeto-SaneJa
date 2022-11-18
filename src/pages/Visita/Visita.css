@@ -1,0 +1,67 @@
+.center-container {
+    display: grid;
+    place-items: center;
+}
+
+.visita-h1 h1 {
+    padding-top: 7rem;
+    font-size: 1.2rem;
+    color: #1A618A;
+}
+
+.container-agendamento {
+    border: 1px solid #5E8D93;
+    margin-top: 2rem;
+    border-radius: 30px;
+    width: 30rem;
+    height: 22rem;
+}
+
+.div-agendamento {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 2rem;
+}
+
+.div-agendamento input {
+    height: 1.5rem;
+    border-radius: 5px;
+    border: 0.1rem;
+    background-color: #d6dbdb;
+    color: #194f6d;
+    font-weight: 500;
+}
+
+.container-tipo-visita {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.select-tipo {
+    width: 15rem;
+    padding: 0.5rem;
+    background-color: #d6dbdb ;
+    border: 0.1rem solid #5E8D93;
+    border-radius: 5px;
+    color: #194f6d;
+    font-weight: 500;
+}
+
+.select-tipo option {
+    background-color: transparent;
+    color: #194f6d;
+}
+
+.campo-observacoes {
+    resize: none;
+    width: 15rem;
+    border-radius: 5px;
+    border: transparent;
+    background-color: #ecf1f1;
+}
+
+.btn {
+    margin-top: 2rem;
+}
