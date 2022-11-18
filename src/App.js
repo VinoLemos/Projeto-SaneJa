@@ -7,6 +7,7 @@ import Home from './pages/Home/Home';
 import {AuthProvider, AuthContext} from './context/auth';
 import React, { useContext} from 'react';
 import CadImovel from './pages/CadastroImovel/CadImovel';
+import Visita from './pages/Visita/Visita';
 
 function App() {
   const Private = ({children}) => {
@@ -57,6 +58,13 @@ function App() {
               element={
               <Private>
                 <CadImovel/>
+              </Private>}
+            />
+            <Route 
+              path="/agendamento" 
+              element={
+              <Private>
+                <Visita/>
               </Private>}
             />
           </Routes>

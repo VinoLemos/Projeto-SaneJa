@@ -40,7 +40,7 @@ function Cadastro() {
     if (authenticated) {
       setCpf(user.cpf);
 
-      api.get(`/clientes/${user.cpf}`).then((response) => {
+      api.get(`/clientes/getByEmail/${user.email}`).then((response) => {
         setNome(response.data.nome);
         setTelefone(response.data.telefone);
         setCpf(response.data.cpf);

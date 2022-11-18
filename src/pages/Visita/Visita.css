@@ -39,7 +39,7 @@
     align-items: center;
 }
 
-.select-tipo {
+.dropdown .btn {
     width: 15rem;
     padding: 0.5rem;
     background-color: #d6dbdb ;
@@ -47,11 +47,31 @@
     border-radius: 5px;
     color: #194f6d;
     font-weight: 500;
+    transition: all 0.2s;
 }
 
-.select-tipo option {
-    background-color: transparent;
-    color: #194f6d;
+.dropdown .btn:hover,
+.dropdown .btn:first-child:active,
+.dropdown .btn:first-child.active {
+    background-color: #5E8D93;
+    border-color: #5E8D93;
+}
+
+.dropdown .dropdown-menu {
+    width: 100%;
+}
+
+.dropdown .dropdown-item {
+    font-size: 1rem;
+}
+
+.dropdown .dropdown-item.active,
+.dropdown .dropdown-item:active {
+    background-color: #5E8D93;
+}
+
+.select-tipo {
+    margin-bottom: 1rem;
 }
 
 .campo-observacoes {
@@ -62,6 +82,18 @@
     background-color: #ecf1f1;
 }
 
-.btn {
-    margin-top: 2rem;
+.form-label {
+    width: 100%
+}
+
+.form-input {
+    padding: 1rem;
+}
+
+.comments {
+    margin-top: 1rem;
+}
+
+.comments textarea {
+    width: 100%;
 }

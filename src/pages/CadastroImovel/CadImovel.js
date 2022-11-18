@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import InputMask from "react-input-mask";
 
@@ -23,9 +23,7 @@ function CadImovel() {
   const [error, setError] = useState("");
 
   const { user } = useContext(AuthContext);
-  const url = window.location.href;
-  url = url.split(".br");
-  url = url[1];
+  const { pathname } = useLocation();
   const navigate = useNavigate();
 
   const imovel = {
@@ -189,9 +187,9 @@ function CadImovel() {
           <div className="div-botao">
             <input
               type="button"
-              value={url == '/dados-imovel' ? "Atualizar" : "Cadastrar"}
+              value={pathname == '/dados-imovel' ? "Atualizar" : "Cadastrar"}
               className="botao-cadastro"
-              onClick={url == '/dados-imovel' ? handleUpdate : handleSubmit}
+              onClick={pathname == '/dados-imovel' ? handleUpdate : handleSubmit}
             />
           </div>
         </form>
