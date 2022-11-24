@@ -23,7 +23,7 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (email, senha) => {
     console.log("login auth", { email, senha });
-    const { data: userResponse } = await api.get(`ObterClientePorEmail/${email}`);
+    const { data: userResponse } = await api.get(`/clientes/GetByEmail/${email}`);
 
     console.log(userResponse);
     setUserEmail(userResponse.login);
