@@ -97,3 +97,17 @@
 .comments textarea {
     width: 100%;
 }
+
+.botao-cadastro {
+    width: 10rem;
+    height: 2rem;
+    border-style: none;
+    border-radius: 0.5rem;
+    background-color: #DFE8E9;
+    box-shadow: 5px 5px 5px #AFB3B5;
+  }
+  
+  .botao-cadastro:hover {
+    background-color: #ebf6f7;
+    cursor: pointer;
+  }

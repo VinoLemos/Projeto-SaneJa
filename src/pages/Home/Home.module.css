@@ -3,6 +3,12 @@
     place-items: center;
 }
 
+.receptive{
+    padding-top: 5rem;
+    font-size: 1.3rem;
+    color: #1A618A;
+}
+
 .home-h1 h1 {
     padding-top: 5rem;
     font-size: 1rem;
@@ -11,7 +17,7 @@
 
 .menu-box {
     display: grid;
-    margin-top: 5%;
+    margin-top: 3rem;
 }
 
 .menu-linha {
@@ -31,6 +37,7 @@
     color: #fff;
     border: none;
     border-radius: 5px;
+    font-size: 0.8rem;
 }
 
 .menu-botao:hover {

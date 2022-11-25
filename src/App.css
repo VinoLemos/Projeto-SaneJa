@@ -90,3 +90,75 @@
 .botao-voltar, .botao-logout:hover {
   cursor: pointer;
 }
+
+/* Individual item */
+.bm-item {
+  display: inline-block;
+
+  /* Our sidebar item styling */
+  text-decoration: none;
+  text-align: left;
+  font-size: 15px;
+  padding-bottom: 15px;
+  color: #d8d8d8;
+  margin-bottom: 10px;
+  transition: color 0.2s;
+}
+
+/* Change color on hover */
+.bm-item:hover {
+  color: white;
+}
+
+/* The rest copied directly from react-burger-menu docs */
+
+/* Position and sizing of burger button */
+.bm-burger-button {
+  position: fixed;
+  width: 24px;
+  height: 20px;
+  left: 36px;
+  top: 36px;
+}
+
+/* Color/shape of burger icon bars */
+.bm-burger-bars {
+  background: #719094;
+}
+
+.bm-burger-bars:hover {
+  background: #94B3B7;
+}
+
+/* Position and sizing of clickable cross button */
+.bm-cross-button {
+  height: 20px;
+  width: 20px;
+}
+
+/* Color/shape of close button cross */
+.bm-cross {
+  background: #bdc3c7;
+}
+
+/* General sidebar styles */
+.bm-menu {
+  background: #5E8D93;
+  padding: 2.5em 1.5em 0;
+  font-size: 1.10em;
+}
+
+/* Morph shape necessary with bubble or elastic */
+.bm-morph-shape {
+  fill: #4b4e59;
+}
+
+/* Wrapper for item list */
+.bm-item-list {
+  color: #b8b7ad;
+}
+
+/* Styling of overlay */
+.bm-overlay {
+  background: rgba(94,141,147,0.01);
+}

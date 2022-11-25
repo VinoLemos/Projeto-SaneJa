@@ -10,7 +10,7 @@ import {FaRegEdit} from 'react-icons/fa'
 import {FaHouseUser} from 'react-icons/fa';
 import {IoMdHammer} from 'react-icons/io'
 
-import './Sidebar.css'
+import classes from './Sidebar.module.css'
 
 export default props => {
     const { logout } = useContext(AuthContext);
@@ -20,28 +20,28 @@ export default props => {
     };
     return (
         <Menu>
-            <Link to='/minhas-solicitacoes' className='menu-item'>
-                <BiFile size='30px' style={{paddingRight: '20px'}}/>
+            <Link to='/minhas-solicitacoes' className={classes['menu-item']}>
+                <BiFile size='40px' style={{paddingRight: '20px'}}/>
                 Minhas Solicitações
             </Link>
-            <Link to='/cadastro-imovel' className='menu-item'>
-                <AiOutlineHome size='30px' style={{paddingRight: '20px'}}/>
+            <Link to='/cadastro-imovel' className={classes['menu-item']}>
+                <AiOutlineHome size='40px' style={{paddingRight: '20px'}}/>
                 Cadastrar imóvel
             </Link>
-            <Link to='/agendar-visita' className='menu-item'>
-                <IoMdHammer size='30px' style={{paddingRight: '20px'}}/> 
+            <Link to='/agendar-visita' className={classes['menu-item']}>
+                <IoMdHammer size='40px' style={{paddingRight: '20px'}}/> 
                 Agendar Visita Técnica
             </Link>
-            <Link to='/dados-cadastrais' className='menu-item'>
-                <FaRegEdit size='30px' style={{paddingRight: '20px'}}/>
+            <Link to='/dados-cadastrais' className={classes['menu-item']}>
+                <FaRegEdit size='40px' style={{paddingRight: '20px'}}/>
                 Atualizar Dados Cadastrais
             </Link>
-            <Link to='/dados-imovel' className='menu-item'>
-                <FaHouseUser size='30px' style={{paddingRight: '20px'}}/>
+            <Link to='/dados-imovel' className={classes['menu-item']}>
+                <FaHouseUser size='40px' style={{paddingRight: '20px'}}/>
                 Editar Dados do Imóvel
             </Link>
-            <button onClick={handleLogout} className='btn-logout'> 
-                <AiOutlineImport size='30px' style={{paddingRight: '20px'}}/>
+            <button onClick={handleLogout} className={classes['btn-logout']}> 
+                <AiOutlineImport size='40px' style={{paddingRight: '20px'}}/>
                 Sair
             </button>
         </Menu>

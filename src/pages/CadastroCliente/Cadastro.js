@@ -9,7 +9,7 @@ import Footer from "../../components/Footer";
 import Back from "../../components/Back";
 import { AuthContext } from "../../context/auth";
 import api from "../../api/saneja";
-import "./Cadastro.css";
+import classes from "./Cadastro.module.css";
 
 function Cadastro() {
   const [nome, setNome] = useState("");
@@ -117,7 +117,7 @@ function Cadastro() {
   return (
     <div className="main-container">
       <Header />
-      <div className="form-cadastro">
+      <div className={classes["form-cadastro"]}>
         <form>
           <h1>Dados Pessoais</h1>
           <input
@@ -125,10 +125,10 @@ function Cadastro() {
             value={nome}
             onChange={(e) => [setNome(e.target.value), setError("")]}
             placeholder="Nome Completo"
-            className="form-data-input"
+            className={classes["form-data-input"]}
           />
           <InputMask
-            className="form-data-input"
+            className={classes["form-data-input"]}
             type="text"
             value={cpf}
             onChange={(e) => [
@@ -139,7 +139,7 @@ function Cadastro() {
             mask="999.999.999-99"
           />
           <InputMask
-            className="form-data-input"
+            className={classes["form-data-input"]}
             type="text"
             value={rg}
             onChange={(e) => [
@@ -154,10 +154,10 @@ function Cadastro() {
             type="date"
             value={dataNasc}
             onChange={(e) => [setDataNasc(e.target.value), setError("")]}
-            className="form-data-input"
+            className={classes["form-data-input"]}
           />
           <InputMask
-            className="form-data-input"
+            className={classes["form-data-input"]}
             value={telefone}
             onChange={(e) => [
               setTelefone(e.target.value.replace(/[^0-9]/g, "")),
@@ -171,7 +171,7 @@ function Cadastro() {
             value={login}
             onChange={(e) => [setLogin(e.target.value), setError("")]}
             placeholder="Email"
-            className="form-data-input"
+            className={classes["form-data-input"]}
           />
           <input
             type="password"
@@ -179,7 +179,7 @@ function Cadastro() {
             value={senha}
             onChange={(e) => [setSenha(e.target.value), setError("")]}
             placeholder="Senha"
-            className="form-data-input"
+            className={classes["form-data-input"]}
           />
           <input
             type="password"
@@ -187,19 +187,19 @@ function Cadastro() {
             value={senhaConf}
             onChange={(e) => [setSenhaConf(e.target.value), setError("")]}
             placeholder="Confirmar senha"
-            className="form-data-input"
+            className={classes["form-data-input"]}
           />
-          <span className="alerta-campos">{error}</span>
-          <div className="div-botao">
+          <span className={classes["alerta-campos"]}>{error}</span>
+          <div className={classes["div-botao"]}>
             <input
               type="button"
               value={authenticated ? "Atualizar" : "Cadastrar"}
-              className="botao-cadastro"
+              className={classes["botao-cadastro"]}
               onClick={authenticated ? handleUpdate : handleSignup}
             />
           </div>
-          {!authenticated && <div className="link-login">
-            <Link to="/login">Já tem uma conta?</Link>
+          {!authenticated && <div className={classes["link-login"]}>
+            <Link to="/login" className={classes.link}>Já tem uma conta?</Link>
           </div>}
         </form>
       </div>

@@ -1,0 +1,24 @@
+#page-wrap {
+    text-align: center;
+  
+    /* Prevent sidebar from showing a scrollbar on page */
+    overflow: auto;
+  }
+  
+.menu-item {
+  font-size: 1.2rem;
+}
+  
+.btn-logout {
+  background-color: transparent;
+  border: none;
+  font-size: 1.2rem;
+  color: #d8d8d8;
+  transition: color 0.2s;
+  padding-left: 0;
+ }
+
+ .btn-logout:hover {
+  color: white;
+  cursor: pointer;
+ }

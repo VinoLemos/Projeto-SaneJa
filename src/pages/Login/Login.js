@@ -1,5 +1,5 @@
 import logo from '../../img/logo-nome.png'
-import './Login.css'
+import classes from './Login.module.css'
 import Header from '../../components/Header'
 import Footer from '../../components/Footer'
 import { useState, useContext } from 'react'
@@ -30,18 +30,18 @@ const Login = () => {
     return(
         <div className='main-container'>
             <Header/>
-            <img src={logo} alt="Nome logo" className='logo-nome'/>
+            <img src={logo} alt="Nome logo" className={classes["logo-nome"]}/>
 
             <form>
-                <div className="div-login">
+                <div className={classes["div-login"]}>
                     <label>Email</label> <br/>
-                    <input type="email" className='data-input' 
+                    <input type="email" className={classes["data-input"]} 
                         value={email}
                         autoComplete="username"
                         onChange={(e) => [setEmail(e.target.value), setError("")]}
                     /> <br/>
                     <label>Senha</label> <br/>
-                    <input type="password" className='data-input' 
+                    <input type="password" className={classes["data-input"]} 
                         value={senha}
                         autoComplete="new-password"
                         onChange={(e) => [setSenha(e.target.value), setError("")]}

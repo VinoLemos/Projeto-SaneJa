@@ -1,0 +1,73 @@
+
+.form-cadastro {
+  display: grid;
+  position: absolute;
+  place-items: center;
+  max-width: 25rem;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.form-cadastro h1 {
+  padding-top: 0.5em;
+  font-size: 1.2rem;
+  color: #1A618A;
+}
+.form-cadastro label {
+  margin-top: 0;
+  padding-top: 0;
+  font-size: 0.7rem;
+  color: #1A618A;
+  font-weight: 600;
+}
+
+.form-data-input {
+  width: 18rem;
+  height: 2em;
+  display: flex;
+  margin-bottom: 1rem;
+  border: 0.1em solid #CFC6C5;
+  border-radius: 0.5em;
+  color: #1A618A;
+  font-weight: 500;
+}
+
+.form-data-input::placeholder {
+  color: #1A618A;
+  font-weight: 500;
+}
+
+.form-data-input:focus {
+  outline-color: #6F9CB5;
+}
+
+.div-botao {
+  display: grid;
+  place-items: center;
+}
+
+.botao-cadastro {
+  width: 10rem;
+  height: 2rem;
+  border-style: none;
+  border-radius: 0.5rem;
+  background-color: #DFE8E9;
+  box-shadow: 5px 5px 5px #AFB3B5;
+}
+
+.botao-cadastro:hover {
+  background-color: #ebf6f7;
+  cursor: pointer;
+}
+
+.alerta-campos {
+  margin-right: 50px;
+  color: red;
+  font-size: 0.6rem;
+}
+
+.link-login {
+  padding-top: 1rem;
+  text-align: center;
+}

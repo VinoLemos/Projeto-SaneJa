@@ -8,7 +8,7 @@ import Footer from "../../components/Footer";
 import Back from "../../components/Back";
 import { AuthContext } from "../../context/auth";
 import api from "../../api/saneja";
-import "../CadastroCliente/Cadastro.css";
+import classes from "./CadImovel.module.css";
 
 function CadImovel() {
   const [rua, setRua] = useState("");
@@ -112,34 +112,35 @@ function CadImovel() {
   };
 
   return (
+    
     <div className="main-container">
       <Header />
-      <div className="form-cadastro">
+      <div className={classes["form-cadastro"]}>
         <form>
           <h1>Dados do Imóvel</h1>
           <input
+            className={classes["form-data-input"]}
             type="text"
             value={rua}
             onChange={(e) => [setRua(e.target.value), setError("")]}
             placeholder="Rua"
-            className="form-data-input"
           />
           <input
-            className="form-data-input"
+            className={classes["form-data-input"]}
             type="text"
             value={numero}
             onChange={(e) => [setNumero(e.target.value), setError("")]}
             placeholder="Nº"
           />
           <input
-            className="form-data-input"
+            className={classes["form-data-input"]}
             type="text"
             value={complemento}
             onChange={(e) => [setComplemento(e.target.value), setError("")]}
             placeholder="Complemento"
           />
           <InputMask
-            className="form-data-input"
+            className={classes["form-data-input"]}
             value={cep}
             onChange={(e) => [
               setCep(e.target.value.replace(/[^0-9]/g, "")),
@@ -149,46 +150,46 @@ function CadImovel() {
             placeholder="CEP"
           />
           <input
+            className={classes["form-data-input"]}
             type="text"
             value={bairro}
             onChange={(e) => [setBairro(e.target.value), setError("")]}
             placeholder="Bairro"
-            className="form-data-input"
           />
           <input
+            className={classes["form-data-input"]}
             type="text"
             value={cidade}
             onChange={(e) => [setCidade(e.target.value), setError("")]}
             placeholder="Cidade"
-            className="form-data-input"
           />
           <input
+            className={classes["form-data-input"]}
             type="text"
             value={estado}
             onChange={(e) => [setEstado(e.target.value), setError("")]}
             placeholder="Estado"
-            className="form-data-input"
           />
           <input
+            className={classes["form-data-input"]}
             type="text"
             value={rgi}
             onChange={(e) => [setRgi(e.target.value), setError("")]}
             placeholder="RGI"
-            className="form-data-input"
           />
           <input
+            className={classes["form-data-input"]}
             type="text"
             value={hidro}
             onChange={(e) => [setHidro(e.target.value), setError("")]}
             placeholder="Hidrômetro"
-            className="form-data-input"
           />
-          <span className="alerta-campos">{error}</span>
-          <div className="div-botao">
+          <span className={classes["alerta-campos"]}>{error}</span>
+          <div className={classes["div-botao"]}>
             <input
               type="button"
               value={pathname == '/dados-imovel' ? "Atualizar" : "Cadastrar"}
-              className="botao-cadastro"
+              className={classes["botao-cadastro"]}
               onClick={pathname == '/dados-imovel' ? handleUpdate : handleSubmit}
             />
           </div>
