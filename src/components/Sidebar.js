@@ -12,7 +12,7 @@ import {IoMdHammer} from 'react-icons/io'
 
 import classes from './Sidebar.module.css'
 
-export default props => {
+const Sidebar = () => {
     const { logout } = useContext(AuthContext);
 
     const handleLogout = () => {
@@ -47,3 +47,5 @@ export default props => {
         </Menu>
     )
 }
+
+export default Sidebar;

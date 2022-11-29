@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import InputMask from "react-input-mask";
 
@@ -23,7 +23,7 @@ function CadImovel() {
   const [error, setError] = useState("");
 
   const { user } = useContext(AuthContext);
-  const { pathname } = useLocation();
+  const { rgi: rgiParam } = useParams();
   const navigate = useNavigate();
 
   const imovel = {
@@ -36,12 +36,11 @@ function CadImovel() {
     estado: estado,
     rgi: rgi,
     hidrometro: hidro,
-    cpfProprietario: user.cpf
+    cpfProprietario: user.cpf,
   };
 
   useEffect(() => {
-
-    api.get(`/imoveis/${rgi}`).then((response) => {
+    api.get(`/imoveis/${rgiParam}`).then((response) => {
       setRua(response.data.rua);
       setNumero(response.data.numero);
       setComplemento(response.data.complemento);
@@ -50,23 +49,35 @@ function CadImovel() {
       setCidade(response.data.cidade);
       setEstado(response.data.estado);
       setRgi(response.data.rgi);
-      setHidro(response.data.hidro);
+      setHidro(response.data.hidrometro);
     });
-
   }, []);
 
   const isFormValid = () => {
-    if (!rua | !numero | !complemento | !cep | !bairro | !cidade | !estado | !rgi | !hidro ) {
+    if (
+      !rua |
+      !numero |
+      !complemento |
+      !cep |
+      !bairro |
+      !cidade |
+      !estado |
+      !rgi |
+      !hidro
+    ) {
       setError("Preencha todos os campos");
       return false;
-    } 
+    }
     return true;
-  }
+  };
 
   const handleUpdate = () => {
     if (!isFormValid()) return;
 
-    api.put(`/imoveis/${rgi}`, imovel)
+    imovel.id = rgiParam;
+
+    api
+      .put(`/imoveis/${rgiParam}`, imovel)
       .then(() => {
         Swal.fire({
           icon: "success",
@@ -84,12 +95,13 @@ function CadImovel() {
           confirmButtonColor: "#6F9CB5",
         });
       });
-  } 
+  };
 
   const handleSubmit = () => {
     if (!isFormValid()) return;
 
-    api.post('/imoveis', imovel)
+    api
+      .post("/imoveis", imovel)
       .then(() => {
         Swal.fire({
           icon: "success",
@@ -112,92 +124,93 @@ function CadImovel() {
   };
 
   return (
-    
-    <div className="main-container">
+    <>
       <Header />
-      <div className={classes["form-cadastro"]}>
-        <form>
-          <h1>Dados do Imóvel</h1>
-          <input
-            className={classes["form-data-input"]}
-            type="text"
-            value={rua}
-            onChange={(e) => [setRua(e.target.value), setError("")]}
-            placeholder="Rua"
-          />
-          <input
-            className={classes["form-data-input"]}
-            type="text"
-            value={numero}
-            onChange={(e) => [setNumero(e.target.value), setError("")]}
-            placeholder="Nº"
-          />
-          <input
-            className={classes["form-data-input"]}
-            type="text"
-            value={complemento}
-            onChange={(e) => [setComplemento(e.target.value), setError("")]}
-            placeholder="Complemento"
-          />
-          <InputMask
-            className={classes["form-data-input"]}
-            value={cep}
-            onChange={(e) => [
-              setCep(e.target.value.replace(/[^0-9]/g, "")),
-              setError(""),
-            ]}
-            mask="99999-999"
-            placeholder="CEP"
-          />
-          <input
-            className={classes["form-data-input"]}
-            type="text"
-            value={bairro}
-            onChange={(e) => [setBairro(e.target.value), setError("")]}
-            placeholder="Bairro"
-          />
-          <input
-            className={classes["form-data-input"]}
-            type="text"
-            value={cidade}
-            onChange={(e) => [setCidade(e.target.value), setError("")]}
-            placeholder="Cidade"
-          />
-          <input
-            className={classes["form-data-input"]}
-            type="text"
-            value={estado}
-            onChange={(e) => [setEstado(e.target.value), setError("")]}
-            placeholder="Estado"
-          />
-          <input
-            className={classes["form-data-input"]}
-            type="text"
-            value={rgi}
-            onChange={(e) => [setRgi(e.target.value), setError("")]}
-            placeholder="RGI"
-          />
-          <input
-            className={classes["form-data-input"]}
-            type="text"
-            value={hidro}
-            onChange={(e) => [setHidro(e.target.value), setError("")]}
-            placeholder="Hidrômetro"
-          />
-          <span className={classes["alerta-campos"]}>{error}</span>
-          <div className={classes["div-botao"]}>
+      <div className="main-container">
+        <div className={classes["form-cadastro"]}>
+          <form>
+            <h1>Dados do Imóvel</h1>
             <input
-              type="button"
-              value={pathname == '/dados-imovel' ? "Atualizar" : "Cadastrar"}
-              className={classes["botao-cadastro"]}
-              onClick={pathname == '/dados-imovel' ? handleUpdate : handleSubmit}
+              className={classes["form-data-input"]}
+              type="text"
+              value={rua}
+              onChange={(e) => [setRua(e.target.value), setError("")]}
+              placeholder="Rua"
             />
-          </div>
-        </form>
+            <input
+              className={classes["form-data-input"]}
+              type="text"
+              value={numero}
+              onChange={(e) => [setNumero(e.target.value), setError("")]}
+              placeholder="Nº"
+            />
+            <input
+              className={classes["form-data-input"]}
+              type="text"
+              value={complemento}
+              onChange={(e) => [setComplemento(e.target.value), setError("")]}
+              placeholder="Complemento"
+            />
+            <InputMask
+              className={classes["form-data-input"]}
+              value={cep}
+              onChange={(e) => [
+                setCep(e.target.value.replace(/[^0-9]/g, "")),
+                setError(""),
+              ]}
+              mask="99999-999"
+              placeholder="CEP"
+            />
+            <input
+              className={classes["form-data-input"]}
+              type="text"
+              value={bairro}
+              onChange={(e) => [setBairro(e.target.value), setError("")]}
+              placeholder="Bairro"
+            />
+            <input
+              className={classes["form-data-input"]}
+              type="text"
+              value={cidade}
+              onChange={(e) => [setCidade(e.target.value), setError("")]}
+              placeholder="Cidade"
+            />
+            <input
+              className={classes["form-data-input"]}
+              type="text"
+              value={estado}
+              onChange={(e) => [setEstado(e.target.value), setError("")]}
+              placeholder="Estado"
+            />
+            <input
+              className={classes["form-data-input"]}
+              type="text"
+              value={rgi}
+              onChange={(e) => [setRgi(e.target.value), setError("")]}
+              placeholder="RGI"
+            />
+            <input
+              className={classes["form-data-input"]}
+              type="text"
+              value={hidro}
+              onChange={(e) => [setHidro(e.target.value), setError("")]}
+              placeholder="Hidrômetro"
+            />
+            <span className={classes["alerta-campos"]}>{error}</span>
+            <div className={classes["div-botao"]}>
+              <input
+                type="button"
+                value={rgiParam ? "Atualizar" : "Cadastrar"}
+                className={classes["botao-cadastro"]}
+                onClick={rgiParam ? handleUpdate : handleSubmit}
+              />
+            </div>
+          </form>
+        </div>
       </div>
       <Back />
       <Footer />
-    </div>
+    </>
   );
 }
 

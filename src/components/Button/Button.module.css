@@ -1,0 +1,35 @@
+.button {
+  background-color: #DFE8E9;
+  padding: 10px 20px;
+  text-align: center;
+  border: none;
+  border-radius: 5px;
+  color: #194F6D;
+  font-weight: 500;
+  transition: background-color .2s;
+  vertical-align: middle;
+}
+
+.button:hover {
+  background-color: #cedee1;
+}
+
+.button--highlight {
+  background-color: #59a4ad;
+  color: #fff;
+}
+
+.button--highlight:hover {
+  background-color: #81c4cd;
+  color: #fff;
+}
+
+.button--danger {
+  background-color: #e9dfdf;
+  color: #d16f6f;
+}
+
+.button--danger:hover {
+  background-color: #e9dfdf;
+  color: #d16f6f;
+}

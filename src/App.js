@@ -7,23 +7,24 @@ import Home from './pages/Home/Home';
 import {AuthProvider, AuthContext} from './context/auth';
 import React, { useContext} from 'react';
 import CadImovel from './pages/CadastroImovel/CadImovel';
+import Imoveis from './pages/Imoveis/Imoveis';
 import Visita from './pages/Visita/Visita';
 
+const Private = ({children}) => {
+  const { authenticated, loading } = useContext(AuthContext);
+
+  if (loading) {
+    return <div className='loading'>Carregando...</div>;
+  }
+
+  if(!authenticated) {
+    return <Navigate to="/login"/>
+  }
+
+  return children;
+};
+
 function App() {
-  const Private = ({children}) => {
-    const { authenticated, loading } = useContext(AuthContext);
-    
-    if (loading) {
-      return <div className='loading'>Carregando...</div>;
-    }
-
-    if(!authenticated) {
-      return <Navigate to="/login"/>
-    }
-
-    return children;
-  };
-
   return (
     <div className="App">
       <Router>
@@ -54,7 +55,14 @@ function App() {
               </Private>}
             />
             <Route 
-              path="/dados-imovel" 
+              path="/imoveis" 
+              element={
+              <Private>
+                <Imoveis/>
+              </Private>}
+            />
+            <Route 
+              path="/imoveis/:rgi" 
               element={
               <Private>
                 <CadImovel/>

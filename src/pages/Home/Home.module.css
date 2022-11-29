@@ -4,43 +4,48 @@
 }
 
 .receptive{
-    padding-top: 5rem;
-    font-size: 1.3rem;
+    font-size: 1.8rem;
     color: #1A618A;
+    font-weight: 500;
 }
 
 .home-h1 h1 {
-    padding-top: 5rem;
     font-size: 1rem;
     color: #1A618A;
 }
 
 .menu-box {
     display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
     margin-top: 3rem;
 }
 
-.menu-linha {
-    display: inline;
-    justify-content: center;
-}
-
 .menu-botao {
-    width: 7rem;
-    height: 5rem;
-    padding-top: 1em;
-    margin-right: 1em;
-    margin-left: 1em;
-    margin-bottom: 2em;
+    height: 200px;
+    width: 100%;
+    padding: 2rem;
     text-align: center;
     background-color: #94B3B7;
     color: #fff;
     border: none;
     border-radius: 5px;
-    font-size: 0.8rem;
+    font-size: 1.2rem;
 }
 
 .menu-botao:hover {
     cursor: pointer;
     background-color: #90bec2;
+}
+
+@media screen and (max-width: 1024px) {
+    .menu-box {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+
+    .center-container {
+        place-items: normal;
+        padding: 0 2rem;
+    }
 }

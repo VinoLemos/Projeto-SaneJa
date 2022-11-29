@@ -1,0 +1,30 @@
+.main-container {
+  padding: 0 1rem;
+  margin: 0 auto;
+  max-width: 60rem;
+  display: grid;
+}
+
+.imoveis {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.controls {
+  text-align: right;
+  margin-bottom: 1rem;
+}
+
+@media screen and (max-width: 720px) {
+  .main-container {
+    place-items: normal;
+  }
+
+  .imoveis {
+    flex-direction: column;
+    justify-content: left;
+  }
+}
+

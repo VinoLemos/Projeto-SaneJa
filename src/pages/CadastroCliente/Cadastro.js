@@ -115,97 +115,99 @@ function Cadastro() {
   };
 
   return (
-    <div className="main-container">
+    <>
       <Header />
-      <div className={classes["form-cadastro"]}>
-        <form>
-          <h1>Dados Pessoais</h1>
-          <input
-            type="text"
-            value={nome}
-            onChange={(e) => [setNome(e.target.value), setError("")]}
-            placeholder="Nome Completo"
-            className={classes["form-data-input"]}
-          />
-          <InputMask
-            className={classes["form-data-input"]}
-            type="text"
-            value={cpf}
-            onChange={(e) => [
-              setCpf(e.target.value.replace(/[^0-9]/g, "")),
-              setError(""),
-            ]} // o replace está dizendo que o campo só vai considerar numeros e o que for caractere, ele vai substituir por vazio
-            placeholder="CPF"
-            mask="999.999.999-99"
-          />
-          <InputMask
-            className={classes["form-data-input"]}
-            type="text"
-            value={rg}
-            onChange={(e) => [
-              setRg(e.target.value.replace(/[^0-9]/g, "")),
-              setError(""),
-            ]}
-            mask="99.999.999-9"
-            placeholder="RG"
-          />
-          <label>Data Nascimento</label> <br />
-          <input
-            type="date"
-            value={dataNasc}
-            onChange={(e) => [setDataNasc(e.target.value), setError("")]}
-            className={classes["form-data-input"]}
-          />
-          <InputMask
-            className={classes["form-data-input"]}
-            value={telefone}
-            onChange={(e) => [
-              setTelefone(e.target.value.replace(/[^0-9]/g, "")),
-              setError(""),
-            ]}
-            mask="(99) 99999-9999"
-            placeholder="Telefone"
-          />
-          <input
-            type="text"
-            value={login}
-            onChange={(e) => [setLogin(e.target.value), setError("")]}
-            placeholder="Email"
-            className={classes["form-data-input"]}
-          />
-          <input
-            type="password"
-            autoComplete="new-password"
-            value={senha}
-            onChange={(e) => [setSenha(e.target.value), setError("")]}
-            placeholder="Senha"
-            className={classes["form-data-input"]}
-          />
-          <input
-            type="password"
-            autoComplete="new-password"
-            value={senhaConf}
-            onChange={(e) => [setSenhaConf(e.target.value), setError("")]}
-            placeholder="Confirmar senha"
-            className={classes["form-data-input"]}
-          />
-          <span className={classes["alerta-campos"]}>{error}</span>
-          <div className={classes["div-botao"]}>
+      <div className="main-container">
+        <div className={classes["form-cadastro"]}>
+          <form>
+            <h1>Dados Pessoais</h1>
             <input
-              type="button"
-              value={authenticated ? "Atualizar" : "Cadastrar"}
-              className={classes["botao-cadastro"]}
-              onClick={authenticated ? handleUpdate : handleSignup}
+              type="text"
+              value={nome}
+              onChange={(e) => [setNome(e.target.value), setError("")]}
+              placeholder="Nome Completo"
+              className={classes["form-data-input"]}
             />
-          </div>
-          {!authenticated && <div className={classes["link-login"]}>
-            <Link to="/login" className={classes.link}>Já tem uma conta?</Link>
-          </div>}
-        </form>
+            <InputMask
+              className={classes["form-data-input"]}
+              type="text"
+              value={cpf}
+              onChange={(e) => [
+                setCpf(e.target.value.replace(/[^0-9]/g, "")),
+                setError(""),
+              ]} // o replace está dizendo que o campo só vai considerar numeros e o que for caractere, ele vai substituir por vazio
+              placeholder="CPF"
+              mask="999.999.999-99"
+            />
+            <InputMask
+              className={classes["form-data-input"]}
+              type="text"
+              value={rg}
+              onChange={(e) => [
+                setRg(e.target.value.replace(/[^0-9]/g, "")),
+                setError(""),
+              ]}
+              mask="99.999.999-9"
+              placeholder="RG"
+            />
+            <label>Data Nascimento</label> <br />
+            <input
+              type="date"
+              value={dataNasc}
+              onChange={(e) => [setDataNasc(e.target.value), setError("")]}
+              className={classes["form-data-input"]}
+            />
+            <InputMask
+              className={classes["form-data-input"]}
+              value={telefone}
+              onChange={(e) => [
+                setTelefone(e.target.value.replace(/[^0-9]/g, "")),
+                setError(""),
+              ]}
+              mask="(99) 99999-9999"
+              placeholder="Telefone"
+            />
+            <input
+              type="text"
+              value={login}
+              onChange={(e) => [setLogin(e.target.value), setError("")]}
+              placeholder="Email"
+              className={classes["form-data-input"]}
+            />
+            <input
+              type="password"
+              autoComplete="new-password"
+              value={senha}
+              onChange={(e) => [setSenha(e.target.value), setError("")]}
+              placeholder="Senha"
+              className={classes["form-data-input"]}
+            />
+            <input
+              type="password"
+              autoComplete="new-password"
+              value={senhaConf}
+              onChange={(e) => [setSenhaConf(e.target.value), setError("")]}
+              placeholder="Confirmar senha"
+              className={classes["form-data-input"]}
+            />
+            <span className={classes["alerta-campos"]}>{error}</span>
+            <div className={classes["div-botao"]}>
+              <input
+                type="button"
+                value={authenticated ? "Atualizar" : "Cadastrar"}
+                className={classes["botao-cadastro"]}
+                onClick={authenticated ? handleUpdate : handleSignup}
+              />
+            </div>
+            {!authenticated && <div className={classes["link-login"]}>
+              <Link to="/login" className={classes.link}>Já tem uma conta?</Link>
+            </div>}
+          </form>
+        </div>
+        <Back />
+        <Footer />
       </div>
-      <Back />
-      <Footer />
-    </div>
+    </>
   );
 }
 
