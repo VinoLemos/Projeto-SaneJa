@@ -73,7 +73,9 @@ function Cadastro() {
   const handleUpdate = () => {
     if (!isFormValid()) return;
 
-    api.put(`/clientes/${cpf}`, cliente)
+    cliente.id = user.id;
+
+    api.put(`/clientes/${user.id}`, cliente)
       .then(() => {
         Swal.fire({
           icon: "success",

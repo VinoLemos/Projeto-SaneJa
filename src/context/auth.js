@@ -32,7 +32,7 @@ export const AuthProvider = ({ children }) => {
     const loggedUser = {
       email,
       senha,
-      cpf: userResponse.cpf,
+      id: userResponse.id,
     };
 
     if (userResponse.login === email && userResponse.senha === senha) {
