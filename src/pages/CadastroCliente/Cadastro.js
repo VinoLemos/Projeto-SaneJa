@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import InputMask from "react-input-mask";
 import validator from "validator";
@@ -22,7 +22,11 @@ function Cadastro() {
   const [senhaConf, setSenhaConf] = useState("");
   const [error, setError] = useState("");
 
-  const { authenticated, user } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
+
+  const { pathname } = useLocation();
+  const isUpdate = pathname === '/dados-cadastrais';
+
   const navigate = useNavigate();
 
   const cliente = {
@@ -37,7 +41,7 @@ function Cadastro() {
   };
 
   useEffect(() => {
-    if (authenticated) {
+    if (isUpdate) {
       setCpf(user.cpf);
 
       api.get(`/clientes/getByEmail/${user.email}`).then((response) => {
@@ -194,12 +198,12 @@ function Cadastro() {
             <div className={classes["div-botao"]}>
               <input
                 type="button"
-                value={authenticated ? "Atualizar" : "Cadastrar"}
+                value={isUpdate ? "Atualizar" : "Cadastrar"}
                 className={classes["botao-cadastro"]}
-                onClick={authenticated ? handleUpdate : handleSignup}
+                onClick={isUpdate ? handleUpdate : handleSignup}
               />
             </div>
-            {!authenticated && <div className={classes["link-login"]}>
+            {!isUpdate && <div className={classes["link-login"]}>
               <Link to="/login" className={classes.link}>Já tem uma conta?</Link>
             </div>}
           </form>
