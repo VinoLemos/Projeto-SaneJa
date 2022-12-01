@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { BsHouseDoorFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
@@ -11,15 +11,18 @@ import ImovelCard from "../../components/ImovelCard/ImovelCard";
 
 import classes from "./Imoveis.module.css";
 import Button from "../../components/Button/Button";
+import { AuthContext } from "../../context/auth";
+import { Spinner } from "react-bootstrap";
 
 function Imoveis() {
   const [imoveis, setImoveis] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const { user } = useContext(AuthContext);
 
   useEffect(() => {
     api
-      .get(`/imoveis`)
+      .get(`/imoveis/getByCpf/${user.cpf}`)
       .then((response) => {
-        console.log(response);
         if (!(response && response.data)) {
           throw new Error("Erro ao buscar imoveis");
         }
@@ -28,7 +31,8 @@ function Imoveis() {
       })
       .catch(() => {
         throw new Error("Erro ao buscar imoveis");
-      });
+      })
+      .finally(() => setIsLoading(false));
   }, []);
 
   const pullImovelFromList = (imovelId) => {
@@ -83,6 +87,7 @@ function Imoveis() {
     <>
       <Header />
       <div className={classes["main-container"]}>
+        {isLoading && <Spinner />}
         <div className={classes.controls}>
           <Link to="/cadastro-imovel">
             <Button type="highlight">

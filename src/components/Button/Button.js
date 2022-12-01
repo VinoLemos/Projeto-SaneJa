@@ -3,10 +3,12 @@ import classes from "./Button.module.css";
 const Button = (props) => {
   return (
     <button
-      className={`${classes.button} ${classes["button--" + props.type]} ${
+      type="button"
+      className={`${classes.button} ${classes["button--" + props.type]} ${props.wider && classes["button--wider"]} ${
         props.className
       }`}
-      onClick={props.onClick}
+      onClick={!props.disabled && props.onClick}
+      {...props}
     >
       {props.children}
     </button>

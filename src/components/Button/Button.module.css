@@ -33,3 +33,11 @@
   background-color: #e9dfdf;
   color: #d16f6f;
 }
+
+.button--wider {
+  width: 80%;
+}
+
+.button[disabled] {
+  opacity: 0.4;
+}

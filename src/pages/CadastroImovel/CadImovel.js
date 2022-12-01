@@ -24,6 +24,8 @@ function CadImovel() {
 
   const { user } = useContext(AuthContext);
   const { rgi: rgiParam } = useParams();
+  const  { pathname } = useLocation();
+  const isUpdate = pathname !== '/cadastro-imovel';
   const navigate = useNavigate();
 
   const imovel = {
@@ -40,6 +42,9 @@ function CadImovel() {
   };
 
   useEffect(() => {
+    if (!isUpdate) {
+      return;
+    }
     api.get(`/imoveis/${rgiParam}`).then((response) => {
       setRua(response.data.rua);
       setNumero(response.data.numero);
@@ -109,7 +114,7 @@ function CadImovel() {
           confirmButtonText: "Ir para página inicial",
           confirmButtonColor: "#6F9CB5",
         });
-        navigate("/home");
+        navigate("/imoveis");
       })
       .catch((error) => {
         console.log(error);

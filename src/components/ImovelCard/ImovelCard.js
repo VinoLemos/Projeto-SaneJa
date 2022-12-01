@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import Button from '../Button/Button';
+import Card from '../Card/Card';
 import classes from './ImovelCard.module.css';
 
 function ImovelCard(props) {
@@ -10,7 +11,7 @@ function ImovelCard(props) {
   }
 
   return (
-    <div className={classes['imovel-card']}>
+    <Card className={classes['imovel-card']}>
       <h1 className={classes['imovel-card__title']}>Imóvel RGI: {imovel.rgi}</h1>
       <h2 className={classes['imovel-card__subtitle']}>Hidrômetro: {imovel.hidrometro}</h2>
       <p className={classes['imovel-card__text']}>{imovel.rua}, {imovel.numero}</p>
@@ -23,7 +24,7 @@ function ImovelCard(props) {
         </Link>
         <Button type="danger" onClick={onDeleteHandler}>Excluir</Button>
       </div>
-    </div>
+    </Card>
   );
 }
 

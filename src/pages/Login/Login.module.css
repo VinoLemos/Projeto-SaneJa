@@ -7,14 +7,11 @@
     transform: translate(-50%, -50%);
 }
   
-.div-login {
-  margin-left: 0.5rem;
+div.div-login {
   padding: 3rem;
   max-width: 25rem;
   display: grid;
   place-items: center;
-  background-color: #D1D0D2;
-  border-radius: 5px;
   position: fixed;
   top: 50%;
   left: 50%;
@@ -32,10 +29,6 @@
   outline-color: #6F9CB5;
 }
 
-.div-login label {
-  justify-self: left;
-}
-
 .div-login a {
   text-decoration: none;
   padding-bottom: 2rem;
@@ -47,5 +40,3 @@
 .div-login a:hover {
   color: #69a0c2;
 }
-
-  

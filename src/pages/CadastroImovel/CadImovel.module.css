@@ -14,13 +14,13 @@
   font-size: 1.2rem;
   color: #1A618A;
 }
-.form-cadastro label {
+/* .form-cadastro label {
   margin-top: 0;
   padding-top: 0;
   font-size: 0.7rem;
   color: #1A618A;
   font-weight: 600;
-}
+} */
 
 .form-data-input {
   width: 18rem;
