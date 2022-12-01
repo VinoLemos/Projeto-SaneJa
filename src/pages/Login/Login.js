@@ -1,14 +1,11 @@
-import logo from "../../img/logo-nome.png";
 import classes from "./Login.module.css";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import { useState, useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/auth";
 import Card from "../../components/Card/Card";
 import Button from "../../components/Button/Button";
-import Input from "../../components/Input/Input";
-import Label from "../../components/Label/Label";
 import FormGroup from "../../components/FormGroup/FormGroup";
 import { Spinner } from "react-bootstrap";
 
@@ -33,7 +30,7 @@ const Login = () => {
     }
 
     console.log("submit", { email, senha });
-    login(email, senha).then(() => setIsLoading(false));
+    login(email, senha).finally(() => setIsLoading(false));
   };
 
   return (
