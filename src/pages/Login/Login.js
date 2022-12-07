@@ -1,67 +1,86 @@
-import classes from "./Login.module.css";
-import Header from "../../components/Header";
-import Footer from "../../components/Footer";
-import { useState, useContext } from "react";
-import { Link } from "react-router-dom";
-import { AuthContext } from "../../context/auth";
-import Card from "../../components/Card/Card";
-import Button from "../../components/Button/Button";
-import FormGroup from "../../components/FormGroup/FormGroup";
-import { Spinner } from "react-bootstrap";
+import classes from './Login.module.css';
+import Header from '../../components/Header';
+import Footer from '../../components/Footer';
+import { useState, useContext, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { AuthContext } from '../../context/auth';
+import Card from '../../components/Card/Card';
+import Button from '../../components/Button/Button';
+import FormGroup from '../../components/FormGroup/FormGroup';
+import { Spinner } from 'react-bootstrap';
+import Swal from 'sweetalert2';
 
 const Login = () => {
   const { login } = useContext(AuthContext);
 
   //const navigate = useNavigate();
-
-  const [email, setEmail] = useState("");
-  const [senha, setSenha] = useState("");
-  const [error, setError] = useState("");
+  const [emailControl, setEmailControl] = useState({
+    value: '',
+    dirty: false,
+    error: true,
+  });
+  const [senhaControl, setSenhaControl] = useState({
+    value: '',
+    dirty: false,
+    error: true,
+  });
   const [isLoading, setIsLoading] = useState(false);
+
+  const updateControl = (value, setFunc) => {
+    setFunc({ value, dirty: true, error: !value });
+  };
 
   const handleLogin = (e) => {
     e.preventDefault();
     setIsLoading(true);
 
-    if (!email | !senha) {
-      setError("Preencha todos os campos");
-      setIsLoading(false);
-      return;
-    }
-
-    console.log("submit", { email, senha });
-    login(email, senha).finally(() => setIsLoading(false));
+    login(emailControl.value, senhaControl.value)
+      .catch((errorMessage) =>
+        Swal.fire({
+          icon: 'error',
+          title: errorMessage,
+          confirmButtonText: 'Voltar',
+          confirmButtonColor: '#6F9CB5',
+        })
+      )
+      .finally(() => setIsLoading(false));
   };
 
   return (
     <>
       <Header />
-      <div className="main-container">
+      <div className='main-container'>
         <form>
-          <Card className={classes["div-login"]}>
+          <Card className={classes['div-login']}>
             <FormGroup
-              label="Email"
+              label='Email'
               input={{
-                type: "email",
-                value: email,
-                autoComplete: "username",
-                onChange: (e) => [setEmail(e.target.value), setError("")],
+                type: 'email',
+                value: emailControl.value,
+                autoComplete: 'username',
+                onChange: (e) => updateControl(e.target.value, setEmailControl),
               }}
+              invalidIf={emailControl.dirty && emailControl.error}
             ></FormGroup>
             <FormGroup
-              label="Senha"
+              label='Senha'
               input={{
-                type: "password",
-                value: senha,
-                autoComplete: "new-password",
-                onChange: (e) => [setSenha(e.target.value), setError("")],
+                type: 'password',
+                value: senhaControl.value,
+                autoComplete: 'new-password',
+                onChange: (e) => updateControl(e.target.value, setSenhaControl),
               }}
+              invalidIf={senhaControl.dirty && senhaControl.error}
             ></FormGroup>
-            <span className="alerta-campos">{error}</span>
-            <Link to="/cadastro">Não tem uma conta?</Link>
+            <Link to='/cadastro'>Não tem uma conta?</Link>
 
-            <Button type="highlight" wider onClick={handleLogin} disabled={isLoading}>
-              {isLoading ? <Spinner as="span" size="sm"/> : 'Entrar'}
+            <Button
+              type='highlight'
+              wider='true'
+              onClick={handleLogin}
+              disabled={isLoading || emailControl.error || senhaControl.error}
+            >
+              {isLoading ? <Spinner as='span' size='sm' /> : 'Entrar'}
             </Button>
           </Card>
         </form>

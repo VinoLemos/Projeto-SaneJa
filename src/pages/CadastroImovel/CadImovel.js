@@ -1,30 +1,30 @@
-import { useContext, useEffect, useState } from "react";
-import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
-import Swal from "sweetalert2";
-import InputMask from "react-input-mask";
+import { useContext, useEffect, useState } from 'react';
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
+import Swal from 'sweetalert2';
+import InputMask from 'react-input-mask';
 
-import Header from "../../components/Header";
-import Footer from "../../components/Footer";
-import Back from "../../components/Back";
-import { AuthContext } from "../../context/auth";
-import api from "../../api/saneja";
-import classes from "./CadImovel.module.css";
+import Header from '../../components/Header';
+import Footer from '../../components/Footer';
+import Back from '../../components/Back';
+import { AuthContext } from '../../context/auth';
+import api from '../../api/saneja';
+import classes from './CadImovel.module.css';
 
 function CadImovel() {
-  const [rua, setRua] = useState("");
-  const [numero, setNumero] = useState("");
-  const [complemento, setComplemento] = useState("");
-  const [cep, setCep] = useState("");
-  const [bairro, setBairro] = useState("");
-  const [cidade, setCidade] = useState("");
-  const [estado, setEstado] = useState("");
-  const [rgi, setRgi] = useState("");
-  const [hidro, setHidro] = useState("");
-  const [error, setError] = useState("");
+  const [rua, setRua] = useState('');
+  const [numero, setNumero] = useState('');
+  const [complemento, setComplemento] = useState('');
+  const [cep, setCep] = useState('');
+  const [bairro, setBairro] = useState('');
+  const [cidade, setCidade] = useState('');
+  const [estado, setEstado] = useState('');
+  const [rgi, setRgi] = useState('');
+  const [hidro, setHidro] = useState('');
+  const [error, setError] = useState('');
 
   const { user } = useContext(AuthContext);
   const { rgi: rgiParam } = useParams();
-  const  { pathname } = useLocation();
+  const { pathname } = useLocation();
   const isUpdate = pathname !== '/cadastro-imovel';
   const navigate = useNavigate();
 
@@ -70,7 +70,7 @@ function CadImovel() {
       !rgi |
       !hidro
     ) {
-      setError("Preencha todos os campos");
+      setError('Preencha todos os campos');
       return false;
     }
     return true;
@@ -85,19 +85,18 @@ function CadImovel() {
       .put(`/imoveis/${rgiParam}`, imovel)
       .then(() => {
         Swal.fire({
-          icon: "success",
-          title: "Dados do imóvel atualizados com sucesso!",
-          confirmButtonText: "Confirmar",
-          confirmButtonColor: "#6F9CB5",
+          icon: 'success',
+          title: 'Dados do imóvel atualizados com sucesso!',
+          confirmButtonText: 'Confirmar',
+          confirmButtonColor: '#6F9CB5',
         });
       })
       .catch((error) => {
-        console.log(error);
         Swal.fire({
-          icon: "error",
-          title: "Algo deu errado",
-          confirmButtonText: "Corrigir dados do imóvel",
-          confirmButtonColor: "#6F9CB5",
+          icon: 'error',
+          title: 'Algo deu errado',
+          confirmButtonText: 'Corrigir dados do imóvel',
+          confirmButtonColor: '#6F9CB5',
         });
       });
   };
@@ -106,107 +105,106 @@ function CadImovel() {
     if (!isFormValid()) return;
 
     api
-      .post("/imoveis", imovel)
+      .post('/imoveis', imovel)
       .then(() => {
         Swal.fire({
-          icon: "success",
-          title: "Cadastro realizado com sucesso!",
-          confirmButtonText: "Ir para página inicial",
-          confirmButtonColor: "#6F9CB5",
+          icon: 'success',
+          title: 'Cadastro realizado com sucesso!',
+          confirmButtonText: 'Ir para página inicial',
+          confirmButtonColor: '#6F9CB5',
         });
-        navigate("/imoveis");
+        navigate('/imoveis');
       })
       .catch((error) => {
-        console.log(error);
         Swal.fire({
-          icon: "error",
-          title: "Algo deu errado",
-          confirmButtonText: "Refazer cadastro",
-          confirmButtonColor: "#6F9CB5",
+          icon: 'error',
+          title: 'Algo deu errado',
+          confirmButtonText: 'Refazer cadastro',
+          confirmButtonColor: '#6F9CB5',
         });
-        navigate("/cadastro-imovel");
+        navigate('/cadastro-imovel');
       });
   };
 
   return (
     <>
       <Header />
-      <div className="main-container">
-        <div className={classes["form-cadastro"]}>
+      <div className='main-container'>
+        <div className={classes['form-cadastro']}>
           <form>
             <h1>Dados do Imóvel</h1>
             <input
-              className={classes["form-data-input"]}
-              type="text"
+              className={classes['form-data-input']}
+              type='text'
               value={rua}
-              onChange={(e) => [setRua(e.target.value), setError("")]}
-              placeholder="Rua"
+              onChange={(e) => [setRua(e.target.value), setError('')]}
+              placeholder='Rua'
             />
             <input
-              className={classes["form-data-input"]}
-              type="text"
+              className={classes['form-data-input']}
+              type='text'
               value={numero}
-              onChange={(e) => [setNumero(e.target.value), setError("")]}
-              placeholder="Nº"
+              onChange={(e) => [setNumero(e.target.value), setError('')]}
+              placeholder='Nº'
             />
             <input
-              className={classes["form-data-input"]}
-              type="text"
+              className={classes['form-data-input']}
+              type='text'
               value={complemento}
-              onChange={(e) => [setComplemento(e.target.value), setError("")]}
-              placeholder="Complemento"
+              onChange={(e) => [setComplemento(e.target.value), setError('')]}
+              placeholder='Complemento'
             />
             <InputMask
-              className={classes["form-data-input"]}
+              className={classes['form-data-input']}
               value={cep}
               onChange={(e) => [
-                setCep(e.target.value.replace(/[^0-9]/g, "")),
-                setError(""),
+                setCep(e.target.value.replace(/[^0-9]/g, '')),
+                setError(''),
               ]}
-              mask="99999-999"
-              placeholder="CEP"
+              mask='99999-999'
+              placeholder='CEP'
             />
             <input
-              className={classes["form-data-input"]}
-              type="text"
+              className={classes['form-data-input']}
+              type='text'
               value={bairro}
-              onChange={(e) => [setBairro(e.target.value), setError("")]}
-              placeholder="Bairro"
+              onChange={(e) => [setBairro(e.target.value), setError('')]}
+              placeholder='Bairro'
             />
             <input
-              className={classes["form-data-input"]}
-              type="text"
+              className={classes['form-data-input']}
+              type='text'
               value={cidade}
-              onChange={(e) => [setCidade(e.target.value), setError("")]}
-              placeholder="Cidade"
+              onChange={(e) => [setCidade(e.target.value), setError('')]}
+              placeholder='Cidade'
             />
             <input
-              className={classes["form-data-input"]}
-              type="text"
+              className={classes['form-data-input']}
+              type='text'
               value={estado}
-              onChange={(e) => [setEstado(e.target.value), setError("")]}
-              placeholder="Estado"
+              onChange={(e) => [setEstado(e.target.value), setError('')]}
+              placeholder='Estado'
             />
             <input
-              className={classes["form-data-input"]}
-              type="text"
+              className={classes['form-data-input']}
+              type='text'
               value={rgi}
-              onChange={(e) => [setRgi(e.target.value), setError("")]}
-              placeholder="RGI"
+              onChange={(e) => [setRgi(e.target.value), setError('')]}
+              placeholder='RGI'
             />
             <input
-              className={classes["form-data-input"]}
-              type="text"
+              className={classes['form-data-input']}
+              type='text'
               value={hidro}
-              onChange={(e) => [setHidro(e.target.value), setError("")]}
-              placeholder="Hidrômetro"
+              onChange={(e) => [setHidro(e.target.value), setError('')]}
+              placeholder='Hidrômetro'
             />
-            <span className={classes["alerta-campos"]}>{error}</span>
-            <div className={classes["div-botao"]}>
+            <span className={classes['alerta-campos']}>{error}</span>
+            <div className={classes['div-botao']}>
               <input
-                type="button"
-                value={rgiParam ? "Atualizar" : "Cadastrar"}
-                className={classes["botao-cadastro"]}
+                type='button'
+                value={rgiParam ? 'Atualizar' : 'Cadastrar'}
+                className={classes['botao-cadastro']}
                 onClick={rgiParam ? handleUpdate : handleSubmit}
               />
             </div>

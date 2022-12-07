@@ -1,6 +1,6 @@
-import React, { createContext, useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import api from "../api/saneja";
+import React, { createContext, useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import api from '../api/saneja';
 
 export const AuthContext = createContext();
 
@@ -12,7 +12,7 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const recoveredUser = localStorage.getItem("user");
+    const recoveredUser = localStorage.getItem('user');
 
     if (recoveredUser) {
       setUser(JSON.parse(recoveredUser));
@@ -22,41 +22,34 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const login = async (email, senha) => {
-    console.log("login auth", { email, senha });
-    const { data: userResponse } = await api.get(`/clientes/GetByEmail/${email}`);
+    return api
+      .get(`/clientes/GetByEmail/${email}`)
+      .then(({ data: userResponse }) => {
+        setUserEmail(userResponse.login);
+        setUserPwd(userResponse.senha);
 
-    console.log(userResponse);
-    setUserEmail(userResponse.login);
-    setUserPwd(userResponse.senha);
+        const loggedUser = {
+          email,
+          senha,
+          cpf: userResponse.cpf,
+          id: userResponse.id,
+        };
 
-    const loggedUser = {
-      email,
-      senha,
-      cpf: userResponse.cpf,
-      id: userResponse.id,
-    };
-
-    if (userResponse.login === email && userResponse.senha === senha) {
-      localStorage.setItem("user", JSON.stringify(loggedUser));
-      setUser(loggedUser);
-      navigate("/home");
-    } else if (userEmail != email || userPwd != senha) {
-      alert("Usuário inválido");
-
-      /*       Swal.fire({
-        icon: "error",
-        title: "Campos inválidos",
-        confirmButtonText: "Voltar",
-        confirmButtonColor: "#6F9CB5",
-      }); */
-    }
+        if (userResponse.login === email && userResponse.senha === senha) {
+          localStorage.setItem('user', JSON.stringify(loggedUser));
+          setUser(loggedUser);
+          navigate('/home');
+        } else if (userEmail != email || userPwd != senha) {
+          return Promise.reject('Usuário ou senha incorreto');
+        }
+        return Promise.resolve();
+      });
   };
 
   const logout = () => {
-    console.log("logout");
-    localStorage.removeItem("user");
+    localStorage.removeItem('user');
     setUser(null);
-    navigate("/login");
+    navigate('/login');
   };
   return (
     <AuthContext.Provider

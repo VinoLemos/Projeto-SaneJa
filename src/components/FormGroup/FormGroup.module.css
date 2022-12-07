@@ -5,3 +5,11 @@
 .form-group__label {
   margin-bottom: 0.5rem;
 }
+
+.form-group--invalid input {
+  border-color: red;
+}
+
+.form-group--invalid label {
+  color: red;
+}
