@@ -1,0 +1,18 @@
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-row {
+  display: flex;
+  width: 100%;
+}
+
+.custom-card {
+  padding: 2.5rem;
+  width: 40rem;
+}
+
+.observacao {
+  height: 10rem;
+}

@@ -1,56 +1,73 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from 'react';
 
-import Header from "../../components/Header";
-import Footer from "../../components/Footer";
-import Back from "../../components/Back";
-import "./Visita.css";
-// import { DropdownButton, Dropdown } from "react-bootstrap";
+import Header from '../../components/Header';
+import Footer from '../../components/Footer';
+import Back from '../../components/Back';
+import FormGroup from '../../components/FormGroup/FormGroup';
+import Card from '../../components/Card/Card';
+import api from '../../api/saneja';
+
+import classes from './Visita.module.css';
+import Button from '../../components/Button/Button';
+import Swal from 'sweetalert2';
 
 function Visita() {
-  // const [visitType, setVisitType] = useState("");
+  const [dataVisita, setDataVisita] = useState('');
+  const [observacao, setObservacao] = useState('');
+  const [isValid, setIsValid] = useState(false);
 
-  // const selectTipoHandler = event => {
-  //   setVisitType(event.target.innerText);
-  // }
+  useEffect(() => setIsValid(!!dataVisita), [dataVisita]);
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+    if (!isValid) return;
+
+    api.post('/VisitaTecnica', {}).catch(() =>
+      Swal.fire({
+        icon: 'error',
+        title: 'Erro ao realizar agendamento',
+        confirmButtonText: 'Voltar',
+        confirmButtonColor: '#6F9CB5',
+      })
+    );
+  };
 
   return (
     <div>
       <Header />
-      <div className="page-wrap" id="outer-container">
-        <div className="center-container">
-          <div className="visita-h1">
-            <h1>Agendar Visita Técnica</h1>
-          </div>
-          <div className="container-agendamento">
-            <div className="div-agendamento">
-              <div>
-                <label className="form-label" htmlFor="date">Data</label>
-                <input className="form-input" id="date" type="date"></input>
-              </div>
-              {/* <div>
-                <label className="form-label" htmlFor="time">Hora</label>
-                <input className="form-input" id="time" type="time"></input>
-              </div> */}
+      <div className='main-container'>
+        <Card title='Agendamento de visita' className={classes['custom-card']}>
+          <form className={classes.form} onSubmit={submitHandler}>
+            <div className={classes['form-row']}>
+              <FormGroup
+                id='dataVisita'
+                label='Data do Agendamento'
+                input={{
+                  type: 'date',
+                  value: dataVisita,
+                  autoComplete: 'date',
+                  onChange: (e) => setDataVisita(e.target.value),
+                }}
+              ></FormGroup>
             </div>
-            <div className="container-tipo-visita">
-              {/* <DropdownButton
-                className="select-tipo"
-                title={visitType || "Selecione o tipo de visita"}
-              >
-                <Dropdown.Item onClick={selectTipoHandler}>Visita Técnica</Dropdown.Item>
-                <Dropdown.Item onClick={selectTipoHandler}>Retorno para Avaliação</Dropdown.Item>
-                <Dropdown.Item onClick={selectTipoHandler}> Retorno Após Notificação</Dropdown.Item>
-              </DropdownButton> */}
-              <div className="comments">
-                <label className="form-label" htmlFor="comments">Observações</label>
-                <textarea id="comments" className="campo-observacoes"></textarea>
-              </div>
+            <div className={classes['form-row']}>
+              <FormGroup
+                id='observacao'
+                label='Observação'
+                input={{
+                  type: 'textarea',
+                  value: observacao,
+                  autoComplete: 'observacao',
+                  className: classes['observacao'],
+                  onChange: (e) => setObservacao(e.target.value),
+                }}
+              ></FormGroup>
             </div>
-          </div>
-          <div className="btn">
-            <input type="button" value="Agendar" className="botao-cadastro" />
-          </div>
-        </div>
+            <Button type='highlight' disabled={!isValid}>
+              Agendar Visita
+            </Button>
+          </form>
+        </Card>
       </div>
       <Back />
       <Footer />

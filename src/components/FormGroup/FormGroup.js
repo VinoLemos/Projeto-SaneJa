@@ -7,10 +7,12 @@ const FormGroup = (props) => {
     <div
       className={`${classes['form-group']} ${
         props.invalidIf ? classes['form-group--invalid'] : ''
-      }`}
+      } ${props.className}`}
     >
-      <Label className={classes['form-group__label']}>{props.label}</Label>
-      {props.input && <Input {...props.input}></Input>}
+      <Label htmlFor={props.id} className={classes['form-group__label']}>
+        {props.label}
+      </Label>
+      {props.input && <Input {...props.input} id={props.id}></Input>}
       {props.children}
     </div>
   );

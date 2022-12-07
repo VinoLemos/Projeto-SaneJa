@@ -3,5 +3,11 @@
   background-color: #fff;
   border-radius: 5px;
   padding: 1rem;
-  width: 450px;
+  width: 100%;
+}
+
+.card__title {
+  font-size: 1.5rem;
+  color: #1A618A;
+  margin-bottom: 2rem;
 }

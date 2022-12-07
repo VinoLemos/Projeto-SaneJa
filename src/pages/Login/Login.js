@@ -53,6 +53,7 @@ const Login = () => {
         <form>
           <Card className={classes['div-login']}>
             <FormGroup
+              id='email'
               label='Email'
               input={{
                 type: 'email',
@@ -63,6 +64,7 @@ const Login = () => {
               invalidIf={emailControl.dirty && emailControl.error}
             ></FormGroup>
             <FormGroup
+              id='senha'
               label='Senha'
               input={{
                 type: 'password',

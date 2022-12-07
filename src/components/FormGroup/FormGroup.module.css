@@ -1,5 +1,6 @@
 .form-group {
   margin-bottom: 1rem;
+  width: 100%;
 }
 
 .form-group__label {

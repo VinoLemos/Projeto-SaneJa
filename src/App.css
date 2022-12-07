@@ -10,12 +10,6 @@
   place-items: center;
 }
 
-.main-container h1 {
-  padding-top: 4rem;
-  font-size: 1rem;
-  color: #444343;
-}
-
 .main-container p {
   padding-top: 3rem;
   font-size: 0.8rem;
