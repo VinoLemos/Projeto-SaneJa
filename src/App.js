@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import Layout from "./components/layout/Layout";
+import NavigationBar from "./components/layout/NavigationBar";
 
 import Home from "./components/pages/Home";
 import About from "./components/pages/About";
@@ -9,6 +10,7 @@ import Contact from "./components/pages/Contact";
 function App() {
   return (
     <>
+      <NavigationBar />
       <Layout>
         <Router>
           <Routes>
