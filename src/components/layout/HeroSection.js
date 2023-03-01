@@ -24,7 +24,7 @@ const Styles = styled.div`
 
   h1 {
     color: #8dadb0;
-    font-size: 100px;
+    font-size: 90px;
     margin-top: 1em;
   }
 
