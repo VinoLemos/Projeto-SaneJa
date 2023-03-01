@@ -3,3 +3,8 @@
 * {
     font-family: 'Poppins', sans-serif;
 }
+
+body {
+    background: rgb(246,246,246);
+    background: radial-gradient(circle, rgba(246,246,246,1) 0%, rgba(224,232,231,1) 100%);
+}
