@@ -1,5 +1,7 @@
 import React from "react";
 
+import { AiOutlineWhatsApp, AiOutlineMail } from "react-icons/ai";
+
 import water from "../../img/pexels-water.mp4";
 
 import styled from "styled-components";
@@ -51,9 +53,34 @@ const Styles = styled.div`
     background-color: rgba(94, 109, 110, 0.5);
     padding: 0.3em;
   }
+
+  #contact-list {
+    list-style-type: none;
+    text-align: left;
+  }
+
+  #contact-list p {
+    padding: 0;
+  }
+
+  #contact-list svg {
+    width: 30px;
+    color: #8dadb0;
+    margin-right: 1em;
+  }
 `;
 
-function HeroSection({ title, subtitle, paragraph, span }) {
+function HeroSection({
+  title,
+  subtitle,
+  paragraph,
+  span,
+  contact,
+  contactTitle,
+  contactInfo,
+  emailTitle,
+  emailInfo,
+}) {
   return (
     <Styles>
       <div>
@@ -65,6 +92,28 @@ function HeroSection({ title, subtitle, paragraph, span }) {
             {paragraph}
             {span && <span>{span}</span>}
           </p>
+          {contact && (
+            <ul id="contact-list">
+              <li>
+                <p>
+                  <AiOutlineWhatsApp />
+                  <strong>
+                    <span>{contactTitle}</span>
+                  </strong>
+                  {contactInfo}
+                </p>
+              </li>
+              <li>
+                <p>
+                  <AiOutlineMail />
+                  <strong>
+                    <span>{emailTitle}</span>
+                  </strong>
+                  {emailInfo}
+                </p>
+              </li>
+            </ul>
+          )}
         </section>
       </div>
     </Styles>
