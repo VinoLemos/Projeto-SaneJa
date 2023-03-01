@@ -1,6 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import Layout from "./components/layout/Layout";
 import NavigationBar from "./components/layout/NavigationBar";
 
 import Home from "./components/pages/Home";
@@ -12,13 +11,11 @@ function App() {
     <>
       <Router>
         <NavigationBar />
-        <Layout>
-          <Routes>
-            <Route exact path="/" element={<Home />}></Route>
-            <Route exact path="/sobre" element={<About />}></Route>
-            <Route exact path="/contato" element={<Contact />}></Route>
-          </Routes>
-        </Layout>
+        <Routes>
+          <Route exact path="/" element={<Home />}></Route>
+          <Route exact path="/sobre" element={<About />}></Route>
+          <Route exact path="/contato" element={<Contact />}></Route>
+        </Routes>
       </Router>
     </>
   );
