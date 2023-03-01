@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import logo from "../../img/logo-name.png";
 
 import styled from "styled-components";
+import SubmitButton from "./SubmitButton";
 
 const Styles = styled.div`
   .navbar {
@@ -16,7 +17,7 @@ const Styles = styled.div`
 
   a {
     text-decoration: none;
-    color: #555;
+    color: #fff;
     padding-right: 1em;
 
     &:hover {
@@ -43,6 +44,16 @@ function NavigationBar() {
             </Nav.Item>
             <Nav.Item>
               <Link to="/contato">Contato</Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Link to="/">
+                <SubmitButton text="Criar Conta" />
+              </Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Link to="/">
+                <SubmitButton text="Login" />
+              </Link>
             </Nav.Item>
           </Nav>
         </Navbar.Collapse>
