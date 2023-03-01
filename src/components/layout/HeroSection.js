@@ -40,6 +40,7 @@ const Styles = styled.div`
   section {
     width: 450px;
     flex-wrap: wrap;
+    background-color: rgba(0, 0, 0, 0.5);
   }
 
   p {
