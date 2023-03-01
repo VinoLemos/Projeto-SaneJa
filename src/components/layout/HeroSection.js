@@ -51,25 +51,19 @@ const Styles = styled.div`
     background-color: rgba(94, 109, 110, 0.5);
     padding: 0.3em;
   }
-
-  a {
-    text-decoration: none;
-    color: #fff;
-    padding-right: 1em;
-  }
 `;
 
-function HeroSection() {
+function HeroSection({ title, subtitle, paragraph, span }) {
   return (
     <Styles>
       <div>
         <video src={water} autoPlay loop muted />
-        <h1>Sanejá </h1>
-        <h3>A sua plataforma de atendimento</h3>
+        <h1>{title}</h1>
+        <h3>{subtitle}</h3>
         <section>
           <p>
-            Aqui você encontrará o passo a passo para fazer o adequamento do seu
-            imóvel e, assim, receber sua rede de <span>saneamento básico</span>
+            {paragraph}
+            {span && <span>{span}</span>}
           </p>
         </section>
       </div>
