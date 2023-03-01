@@ -51,7 +51,7 @@ function NavigationBar() {
               </Link>
             </Nav.Item>
             <Nav.Item>
-              <Link to="/">
+              <Link to="/login">
                 <SubmitButton text="Login" />
               </Link>
             </Nav.Item>
