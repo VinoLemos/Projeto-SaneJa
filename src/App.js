@@ -10,16 +10,16 @@ import Contact from "./components/pages/Contact";
 function App() {
   return (
     <>
-      <NavigationBar />
-      <Layout>
-        <Router>
+      <Router>
+        <NavigationBar />
+        <Layout>
           <Routes>
             <Route exact path="/" element={<Home />}></Route>
             <Route exact path="/sobre" element={<About />}></Route>
             <Route exact path="/contato" element={<Contact />}></Route>
           </Routes>
-        </Router>
-      </Layout>
+        </Layout>
+      </Router>
     </>
   );
 }

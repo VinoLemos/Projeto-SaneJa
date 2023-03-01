@@ -1,6 +1,7 @@
 import React from "react";
 
 import { Nav, Navbar } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 import logo from "../../img/logo-name.png";
 
@@ -9,15 +10,17 @@ import styled from "styled-components";
 const Styles = styled.div`
   .navbar {
     padding: 1em;
-    background-color: #a7dadc;
+    background-color: #71a6a8;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   }
 
-  .navbar-brand,
-  .navbar-nav .nav-link {
+  a {
+    text-decoration: none;
     color: #555;
+    padding-right: 1em;
 
     &:hover {
-      color: #71a6a8;
+      color: #a7dadc;
     }
   }
 `;
@@ -33,13 +36,13 @@ function NavigationBar() {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
             <Nav.Item>
-              <Nav.Link href="/">Inicio</Nav.Link>
+              <Link to="/">Inicio</Link>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link href="/sobre">Sobre</Nav.Link>
+              <Link to="/sobre">Sobre</Link>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link href="/contato">Contato</Nav.Link>
+              <Link to="/contato">Contato</Link>
             </Nav.Item>
           </Nav>
         </Navbar.Collapse>
