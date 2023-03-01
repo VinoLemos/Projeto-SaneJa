@@ -65,9 +65,7 @@ function HeroSection() {
       <div>
         <video src={water} autoPlay loop muted />
         <h1>Sanejá </h1>
-        <h3>
-          <important>A sua plataforma de atendimento</important>
-        </h3>
+        <h3>A sua plataforma de atendimento</h3>
         <section>
           <p>
             Aqui você encontrará o passo a passo para fazer o adequamento do seu
