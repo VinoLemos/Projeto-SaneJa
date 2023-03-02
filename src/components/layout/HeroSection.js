@@ -5,6 +5,7 @@ import { AiOutlineWhatsApp, AiOutlineMail } from "react-icons/ai";
 import water from "../../img/pexels-water.mp4";
 
 import styled from "styled-components";
+import SubmitButton from "./SubmitButton";
 
 const Styles = styled.div`
   video {
@@ -74,6 +75,14 @@ const Styles = styled.div`
     color: #8dadb0;
     margin-right: 1em;
   }
+
+  #btn-control {
+    width: 300px;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    padding: 2em;
+  }
 `;
 
 function HeroSection({
@@ -86,6 +95,10 @@ function HeroSection({
   contactInfo,
   emailTitle,
   emailInfo,
+  btnText,
+  link,
+  btnStyle,
+  btnSize,
 }) {
   return (
     <Styles>
@@ -121,6 +134,16 @@ function HeroSection({
             </ul>
           )}
         </section>
+        {btnText && (
+          <div id="btn-control">
+            <SubmitButton
+              text={btnText}
+              btnStyle={btnStyle}
+              link={link}
+              btnSize={btnSize}
+            />
+          </div>
+        )}
       </div>
     </Styles>
   );
