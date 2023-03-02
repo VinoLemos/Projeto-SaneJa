@@ -38,6 +38,9 @@ const Styles = styled.div`
   .btn--large {
     padding: 12px;
   }
+  a {
+    width: 5%;
+  }
 `;
 
 const STYLES = ["btn--primary", "btn--outline"];
