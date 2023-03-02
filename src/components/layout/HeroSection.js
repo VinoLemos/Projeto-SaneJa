@@ -20,34 +20,39 @@ const Styles = styled.div`
     width: 100vw;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.2);
+    justify-content: left;
+  }
+
+  h3,
+  p {
+    color: #fff;
   }
 
   h1 {
+    margin-top: 0.2em;
     color: #8dadb0;
-    font-size: 90px;
-    margin-top: 1em;
+    margin-left: 0.3em;
+    font-size: 4em;
+    text-shadow: 2px 2px #333;
   }
 
   h3 {
-    color: #7eb7bd;
-    font-size: 22px;
-    font-weight: 600;
-    padding-left: 1em;
-  }
-
-  section {
-    width: 450px;
-    flex-wrap: wrap;
-    background-color: rgba(0, 0, 0, 0.5);
+    font-size: 1em;
+    font-weight: 300;
+    padding: 0 2em 6em;
+    text-shadow: 2px 2px #333;
   }
 
   p {
-    color: #fff;
-    font-size: 18px;
-    font-weight: 100;
-    padding: 3em;
+    font-size: 15px;
+  }
+
+  section {
+    width: 80%;
+    flex-wrap: wrap;
+    margin-left: 1.8em;
+    padding: 1em;
+    background-color: rgba(0, 0, 0, 0.5);
   }
 
   span {
