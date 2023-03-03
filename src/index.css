@@ -5,6 +5,8 @@
 }
 
 body {
-    background: rgb(246,246,246);
-    background: radial-gradient(circle, rgba(246,246,246,1) 0%, rgba(224,232,231,1) 100%);
+    display: grid;
+    min-height: 100vh;
+    background: rgb(181,198,197);
+    background: linear-gradient(90deg, rgba(181,198,197,1) 25%, rgba(195,221,219,1) 100%);
 }
