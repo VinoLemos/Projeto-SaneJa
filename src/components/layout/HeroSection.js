@@ -17,11 +17,7 @@ const Styles = styled.div`
   }
 
   div {
-    height: 100vh;
-    width: 100vw;
-    display: flex;
-    flex-direction: column;
-    justify-content: left;
+    text-align: left;
   }
 
   h3,
@@ -31,8 +27,8 @@ const Styles = styled.div`
 
   h1 {
     margin-top: 0.2em;
+    margin-left: 0.8em;
     color: #8dadb0;
-    margin-left: 0.3em;
     font-size: 4em;
     text-shadow: 2px 2px #333;
   }
@@ -40,7 +36,8 @@ const Styles = styled.div`
   h3 {
     font-size: 1em;
     font-weight: 300;
-    padding: 0 2em 6em;
+    margin-left: 3.2em;
+    margin-bottom: 8em;
     text-shadow: 2px 2px #333;
   }
 
@@ -51,7 +48,7 @@ const Styles = styled.div`
   section {
     width: 80%;
     flex-wrap: wrap;
-    margin-left: 1.8em;
+    margin-left: 2.5em;
     padding: 1em;
     background-color: rgba(0, 0, 0, 0.5);
   }
@@ -75,13 +72,9 @@ const Styles = styled.div`
     color: #8dadb0;
     margin-right: 1em;
   }
-
-  #btn-control {
-    width: 300px;
-    height: 100px;
-    display: flex;
-    flex-direction: column;
-    padding: 2em;
+  .btn {
+    margin: 2em 2.5em;
+    width: 120px;
   }
 `;
 
@@ -99,10 +92,14 @@ function HeroSection({
   link,
   btnStyle,
   btnSize,
+  btnText2,
+  link2,
+  btnStyle2,
+  btnSize2,
 }) {
   return (
     <Styles>
-      <div>
+      <div className="d-flex flex-column">
         <video src={water} autoPlay loop muted />
         <h1>{title}</h1>
         <h3>{subtitle}</h3>
@@ -135,14 +132,16 @@ function HeroSection({
           )}
         </section>
         {btnText && (
-          <div id="btn-control">
-            <SubmitButton
-              text={btnText}
-              btnStyle={btnStyle}
-              link={link}
-              btnSize={btnSize}
-            />
-          </div>
+          <SubmitButton
+            text={btnText}
+            btnStyle={btnStyle}
+            link={link}
+            btnSize={btnSize}
+            text2={btnText2}
+            btnStyle2={btnStyle2}
+            link2={link2}
+            btnSize2={btnSize2}
+          />
         )}
       </div>
     </Styles>
