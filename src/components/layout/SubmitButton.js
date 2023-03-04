@@ -12,7 +12,7 @@ const Styles = styled.div`
   }
 
   .btn--primary {
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: rgba(0, 0, 0, 0.5);
     color: #fff;
     border: 1px solid #fff;
   }
@@ -23,6 +23,16 @@ const Styles = styled.div`
     padding: 8px 20px;
     border: 1px solid rgba(0, 0, 0, 0.5);
     transition: all 0.3s ease-out;
+  }
+
+  .btn--secondary {
+    background-color: #8dadb0;
+    color: #fff;
+    border: none;
+
+    &:hover {
+      background-color: #9bbfc2;
+    }
   }
 
   .btn--primary:hover,
@@ -38,17 +48,35 @@ const Styles = styled.div`
   .btn--large {
     padding: 12px;
   }
+
+  .btn--x-large {
+    width: 100%;
+    padding: 12px;
+  }
+
   a {
     width: 5%;
   }
 `;
 
-const STYLES = ["btn--primary", "btn--outline"];
-const SIZES = ["btn--medium", "btn--large"];
+const STYLES = ["btn--primary", "btn--outline", "btn--secondary"];
+const SIZES = ["btn--medium", "btn--large", "btn--x-large"];
 
-function SubmitButton({ text, btnStyle, btnSize, link, onClick }) {
+function SubmitButton({
+  text,
+  btnStyle,
+  btnSize,
+  link,
+  text2,
+  btnStyle2,
+  btnSize2,
+  link2,
+  onClick,
+}) {
   const checkBtnStyle = STYLES.includes(btnStyle) ? btnStyle : STYLES[0];
   const checkBtnSize = SIZES.includes(btnSize) ? btnSize : SIZES[0];
+  const checkBtnStyle2 = STYLES.includes(btnStyle2) ? btnStyle2 : STYLES[0];
+  const checkBtnSize2 = SIZES.includes(btnSize2) ? btnSize2 : SIZES[0];
   return (
     <Styles>
       {link ? (
@@ -68,6 +96,17 @@ function SubmitButton({ text, btnStyle, btnSize, link, onClick }) {
         >
           {text}
         </Button>
+      )}
+      {link2 && (
+        <Link to={link2}>
+          <Button
+            className={`btn ${checkBtnStyle2} ${checkBtnSize2}`}
+            link2={link2}
+            onClick={onClick}
+          >
+            {text2}
+          </Button>
+        </Link>
       )}
     </Styles>
   );
