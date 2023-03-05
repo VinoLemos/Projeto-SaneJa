@@ -1,54 +1,48 @@
 import React from "react";
-import {Container, Navbar, Nav} from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import {MdHome, MdChat, MdArticle} from "react-icons/md";
 
 import styled from "styled-components";
 
 const Styles = styled.div`
+  .row-bottom {
+    position: absolute;
+    bottom: 0;
+  }
 
-    nav {
-        justify-content: center;
-    }
+  a {
+    font-size: 1.2em;
+    padding: 0.5em;
+    text-decoration: none;
+    color: #fff;
+    text-transform: uppercase;
 
-    a {
-        font-size: 1.5em;
-        padding: 1em;
-        text-decoration: none;
-        color: #fff;
-        text-transform: uppercase;
-        
-        &:hover {
-            background-color: rgba(0, 0, 0, 0.5);
-        }
+    &:hover {
+      color: #71a6a8;
+      text-decoration: underline;
+      text-underline-position: under;
     }
-
-    svg {
-        margin-right: 0.5em;
-    }
+  }
 `;
 
 function Footer() {
-    return(
-        <Styles>
-            <Container >
-            <Navbar fixed="bottom">
-                <Nav>
-                    <Nav.Item>
-                        <Link to="/"> <MdHome/> Inicio</Link>
-                    </Nav.Item>
-                    <Nav.Item>
-                        <Link to="/sobre"> <MdArticle/> Sobre nós</Link>
-                    </Nav.Item>
-                    <Nav.Item>
-                        <Link to="/contato"> <MdChat/> Contato</Link>
-                    </Nav.Item>
-                </Nav>
-            </Navbar>
-        </Container>
-        </Styles>
-        
-    )
+  return (
+    <Styles>
+      <Container className="text-center">
+        <Row className="row-bottom">
+          <Col className="text-center py-3">
+            <Link to="/">Inicio</Link>
+          </Col>
+          <Col className="text-center py-3">
+            <Link to="/sobre">Sobre</Link>
+          </Col>
+          <Col className="text-center py-3">
+            <Link to="/contato">Contato</Link>
+          </Col>
+        </Row>
+      </Container>
+    </Styles>
+  );
 }
 
-export default Footer
+export default Footer;
