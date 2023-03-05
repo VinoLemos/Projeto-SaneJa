@@ -12,12 +12,38 @@ function App() {
     <>
       <Router>
         <Routes>
-          <Route exact path="/" element={<Home />}></Route>
-          <Route exact path="/sobre" element={<About />}></Route>
-          <Route exact path="/contato" element={<Contact />}></Route>
+          <Route
+            exact
+            path="/"
+            element={
+              <>
+                <Home />
+                <Footer />
+              </>
+            }
+          ></Route>
+          <Route
+            exact
+            path="/sobre"
+            element={
+              <>
+                <About />
+                <Footer />
+              </>
+            }
+          ></Route>
+          <Route
+            exact
+            path="/contato"
+            element={
+              <>
+                <Contact />
+                <Footer />
+              </>
+            }
+          ></Route>
           <Route exact path="/login" element={<Login />}></Route>
         </Routes>
-        <Footer/>
       </Router>
     </>
   );
