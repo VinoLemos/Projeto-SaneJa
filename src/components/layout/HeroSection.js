@@ -1,5 +1,5 @@
 import React from "react";
-
+import Container from "react-bootstrap/Container";
 import { AiOutlineWhatsApp, AiOutlineMail } from "react-icons/ai";
 
 import water from "../../img/pexels-water.mp4";
@@ -16,39 +16,28 @@ const Styles = styled.div`
     z-index: -1;
   }
 
-  div {
-    text-align: left;
-  }
-
   h3,
   p {
     color: #fff;
+    font-size: 1em;
   }
 
   h1 {
     margin-top: 0.2em;
-    margin-left: 0.8em;
     color: #8dadb0;
     font-size: 4em;
     text-shadow: 2px 2px #333;
   }
 
   h3 {
-    font-size: 1em;
     font-weight: 300;
-    margin-left: 3.2em;
     margin-bottom: 8em;
     text-shadow: 2px 2px #333;
   }
 
-  p {
-    font-size: 15px;
-  }
-
   section {
-    width: 80%;
+    width: 90%;
     flex-wrap: wrap;
-    margin-left: 2.5em;
     padding: 1em;
     background-color: rgba(0, 0, 0, 0.5);
   }
@@ -63,17 +52,14 @@ const Styles = styled.div`
     text-align: left;
   }
 
-  #contact-list p {
-    padding: 0;
-  }
-
   #contact-list svg {
     width: 30px;
     color: #8dadb0;
     margin-right: 1em;
   }
   .btn {
-    margin: 2em 2.5em;
+    margin-top: 2em;
+    margin-right: 2em;
     width: 120px;
   }
 `;
@@ -101,48 +87,50 @@ function HeroSection({
     <Styles>
       <div className="d-flex flex-column">
         <video src={water} autoPlay loop muted />
-        <h1>{title}</h1>
-        <h3>{subtitle}</h3>
-        <section>
-          <p>
-            {paragraph}
-            {span && <span>{span}</span>}
-          </p>
-          {contact && (
-            <ul id="contact-list">
-              <li>
-                <p>
-                  <AiOutlineWhatsApp />
-                  <strong>
-                    <span>{contactTitle}</span>
-                  </strong>
-                  {contactInfo}
-                </p>
-              </li>
-              <li>
-                <p>
-                  <AiOutlineMail />
-                  <strong>
-                    <span>{emailTitle}</span>
-                  </strong>
-                  {emailInfo}
-                </p>
-              </li>
-            </ul>
+        <Container>
+          <h1>{title}</h1>
+          <h3>{subtitle}</h3>
+          <section>
+            <p>
+              {paragraph}
+              {span && <span>{span}</span>}
+            </p>
+            {contact && (
+              <ul id="contact-list">
+                <li>
+                  <p>
+                    <AiOutlineWhatsApp />
+                    <strong>
+                      <span>{contactTitle}</span>
+                    </strong>
+                    {contactInfo}
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    <AiOutlineMail />
+                    <strong>
+                      <span>{emailTitle}</span>
+                    </strong>
+                    {emailInfo}
+                  </p>
+                </li>
+              </ul>
+            )}
+          </section>
+          {btnText && (
+            <SubmitButton
+              text={btnText}
+              btnStyle={btnStyle}
+              link={link}
+              btnSize={btnSize}
+              text2={btnText2}
+              btnStyle2={btnStyle2}
+              link2={link2}
+              btnSize2={btnSize2}
+            />
           )}
-        </section>
-        {btnText && (
-          <SubmitButton
-            text={btnText}
-            btnStyle={btnStyle}
-            link={link}
-            btnSize={btnSize}
-            text2={btnText2}
-            btnStyle2={btnStyle2}
-            link2={link2}
-            btnSize2={btnSize2}
-          />
-        )}
+        </Container>
       </div>
     </Styles>
   );
