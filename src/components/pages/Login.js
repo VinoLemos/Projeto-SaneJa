@@ -133,7 +133,7 @@ function Login() {
                 {errors.senha && <span>{errors.senha.message}</span>}
               </Form.Group>
               <p>
-                Ainda não tem conta? <Link to="/">Cadastre-se</Link>
+                Ainda não tem conta? <Link to="/cadastro">Cadastre-se</Link>
               </p>
 
               <SubmitButton
