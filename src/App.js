@@ -6,6 +6,7 @@ import Home from "./components/pages/Home";
 import About from "./components/pages/About";
 import Contact from "./components/pages/Contact";
 import Login from "./components/pages/Login";
+import RegisterUser from "./components/pages/RegisterUser";
 
 function App() {
   return (
@@ -43,6 +44,7 @@ function App() {
             }
           ></Route>
           <Route exact path="/login" element={<Login />}></Route>
+          <Route exact path="/cadastro" element={<RegisterUser />}></Route>
         </Routes>
       </Router>
     </>
