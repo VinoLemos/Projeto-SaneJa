@@ -7,7 +7,7 @@ const btnStyle = css`
   cursor: pointer;
   margin-top: 2em;
   margin-right: 2em;
-  width: 15vh;
+  width: 20vh;
   text-indent: wrap;
   height: 40px;
   color: #fff;
