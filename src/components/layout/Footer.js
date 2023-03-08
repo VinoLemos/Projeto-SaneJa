@@ -10,7 +10,7 @@ const linkStyle = css`
   font-weight: 800;
   text-transform: uppercase;
   text-decoration: none;
-  padding: 0px 2em;
+  padding: 0px 1em;
   display: inline-block;
 
   &:hover {
