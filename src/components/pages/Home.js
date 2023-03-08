@@ -10,13 +10,9 @@ function Home() {
         paragraph="A ferramenta certa para fazer o adequamento do seu
     imóvel e te ajudar a receber a rede de"
         span="saneamento básico"
-        btnText="CADASTRO"
-        btnStyle="btn--primary"
-        btnSize="btn--large"
+        btnText="cadastro"
         link="/cadastro"
-        btnText2="LOGIN"
-        btnStyle2="btn--primary"
-        btnSize2="btn--large"
+        btnText2="login"
         link2="/login"
       />
     </>
