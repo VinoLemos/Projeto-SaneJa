@@ -1,47 +1,45 @@
 import React from "react";
-import { Container, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-import styled from "styled-components";
+import Container from "@mui/material/Container";
+import { css } from "@emotion/css";
 
-const Styles = styled.div`
-  .row-bottom {
-    position: absolute;
-    bottom: 0;
-  }
+const linkStyle = css`
+  color: #fff;
+  font-size: 1em;
+  font-weight: 800;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 0px 2em;
+  display: inline-block;
 
-  a {
-    font-size: 1.2em;
-    padding: 0.5em;
-    text-decoration: none;
-    color: #fff;
-    text-transform: uppercase;
-
-    &:hover {
-      color: #71a6a8;
-      text-decoration: underline;
-      text-underline-position: under;
-    }
+  &:hover {
+    color: #71a6a8;
+    text-decoration: underline;
+    text-underline-position: under;
   }
 `;
 
 function Footer() {
   return (
-    <Styles>
-      <Container className="text-center">
-        <Row className="row-bottom">
-          <Col className="text-center py-3">
-            <Link to="/">Inicio</Link>
-          </Col>
-          <Col className="text-center py-3">
-            <Link to="/sobre">Sobre</Link>
-          </Col>
-          <Col className="text-center py-3">
-            <Link to="/contato">Contato</Link>
-          </Col>
-        </Row>
-      </Container>
-    </Styles>
+    <Container
+      maxWidth="lg"
+      className={css`
+        position: absolute;
+        top: 90vh;
+        text-align: center;
+      `}
+    >
+      <Link to="/" className={linkStyle}>
+        Inicio
+      </Link>
+      <Link to="/sobre" className={linkStyle}>
+        Sobre
+      </Link>
+      <Link to="/contato" className={linkStyle}>
+        Contato
+      </Link>
+    </Container>
   );
 }
 
