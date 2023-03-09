@@ -1,80 +1,37 @@
-import React from "react";
-import { Row, Col, Container, Form } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 
-import water from "../../img/pexels-water.mp4";
-import logo from "../../img/logo.png";
+import Avatar from "@mui/material/Avatar";
+import TextField from "@mui/material/TextField";
+import InputAdornment from "@mui/material/InputAdornment";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import FormControl from "@mui/material/FormControl";
+import FormHelperText from "@mui/material/FormHelperText";
+import InputLabel from "@mui/material/InputLabel";
+import OutlinedInput from "@mui/material/OutlinedInput";
+import IconButton from "@mui/material/IconButton";
+import Paper from "@mui/material/Paper";
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
+import { css } from "@emotion/css";
 
-import styled from "styled-components";
+import { Link } from "react-router-dom";
+
+import water from "../../img/pexels-water.mp4";
 import SubmitButton from "../layout/SubmitButton";
 
-const Styles = styled.div`
-  #main-container {
-    place-items: center center;
-  }
-
-  img {
-    margin-top: 6em;
-    margin-bottom: 2em;
-  }
-
-  h1 {
-    color: #648281;
-    text-shadow: 2px 2px #555;
-  }
-
-  video {
-    object-fit: cover;
-    width: 30vw;
-    height: 100vh;
-    position: absolute;
-    z-index: -1;
-  }
-
-  input {
-    width: 100%;
-    color: #555;
-    border-radius: 3px;
-    padding: 12px;
-    background-color: rgba(94, 109, 110, 0.2);
-    border: 1px solid rgba(94, 109, 110, 0.3);
-  }
-
-  .form-control:focus {
-    background-color: rgba(94, 109, 110, 0.2);
-    color: #555;
-    border-color: #555;
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.1),
-      0 0 8px rgba(94, 109, 110, 1);
-  }
-
-  p {
-    color: #555;
-    font-weight: 500;
-    font-size: 0.6em;
-    text-align: right;
-  }
-
-  svg {
-    font-size: 1.5em;
-    color: #648281;
-    cursor: pointer;
-  }
-
-  a {
-    color: #648281;
-    text-decoration: none;
-  }
-
-  span {
-    display: flex;
-    color: #bf6560;
-    margin-bottom: 0.5em;
-  }
-`;
-
 function Login() {
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
+
   const {
     register,
     handleSubmit,
@@ -84,69 +41,124 @@ function Login() {
   const onSubmit = (data) => console.log(data);
 
   return (
-    <Styles>
-      <Row>
-        <Col xs={4}>
-          <video src={water} autoPlay loop muted />
-        </Col>
-        <Col xs={8}>
-          <Container id="main-container" className="d-grid text-center ">
-            <Form>
-              <img src={logo} alt="Logo Sanejá" />
-              <h1 className="fs-3 mb-4">Faça o login</h1>
-
-              <Form.Group>
-                <Form.Control
-                  className="mb-2"
-                  type="email"
-                  name="email"
-                  size="lg"
-                  placeholder="Email"
-                  autoComplete="username"
-                  {...register("email", {
-                    required: "Email obrigatório",
-                    pattern: {
-                      value: /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/,
-                      message: "Email incompleto ou inválido",
-                    },
-                  })}
-                />
-                {errors.email && <span>{errors.email.message}</span>}
-              </Form.Group>
-
-              <Form.Group>
-                <Form.Control
-                  className="mb-2"
-                  type="password"
-                  name="senha"
-                  size="lg"
-                  placeholder="Senha"
-                  autoComplete="current-password"
-                  {...register("senha", {
-                    required: "Senha obrigatória",
-                    minLength: {
-                      value: 4,
-                      message: "Senha precisa ter entre 4 e 8 caracteres",
-                    },
-                  })}
-                />
-                {errors.senha && <span>{errors.senha.message}</span>}
-              </Form.Group>
-              <p>
-                Ainda não tem conta? <Link to="/cadastro">Cadastre-se</Link>
-              </p>
-
-              <SubmitButton
-                text="Entrar"
-                btnStyle="btn--secondary"
-                btnSize="btn--x-large"
-                onClick={handleSubmit(onSubmit)}
+    <Grid container component="main" sx={{ height: "100vh" }}>
+      <Grid item xs={12} sm={4} md={7}>
+        <video
+          src={water}
+          autoPlay
+          loop
+          muted
+          className={css`
+            object-fit: cover;
+            width: 100vw;
+            min-height: 100vh;
+            position: absolute;
+            z-index: -1;
+          `}
+        />{" "}
+      </Grid>
+      <Grid
+        item
+        xs={12}
+        sm={8}
+        md={5}
+        component={Paper}
+        elevation={6}
+        square
+        bgcolor="#c7d9d8"
+      >
+        <Box
+          sx={{
+            my: 8,
+            mx: 4,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <Avatar sx={{ m: 1, bgcolor: "primary.main" }}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Faça o login
+          </Typography>
+          <Box component="form" noValidate sx={{ mt: 1, width: "30ch" }}>
+            <FormControl sx={{ width: "30ch" }}>
+              <TextField
+                id="component-error"
+                margin="normal"
+                fullWidth
+                label="Email"
+                name="email"
+                autoComplete="email"
+                {...register("email", {
+                  required: "Email obrigatório",
+                  pattern: {
+                    value: /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/,
+                    message: "Email incompleto ou inválido",
+                  },
+                })}
+                aria-describedby="component-error-text"
               />
-            </Form>
-          </Container>
-        </Col>
-      </Row>
-    </Styles>
+              {errors.email && (
+                <FormHelperText sx={{ color: "#bf6560" }}>
+                  {errors.email.message}
+                </FormHelperText>
+              )}
+            </FormControl>
+
+            <FormControl sx={{ mb: 3, width: "30ch" }} variant="outlined">
+              <InputLabel htmlFor="outlined-adornment-password">
+                Senha
+              </InputLabel>
+              <OutlinedInput
+                type={showPassword ? "text" : "password"}
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      onMouseDown={handleMouseDownPassword}
+                      edge="end"
+                    >
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                }
+                label="Senha"
+                {...register("senha", {
+                  required: "Senha obrigatória",
+                  minLength: {
+                    value: 4,
+                    message: "Senha precisa ter entre 4 e 8 caracteres",
+                  },
+                })}
+              />
+              {errors.senha && (
+                <FormHelperText sx={{ color: "#bf6560" }}>
+                  {errors.senha.message}
+                </FormHelperText>
+              )}
+            </FormControl>
+            <SubmitButton text="Entrar" onClick={handleSubmit(onSubmit)} />
+            <Grid container>
+              <Grid item mt={2}>
+                Não tem uma conta?{" "}
+                <Link
+                  to="/cadastro"
+                  className={css`
+                    text-decoration: none;
+                    color: #3b8786;
+                  `}
+                >
+                  Cadastre-se
+                </Link>
+              </Grid>
+            </Grid>
+          </Box>
+        </Box>
+      </Grid>
+    </Grid>
   );
 }
 
