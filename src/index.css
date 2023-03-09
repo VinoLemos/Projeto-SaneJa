@@ -8,3 +8,8 @@ body {
     background: rgb(181,198,197);
     background: linear-gradient(90deg, rgba(181,198,197,1) 25%, rgba(195,221,219,1) 100%);
 }
+
+h1 {
+    color: #3b8786;
+    font-size: 1.5em;
+}
