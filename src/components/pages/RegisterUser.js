@@ -1,112 +1,250 @@
-import React from "react";
-import { Row, Col, Container, Form } from "react-bootstrap";
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+
+import Grid from "@mui/material/Grid";
+import Avatar from "@mui/material/Avatar";
+import AccountBoxOutlinedIcon from "@mui/icons-material/AccountBoxOutlined";
+import FormHelperText from "@mui/material/FormHelperText";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
+import Paper from "@mui/material/Paper";
+import Box from "@mui/material/Box";
+import InputAdornment from "@mui/material/InputAdornment";
+import FormControl from "@mui/material/FormControl";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import OutlinedInput from "@mui/material/OutlinedInput";
+import IconButton from "@mui/material/IconButton";
+import InputLabel from "@mui/material/InputLabel";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { css } from "@emotion/css";
 
 import water from "../../img/pexels-water.mp4";
-
-import styled from "styled-components";
-
-const Styles = styled.div`
-  #register-container {
-    margin-top 8em;
-    place-items: center;
-  }
-
-  video {
-    object-fit: cover;
-    width: 30vw;
-    height: 100vh;
-    position: absolute;
-    z-index: -1;
-  }
-
-  h1 {
-    color: #648281;
-    text-shadow: 2px 2px #555;
-  }
-
-  label {
-    color: #648281;
-    font-weight: 600;
-    text-transform: uppercase;
-  }
-
-  input {
-    width: 100%;
-    color: #555;
-    border-radius: 3px;
-    padding: 12px;
-    background-color: rgba(94, 109, 110, 0.2);
-    border: 1px solid rgba(94, 109, 110, 0.3);
-  }
-
-  .form-control:focus {
-    background-color: rgba(94, 109, 110, 0.2);
-    color: #555;
-    border-color: #555;
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.1),
-      0 0 8px rgba(94, 109, 110, 1);
-  }
-`;
+import SubmitButton from "../layout/SubmitButton";
 
 function RegisterUser() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ mode: "onBlur" });
+
+  const onSubmit = (data) => console.log(data);
+
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
+
   return (
-    <Styles>
-      <Row>
-        <Col xs={4}>
-          <video src={water} autoPlay loop muted />
-        </Col>
-        <Col xs={8}>
-          <Container id="register-container" className="d-grid text-left">
-            <Form>
-              <h1>Faça o cadastro</h1>
-              <Form.Group>
-                <Form.Label>Nome completo</Form.Label>
-                <Form.Control
-                  className="mb-2"
-                  type="text"
+    <Grid container component="main" sx={{ height: "100vh" }}>
+      <Grid item xs={12} sm={4} md={7}>
+        <video
+          src={water}
+          autoPlay
+          loop
+          muted
+          className={css`
+            object-fit: cover;
+            width: 100vw;
+            min-height: 100vh;
+            position: absolute;
+            z-index: -1;
+          `}
+        />
+      </Grid>
+      <Grid
+        item
+        xs={12}
+        sm={8}
+        md={5}
+        component={Paper}
+        elevation={6}
+        square
+        bgcolor="#c7d9d8"
+      >
+        <Box
+          sx={{
+            my: 8,
+            mx: 4,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <Avatar sx={{ m: 1, bgcolor: "primary.main" }}>
+            <AccountBoxOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Faça o cadastro
+          </Typography>
+          <Box component="form" noValidate sx={{ mt: 1 }}>
+            <Grid container spacing={1}>
+              <Grid item xs={6} sm={6}>
+                <TextField
+                  margin="normal"
+                  fullWidth
+                  label="Nome completo"
                   name="nome"
-                  placeholder="Digite seu nome..."
-                />
-              </Form.Group>
-              <Form.Group>
-                <Form.Label>cpf</Form.Label>
-                <Form.Control
-                  className="mb-2"
                   type="text"
+                  {...register("nome", {
+                    required: "Nome obrigatório",
+                    pattern: {
+                      value: /^[a-zA-Z]+ [a-zA-Z]+$/,
+                      message: "Nome incompleto ou inválido",
+                    },
+                  })}
+                />
+                {errors.nome && (
+                  <FormHelperText sx={{ color: "#bf6560" }}>
+                    {errors.nome.message}
+                  </FormHelperText>
+                )}
+              </Grid>
+
+              <Grid item xs={6} sm={6}>
+                <TextField
+                  margin="normal"
+                  fullWidth
+                  label="CPF"
                   name="cpf"
-                  placeholder="Digite seu CPF..."
-                />
-              </Form.Group>
-              <Form.Group>
-                <Form.Label>rg</Form.Label>
-                <Form.Control
-                  className="mb-2"
                   type="text"
+                  {...register("cpf", {
+                    required: "CPF obrigatório",
+                  })}
+                />
+                {errors.cpf && (
+                  <FormHelperText sx={{ color: "#bf6560" }}>
+                    {errors.cpf.message}
+                  </FormHelperText>
+                )}
+              </Grid>
+            </Grid>
+
+            <Grid container spacing={1}>
+              <Grid item xs={6} sm={6}>
+                <TextField
+                  margin="normal"
+                  fullWidth
+                  label="RG"
                   name="rg"
-                  placeholder="Digite seu RG..."
+                  type="text"
+                  {...register("rg", {
+                    required: "RG obrigatório",
+                  })}
                 />
-              </Form.Group>
-              <Form.Group>
-                <Form.Label>data de nascimento</Form.Label>
-                <Form.Control
-                  className="mb-2"
-                  type="date"
-                  name="data_nascimento"
+                {errors.rg && (
+                  <FormHelperText sx={{ color: "#bf6560" }}>
+                    {errors.rg.message}
+                  </FormHelperText>
+                )}
+              </Grid>
+
+              <Grid item xs={6} sm={6}>
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  <DatePicker
+                    sx={{ marginTop: 2, width: "100%" }}
+                    name="dataNascimento"
+                    label="Data nascimento"
+                    {...register("dataNascimento", {
+                      required: "Data obrigatória",
+                    })}
+                  />
+                </LocalizationProvider>
+                {errors.dataNascimento && (
+                  <FormHelperText sx={{ color: "#bf6560" }}>
+                    {errors.dataNascimento.message}
+                  </FormHelperText>
+                )}
+              </Grid>
+            </Grid>
+
+            <Grid container spacing={1}>
+              <Grid item xs={6} sm={6}>
+                <TextField
+                  margin="normal"
+                  fullWidth
+                  label="Celular"
+                  name="celular"
+                  type="text"
+                  {...register("celular", {
+                    required: "Celular obrigatório",
+                  })}
                 />
-              </Form.Group>
-              <Form.Group>
-                <Form.Label>telefone</Form.Label>
-                <Form.Control className="mb-2" type="text" name="telefone" />
-              </Form.Group>
-              <Form.Group>
-                <Form.Label>email</Form.Label>
-                <Form.Control className="mb-2" type="email" name="email" />
-              </Form.Group>
-            </Form>
-          </Container>
-        </Col>
-      </Row>
-    </Styles>
+                {errors.celular && (
+                  <FormHelperText sx={{ color: "#bf6560" }}>
+                    {errors.celular.message}
+                  </FormHelperText>
+                )}
+              </Grid>
+
+              <Grid item xs={6} sm={6}>
+                <TextField
+                  margin="normal"
+                  fullWidth
+                  label="Email"
+                  name="email"
+                  type="text"
+                  {...register("email", {
+                    required: "Email obrigatório",
+                    pattern: {
+                      value: /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/,
+                      message: "Email incompleto ou inválido",
+                    },
+                  })}
+                />
+                {errors.email && (
+                  <FormHelperText sx={{ color: "#bf6560" }}>
+                    {errors.email.message}
+                  </FormHelperText>
+                )}
+              </Grid>
+            </Grid>
+
+            <FormControl
+              sx={{ mt: 2, mb: 2, width: "100%" }}
+              variant="outlined"
+            >
+              <InputLabel>Senha</InputLabel>
+              <OutlinedInput
+                type={showPassword ? "text" : "password"}
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      onMouseDown={handleMouseDownPassword}
+                      edge="end"
+                    >
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                }
+                label="Senha"
+                {...register("senha", {
+                  required: "Senha obrigatória",
+                  minLength: {
+                    value: 4,
+                    message: "Senha precisa ter entre 4 e 8 caracteres",
+                  },
+                })}
+              />
+              {errors.senha && (
+                <FormHelperText sx={{ color: "#bf6560" }}>
+                  {errors.senha.message}
+                </FormHelperText>
+              )}
+            </FormControl>
+            <SubmitButton text="Cadastrar" onClick={handleSubmit(onSubmit)} />
+          </Box>
+        </Box>
+      </Grid>
+    </Grid>
   );
 }
 
