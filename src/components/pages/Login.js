@@ -98,7 +98,6 @@ function Login() {
                     message: "Email incompleto ou inválido",
                   },
                 })}
-                aria-describedby="component-error-text"
               />
               {errors.email && (
                 <FormHelperText sx={{ color: "#bf6560" }}>
