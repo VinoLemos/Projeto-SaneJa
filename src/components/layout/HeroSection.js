@@ -4,6 +4,8 @@ import Container from "@mui/material/Container";
 
 import { css } from "@emotion/css";
 
+import { Box } from "@mui/material";
+
 import { AiOutlineWhatsApp, AiOutlineMail } from "react-icons/ai";
 
 import water from "../../img/pexels-water.mp4";
@@ -26,7 +28,13 @@ function HeroSection({
   link2,
 }) {
   return (
-    <>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        minHeight: "95vh",
+      }}
+    >
       <video
         src={water}
         autoPlay
@@ -63,12 +71,14 @@ function HeroSection({
           className={css`
             flex-wrap: wrap;
             padding: 0.5em;
-            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
           `}
         >
           <p
             className={css`
-              font-weight: 400;
+              font-weight: 600;
               color: #fff;
             `}
           >
@@ -147,7 +157,7 @@ function HeroSection({
           />
         )}
       </Container>
-    </>
+    </Box>
   );
 }
 
