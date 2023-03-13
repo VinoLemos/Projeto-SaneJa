@@ -24,11 +24,9 @@ function Footer() {
   return (
     <Container
       maxWidth="lg"
-      className={css`
-        position: absolute;
-        top: 90vh;
-        text-align: center;
-      `}
+      sx={{
+        textAlign: "center",
+      }}
     >
       <Link to="/" className={linkStyle}>
         Inicio
