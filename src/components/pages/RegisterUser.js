@@ -21,6 +21,8 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { css } from "@emotion/css";
 
+import { Link } from "react-router-dom";
+
 import water from "../../img/pexels-water.mp4";
 import SubmitButton from "../layout/SubmitButton";
 
@@ -240,6 +242,20 @@ function RegisterUser() {
                 </FormHelperText>
               )}
             </FormControl>
+            <Grid container>
+              <Grid item mb={2}>
+                Já tem uma conta?{" "}
+                <Link
+                  to="/login"
+                  className={css`
+                    text-decoration: none;
+                    color: #3b8786;
+                  `}
+                >
+                  Login
+                </Link>
+              </Grid>
+            </Grid>
             <SubmitButton text="Cadastrar" onClick={handleSubmit(onSubmit)} />
           </Box>
         </Box>
