@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 
 import Grid from "@mui/material/Grid";
 import Avatar from "@mui/material/Avatar";
@@ -28,6 +28,7 @@ import SubmitButton from "../layout/SubmitButton";
 
 function RegisterUser() {
   const {
+    control,
     register,
     handleSubmit,
     formState: { errors },
@@ -148,16 +149,24 @@ function RegisterUser() {
               </Grid>
 
               <Grid item xs={6} sm={6}>
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                  <DatePicker
-                    sx={{ marginTop: 2, width: "100%" }}
-                    name="dataNascimento"
-                    label="Data nascimento"
-                    {...register("dataNascimento", {
-                      required: "Data obrigatória",
-                    })}
-                  />
-                </LocalizationProvider>
+                <Controller
+                  name="dataNascimento"
+                  control={control}
+                  defaultValue={null}
+                  rules={{ required: true }}
+                  render={({ field: { onChange, value } }) => (
+                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                      <DatePicker
+                      label="Data de nascimento"
+                      inputVariant="outlined"
+                      ampm={false}
+                      value={value}
+                      onChange={onChange}
+                    />
+                    </LocalizationProvider>
+                    
+                  )}
+                />
                 {errors.dataNascimento && (
                   <FormHelperText sx={{ color: "#bf6560" }}>
                     {errors.dataNascimento.message}
