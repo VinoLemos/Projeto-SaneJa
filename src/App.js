@@ -7,6 +7,7 @@ import About from "./components/pages/About";
 import Contact from "./components/pages/Contact";
 import Login from "./components/pages/Login";
 import RegisterUser from "./components/pages/RegisterUser";
+import Homepage from "./components/pages/Homepage";
 
 function App() {
   return (
@@ -45,6 +46,7 @@ function App() {
           ></Route>
           <Route exact path="/login" element={<Login />}></Route>
           <Route exact path="/cadastro" element={<RegisterUser />}></Route>
+          <Route exact path="/home" element={<Homepage />}></Route>
         </Routes>
       </Router>
     </>
