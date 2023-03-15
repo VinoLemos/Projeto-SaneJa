@@ -7,20 +7,24 @@ import logo from "../../img/logo-name.png";
 
 import styled from "styled-components";
 
+import "bootstrap/dist/css/bootstrap.min.css";
+import SubmitButton from "./SubmitButton";
+
 const Styles = styled.div`
   .navbar {
     padding: 1em;
-    background-color: #71a6a8;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   }
 
   a {
     text-decoration: none;
-    color: #fff;
-    padding-right: 1em;
+    text-transform: uppercase;
+    color: #307d85;
+    padding-right: 1.5em;
 
     &:hover {
-      color: #444;
+      color: #6ca5ab;
     }
   }
 `;
@@ -29,20 +33,28 @@ function NavigationBar() {
   return (
     <Styles>
       <Navbar expand="lg">
-        <Navbar.Brand href="/">
-          <img src={logo} alt="Logo Sanejá" />
+        <Navbar.Brand>
+          <Link to="/">
+            <img src={logo} alt="Logo Sanejá" />
+          </Link>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
             <Nav.Item>
-              <Link to="/">Inicio</Link>
+              <Link to="/">Meus Imóveis</Link>
             </Nav.Item>
             <Nav.Item>
-              <Link to="/sobre">Sobre</Link>
+              <Link to="/">Agendar Visita Técnica</Link>
             </Nav.Item>
             <Nav.Item>
-              <Link to="/contato">Contato</Link>
+              <Link to="/">Minhas Visitas</Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Link to="/">Meu Perfil</Link>
+            </Nav.Item>
+            <Nav.Item>
+              <SubmitButton text="Sair" />
             </Nav.Item>
           </Nav>
         </Navbar.Collapse>
