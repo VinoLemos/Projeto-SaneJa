@@ -45,7 +45,7 @@ function NavigationBar() {
               <Link to="/">Meus Imóveis</Link>
             </Nav.Item>
             <Nav.Item>
-              <Link to="/">Agendar Visita Técnica</Link>
+              <Link to="/agendamento">Agendar Visita Técnica</Link>
             </Nav.Item>
             <Nav.Item>
               <Link to="/">Minhas Visitas</Link>
