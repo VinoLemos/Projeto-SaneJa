@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Controller, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
 import Grid from "@mui/material/Grid";
 import Avatar from "@mui/material/Avatar";
@@ -16,9 +16,6 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import IconButton from "@mui/material/IconButton";
 import InputLabel from "@mui/material/InputLabel";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { css } from "@emotion/css";
 
 import { Link } from "react-router-dom";
@@ -28,7 +25,6 @@ import SubmitButton from "../layout/SubmitButton";
 
 function RegisterUser() {
   const {
-    control,
     register,
     handleSubmit,
     formState: { errors },
@@ -132,6 +128,7 @@ function RegisterUser() {
             <Grid container spacing={1}>
               <Grid item xs={6} sm={6}>
                 <TextField
+                  sx={{ marginTop: "1.3em" }}
                   margin="normal"
                   fullWidth
                   label="RG"
@@ -149,23 +146,16 @@ function RegisterUser() {
               </Grid>
 
               <Grid item xs={6} sm={6}>
-                <Controller
+                <InputLabel sx={{ fontSize: "0.9em", color: "#3b8786" }}>
+                  Data de nascimento
+                </InputLabel>
+                <TextField
+                  fullWidth
                   name="dataNascimento"
-                  control={control}
-                  defaultValue={null}
-                  rules={{ required: true }}
-                  render={({ field: { onChange, value } }) => (
-                    <LocalizationProvider dateAdapter={AdapterDayjs}>
-                      <DatePicker
-                      label="Data de nascimento"
-                      inputVariant="outlined"
-                      ampm={false}
-                      value={value}
-                      onChange={onChange}
-                    />
-                    </LocalizationProvider>
-                    
-                  )}
+                  type="date"
+                  {...register("dataNascimento", {
+                    required: "Data obrigatória",
+                  })}
                 />
                 {errors.dataNascimento && (
                   <FormHelperText sx={{ color: "#bf6560" }}>
@@ -201,6 +191,7 @@ function RegisterUser() {
                   label="Email"
                   name="email"
                   type="text"
+                  autoComplete="username"
                   {...register("email", {
                     required: "Email obrigatório",
                     pattern: {
@@ -224,6 +215,7 @@ function RegisterUser() {
               <InputLabel>Senha</InputLabel>
               <OutlinedInput
                 type={showPassword ? "text" : "password"}
+                autoComplete="current-password"
                 endAdornment={
                   <InputAdornment position="end">
                     <IconButton
@@ -259,6 +251,10 @@ function RegisterUser() {
                   className={css`
                     text-decoration: none;
                     color: #3b8786;
+
+                    &:hover {
+                      color: #41696e;
+                    }
                   `}
                 >
                   Login
