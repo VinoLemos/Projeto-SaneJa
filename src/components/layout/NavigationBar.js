@@ -24,7 +24,7 @@ const Styles = styled.div`
     padding-right: 1.5em;
 
     &:hover {
-      color: #6ca5ab;
+      color: #41696e;
     }
   }
 `;
