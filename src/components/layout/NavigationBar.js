@@ -42,7 +42,7 @@ function NavigationBar() {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
             <Nav.Item>
-              <Link to="/">Meus Imóveis</Link>
+              <Link to="/imoveis">Meus Imóveis</Link>
             </Nav.Item>
             <Nav.Item>
               <Link to="/agendamento">Agendar Visita Técnica</Link>
