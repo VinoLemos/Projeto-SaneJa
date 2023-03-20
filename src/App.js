@@ -9,6 +9,7 @@ import Login from "./components/pages/Login";
 import RegisterUser from "./components/pages/RegisterUser";
 import Homepage from "./components/pages/Homepage";
 import TechnicalVisit from "./components/pages/TechnicalVisit";
+import Properties from "./components/pages/Properties";
 
 function App() {
   return (
@@ -49,6 +50,7 @@ function App() {
           <Route exact path="/cadastro" element={<RegisterUser />}></Route>
           <Route exact path="/home" element={<Homepage />}></Route>
           <Route exact path="/agendamento" element={<TechnicalVisit />}></Route>
+          <Route exact path="/imoveis" element={<Properties />}></Route>
         </Routes>
       </Router>
     </>
