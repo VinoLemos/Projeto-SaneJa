@@ -36,31 +36,34 @@ function Properties() {
         />
         <NavigationBar />
       </Grid>
-      <Button variant="contained" sx={{ marginTop: 4 }}>
-        <AddCircleOutlineOutlinedIcon sx={{ marginRight: 1 }} />
-        <Link
-          to="/cadastro-imovel"
-          className={css`
-            text-decoration: none;
-            color: #fff;
-
-            &:hover {
+      <Grid container sx={{ justifyContent: "center" }}>
+        <Button variant="contained" sx={{ marginTop: 4 }}>
+          <AddCircleOutlineOutlinedIcon sx={{ marginRight: 1 }} />
+          <Link
+            to="/cadastro-imovel"
+            className={css`
+              text-decoration: none;
               color: #fff;
-            }
-          `}
-        >
-          Novo imóvel
-        </Link>
-      </Button>
+
+              &:hover {
+                color: #fff;
+              }
+            `}
+          >
+            Novo imóvel
+          </Link>
+        </Button>
+      </Grid>
+
       <Grid
         item
-        sm={12}
-        xs={12}
+        sm={8}
+        xs={8}
         sx={{
           display: "flex",
           flexDirection: "row",
+          justifyContent: "space-around",
           flexWrap: "wrap",
-          justifyContent: "center",
         }}
       >
         <Card
@@ -87,6 +90,7 @@ function Properties() {
                 marginTop: 2,
                 display: "flex",
                 flexDirection: "row",
+                flexWrap: "wrap",
                 justifyContent: "space-between",
               }}
             >
