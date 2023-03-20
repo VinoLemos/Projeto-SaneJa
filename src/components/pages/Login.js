@@ -124,6 +124,7 @@ function Login() {
                     </IconButton>
                   </InputAdornment>
                 }
+                autoComplete="current-password"
                 label="Senha"
                 {...register("senha", {
                   required: "Senha obrigatória",
