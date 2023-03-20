@@ -10,6 +10,7 @@ import RegisterUser from "./components/pages/RegisterUser";
 import Homepage from "./components/pages/Homepage";
 import TechnicalVisit from "./components/pages/TechnicalVisit";
 import Properties from "./components/pages/Properties";
+import RegisterProperty from "./components/pages/RegisterProperty";
 
 function App() {
   return (
@@ -51,6 +52,11 @@ function App() {
           <Route exact path="/home" element={<Homepage />}></Route>
           <Route exact path="/agendamento" element={<TechnicalVisit />}></Route>
           <Route exact path="/imoveis" element={<Properties />}></Route>
+          <Route
+            exact
+            path="/cadastro-imovel"
+            element={<RegisterProperty />}
+          ></Route>
         </Routes>
       </Router>
     </>

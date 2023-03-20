@@ -12,6 +12,7 @@ import { css } from "@emotion/css";
 import NavigationBar from "../layout/NavigationBar";
 
 import water from "../../img/pixabay-water.jpeg";
+import { Link } from "react-router-dom";
 
 function Properties() {
   return (
@@ -37,7 +38,19 @@ function Properties() {
       </Grid>
       <Button variant="contained" sx={{ marginTop: 4 }}>
         <AddCircleOutlineOutlinedIcon sx={{ marginRight: 1 }} />
-        Novo imóvel
+        <Link
+          to="/cadastro-imovel"
+          className={css`
+            text-decoration: none;
+            color: #fff;
+
+            &:hover {
+              color: #fff;
+            }
+          `}
+        >
+          Novo imóvel
+        </Link>
       </Button>
       <Grid
         item
