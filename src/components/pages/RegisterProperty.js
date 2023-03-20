@@ -80,7 +80,7 @@ function RegisterProperty() {
           </Typography>
           <Box component="form" noValidate sx={{ mt: 1, maxWidth: "70vw" }}>
             <Grid container spacing={1} marginBottom={2}>
-              <Grid item xs={6} sm={6}>
+              <Grid item xs={12} sm={6}>
                 <TextField
                   InputLabelProps={{ shrink: true }}
                   margin="normal"
@@ -106,7 +106,7 @@ function RegisterProperty() {
                   {...register("rua")}
                 />
               </Grid>
-              <Grid item xs={6} sm={6}>
+              <Grid item xs={12} sm={6}>
                 <TextField
                   InputLabelProps={{ shrink: true }}
                   margin="normal"
@@ -133,7 +133,7 @@ function RegisterProperty() {
                   {...register("bairro")}
                 />
               </Grid>
-              <Grid item xs={6} sm={6}>
+              <Grid item xs={12} sm={6}>
                 <TextField
                   InputLabelProps={{ shrink: true }}
                   margin="normal"
@@ -153,7 +153,7 @@ function RegisterProperty() {
                   {...register("estado")}
                 />
               </Grid>
-              <Grid item xs={6} sm={6}>
+              <Grid item xs={12} sm={6}>
                 <TextField
                   margin="normal"
                   fullWidth
