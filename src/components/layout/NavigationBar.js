@@ -51,7 +51,7 @@ function NavigationBar() {
               <Link to="/">Minhas Visitas</Link>
             </Nav.Item>
             <Nav.Item>
-              <Link to="/">Meu Perfil</Link>
+              <Link to="/perfil">Meu Perfil</Link>
             </Nav.Item>
             <Nav.Item>
               <SubmitButton text="Sair" />

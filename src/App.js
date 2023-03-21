@@ -11,6 +11,7 @@ import Homepage from "./components/pages/Homepage";
 import TechnicalVisit from "./components/pages/TechnicalVisit";
 import Properties from "./components/pages/Properties";
 import RegisterProperty from "./components/pages/RegisterProperty";
+import UpdateProfile from "./components/pages/UpdateProfile";
 
 function App() {
   return (
@@ -57,6 +58,7 @@ function App() {
             path="/cadastro-imovel"
             element={<RegisterProperty />}
           ></Route>
+          <Route exact path="/perfil" element={<UpdateProfile />}></Route>
         </Routes>
       </Router>
     </>
