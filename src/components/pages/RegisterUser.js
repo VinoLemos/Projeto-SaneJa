@@ -28,7 +28,7 @@ function RegisterUser() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({ mode: "onBlur" });
+  } = useForm();
 
   const onSubmit = (data) => console.log(data);
 

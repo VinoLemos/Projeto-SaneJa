@@ -36,7 +36,7 @@ function Login() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({ mode: "onBlur" });
+  } = useForm();
 
   const onSubmit = (data) => console.log(data);
 
@@ -149,6 +149,10 @@ function Login() {
                   className={css`
                     text-decoration: none;
                     color: #3b8786;
+
+                    &:hover {
+                      color: #41696e;
+                    }
                   `}
                 >
                   Cadastre-se
