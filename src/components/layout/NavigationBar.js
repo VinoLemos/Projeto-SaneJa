@@ -5,10 +5,11 @@ import { Link } from "react-router-dom";
 
 import logo from "../../img/logo-name.png";
 
-import styled from "styled-components";
-
-import "bootstrap/dist/css/bootstrap.min.css";
 import SubmitButton from "./SubmitButton";
+
+import styled from "styled-components";
+import { css } from "@emotion/css";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const Styles = styled.div`
   .navbar {
@@ -20,11 +21,13 @@ const Styles = styled.div`
   a {
     text-decoration: none;
     text-transform: uppercase;
-    color: #307d85;
-    padding-right: 1.5em;
+    color: #fff;
+    text-shadow: 2px 2px #333;
+    padding: 8px;
 
     &:hover {
-      color: #41696e;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 0 15px rgba(253, 253, 253, 0.5);
     }
   }
 `;
@@ -32,7 +35,14 @@ const Styles = styled.div`
 function NavigationBar() {
   return (
     <Styles>
-      <Navbar expand="lg">
+      <Navbar
+        expand="lg"
+        className={css`
+          width: 100vw;
+          background-size: cover;
+          background-image: url("https://images.pexels.com/photos/689326/pexels-photo-689326.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2");
+        `}
+      >
         <Navbar.Brand>
           <Link to="/">
             <img src={logo} alt="Logo Sanejá" />
