@@ -14,9 +14,6 @@ import MenuItem from "@mui/material/MenuItem";
 
 import NavigationBar from "../layout/NavigationBar";
 
-import { css } from "@emotion/css";
-
-import water from "../../img/pixabay-water.jpeg";
 import SubmitButton from "../layout/SubmitButton";
 
 function TechnicalVisit() {
@@ -30,29 +27,7 @@ function TechnicalVisit() {
 
   return (
     <Grid container direction="row" justifyContent="center" alignItems="center">
-      <Grid
-        item
-        sm={12}
-        xs={12}
-        sx={{
-          minHeight: "40vh",
-          boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2)",
-        }}
-      >
-        <img
-          src={water}
-          className={css`
-            object-fit: cover;
-            width: 100vw;
-            height: 40vh;
-            position: absolute;
-            z-index: -1;
-          `}
-          alt="Imagem de gotas de água"
-        />
-        <NavigationBar />
-      </Grid>
-
+      <NavigationBar />
       <Grid item sm={12} xs={12}>
         <Typography component="h1" variant="h5" mt={5} textAlign="center">
           Agende uma visita

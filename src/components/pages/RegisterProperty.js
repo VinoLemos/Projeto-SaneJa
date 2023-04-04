@@ -11,11 +11,7 @@ import FormHelperText from "@mui/material/FormHelperText";
 
 import NavigationBar from "../layout/NavigationBar";
 
-import { css } from "@emotion/css";
-
 import SubmitButton from "../layout/SubmitButton";
-
-import water from "../../img/pixabay-water.jpeg";
 
 function RegisterProperty() {
   const {
@@ -43,29 +39,11 @@ function RegisterProperty() {
 
   return (
     <Grid container direction="row" justifyContent="center" alignItems="center">
-      <Grid
-        item
-        sm={12}
-        xs={12}
-        sx={{ minHeight: "30vh", boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2)" }}
-      >
-        <img
-          src={water}
-          className={css`
-            object-fit: cover;
-            width: 100vw;
-            height: 30vh;
-            position: absolute;
-            z-index: -1;
-          `}
-          alt="Imagem de gotas de água"
-        />
-        <NavigationBar />
-      </Grid>
+      <NavigationBar />
       <Grid item sm={12} xs={12}>
         <Box
           sx={{
-            my: 8,
+            my: 4,
             mx: 4,
             display: "flex",
             flexDirection: "column",
@@ -78,7 +56,7 @@ function RegisterProperty() {
           <Typography component="h1" variant="h5">
             Cadastre seu imóvel
           </Typography>
-          <Box component="form" noValidate sx={{ mt: 1, maxWidth: "70vw" }}>
+          <Box component="form" noValidate sx={{ mt: 1, maxWidth: "50vw" }}>
             <Grid container spacing={1} marginBottom={2}>
               <Grid item xs={12} sm={6}>
                 <TextField

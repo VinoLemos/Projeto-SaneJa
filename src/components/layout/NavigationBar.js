@@ -30,6 +30,16 @@ const Styles = styled.div`
       box-shadow: 0 0 15px rgba(253, 253, 253, 0.5);
     }
   }
+
+  .navbar-toggler,
+  .navbar-toggler:focus,
+  .navbar-toggler:active,
+  .navbar-toggler-icon:focus {
+    outline: none;
+    background-color: rgba(250, 250, 250, 0.4);
+    box-shadow: none;
+    border: 0;
+  }
 `;
 
 function NavigationBar() {
