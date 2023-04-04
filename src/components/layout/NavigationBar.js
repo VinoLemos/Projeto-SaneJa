@@ -2,10 +2,9 @@ import React from "react";
 
 import { Nav, Navbar } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import Button from "@mui/material/Button";
 
 import logo from "../../img/logo-name.png";
-
-import SubmitButton from "./SubmitButton";
 
 import styled from "styled-components";
 import { css } from "@emotion/css";
@@ -54,7 +53,7 @@ function NavigationBar() {
         `}
       >
         <Navbar.Brand>
-          <Link to="/">
+          <Link to="/home">
             <img src={logo} alt="Logo Sanejá" />
           </Link>
         </Navbar.Brand>
@@ -74,7 +73,7 @@ function NavigationBar() {
               <Link to="/perfil">Meu Perfil</Link>
             </Nav.Item>
             <Nav.Item>
-              <SubmitButton text="Sair" />
+              <Button variant="contained">Sair</Button>
             </Nav.Item>
           </Nav>
         </Navbar.Collapse>
