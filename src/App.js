@@ -15,53 +15,47 @@ import UpdateProfile from "./components/pages/UpdateProfile";
 
 function App() {
   return (
-    <>
-      <Router>
-        <Routes>
-          <Route
-            exact
-            path="/"
-            element={
-              <>
-                <Home />
-                <Footer />
-              </>
-            }
-          ></Route>
-          <Route
-            exact
-            path="/sobre"
-            element={
-              <>
-                <About />
-                <Footer />
-              </>
-            }
-          ></Route>
-          <Route
-            exact
-            path="/contato"
-            element={
-              <>
-                <Contact />
-                <Footer />
-              </>
-            }
-          ></Route>
-          <Route exact path="/login" element={<Login />}></Route>
-          <Route exact path="/cadastro" element={<RegisterUser />}></Route>
-          <Route exact path="/home" element={<Homepage />}></Route>
-          <Route exact path="/agendamento" element={<TechnicalVisit />}></Route>
-          <Route exact path="/imoveis" element={<Properties />}></Route>
-          <Route
-            exact
-            path="/cadastro-imovel"
-            element={<RegisterProperty />}
-          ></Route>
-          <Route exact path="/perfil" element={<UpdateProfile />}></Route>
-        </Routes>
-      </Router>
-    </>
+    <Router>
+      <Routes>
+        <Route
+          exact
+          path="/"
+          element={
+            <>
+              <Home />
+              <Footer />
+            </>
+          }
+        />
+        <Route
+          exact
+          path="/sobre"
+          element={
+            <>
+              <About />
+              <Footer />
+            </>
+          }
+        />
+        <Route
+          exact
+          path="/contato"
+          element={
+            <>
+              <Contact />
+              <Footer />
+            </>
+          }
+        />
+        <Route exact path="/login" element={<Login />} />
+        <Route exact path="/cadastro" element={<RegisterUser />} />
+        <Route exact path="/home" element={<Homepage />} />
+        <Route exact path="/agendamento" element={<TechnicalVisit />} />
+        <Route exact path="/imoveis" element={<Properties />} />
+        <Route exact path="/cadastro-imovel" element={<RegisterProperty />} />
+        <Route exact path="/perfil" element={<UpdateProfile />} />
+      </Routes>
+    </Router>
   );
 }
 
