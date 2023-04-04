@@ -12,6 +12,7 @@ import TechnicalVisit from "./components/pages/TechnicalVisit";
 import Properties from "./components/pages/Properties";
 import RegisterProperty from "./components/pages/RegisterProperty";
 import UpdateProfile from "./components/pages/UpdateProfile";
+import Visits from "./components/pages/Visits";
 
 function App() {
   return (
@@ -54,6 +55,7 @@ function App() {
         <Route exact path="/imoveis" element={<Properties />} />
         <Route exact path="/cadastro-imovel" element={<RegisterProperty />} />
         <Route exact path="/perfil" element={<UpdateProfile />} />
+        <Route exact path="/visitas" element={<Visits />} />
       </Routes>
     </Router>
   );
