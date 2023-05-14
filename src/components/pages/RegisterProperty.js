@@ -8,6 +8,7 @@ import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import FormHelperText from "@mui/material/FormHelperText";
+import CircularProgress from "@mui/material/CircularProgress";
 
 import NavigationBar from "../layout/NavigationBar";
 
@@ -23,10 +24,12 @@ function RegisterProperty() {
 
   const onSubmit = (data) => console.log(data);
 
+  const [loading, setLoading] = React.useState(false);
+
   const checkCEP = (e) => {
     const cleanCep = e.target.value.replace(/\D/g, "");
     if (!e.target.value) return;
-    fetch(`https://brasilapi.com.br/api/cep/v1/${cleanCep}`)
+    fetch(`https://brasilapi.com.br/api/cep/v1/${cleanCep}`, setLoading(true))
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
@@ -34,6 +37,7 @@ function RegisterProperty() {
         setValue("bairro", data.neighborhood);
         setValue("cidade", data.city);
         setValue("estado", data.state);
+        setLoading(false);
       });
   };
 
@@ -56,6 +60,9 @@ function RegisterProperty() {
           <Typography component="h1" variant="h5">
             Cadastre seu imóvel
           </Typography>
+          {loading && (
+            <CircularProgress sx={{ color: "#3b8786", alignItems: "center" }} />
+          )}
           <Box component="form" noValidate sx={{ mt: 1, maxWidth: "50vw" }}>
             <Grid container spacing={1} marginBottom={2}>
               <Grid item xs={12} sm={6}>
