@@ -18,8 +18,6 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { css } from "@emotion/css";
 
-import styled from "styled-components";
-
 import { Link } from "react-router-dom";
 
 import water from "../../img/pexels-water.mp4";
@@ -42,168 +40,135 @@ function Login() {
 
   const onSubmit = (data) => console.log(data);
 
-  const Styles = styled.div`
-    ul {
-      list-style-type: square;
-    }
-    .item-lista {
-      font-size: 12px;
-    }
-  `;
-
   return (
-    <Styles>
-      <Grid container component="main" sx={{ height: "100vh" }}>
-        <Grid item xs={12} sm={4} md={7}>
-          <video
-            src={water}
-            autoPlay
-            loop
-            muted
-            className={css`
-              object-fit: cover;
-              width: 100vw;
-              min-height: 100vh;
-              position: absolute;
-              z-index: -1;
-            `}
-          />{" "}
-        </Grid>
-        <Grid
-          item
-          xs={12}
-          sm={8}
-          md={5}
-          component={Paper}
-          elevation={6}
-          square
-          bgcolor="#c7d9d8"
-        >
-          <Box
-            sx={{
-              my: 8,
-              mx: 4,
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-            }}
-          >
-            <Avatar sx={{ m: 1, bgcolor: "primary.main" }}>
-              <LockOutlinedIcon />
-            </Avatar>
-            <Typography component="h1" variant="h5">
-              Faça o login
-            </Typography>
-            <Box component="form" noValidate sx={{ mt: 1, width: "30ch" }}>
-              <FormControl sx={{ width: "30ch" }}>
-                <TextField
-                  id="component-error"
-                  margin="normal"
-                  fullWidth
-                  label="Email"
-                  name="email"
-                  autoComplete="email"
-                  inputProps={{
-                    maxLength: 40,
-                  }}
-                  {...register("email", {
-                    required: "Email obrigatório",
-                    pattern: {
-                      value: /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/,
-                      message: "Email incompleto ou inválido",
-                    },
-                  })}
-                />
-                {errors.email && (
-                  <FormHelperText sx={{ color: "#bf6560" }}>
-                    {errors.email.message}
-                  </FormHelperText>
-                )}
-              </FormControl>
-
-              <FormControl sx={{ mb: 3, width: "30ch" }} variant="outlined">
-                <InputLabel htmlFor="outlined-adornment-password">
-                  Senha
-                </InputLabel>
-                <OutlinedInput
-                  type={showPassword ? "text" : "password"}
-                  endAdornment={
-                    <InputAdornment position="end">
-                      <IconButton
-                        aria-label="toggle password visibility"
-                        onClick={handleClickShowPassword}
-                        onMouseDown={handleMouseDownPassword}
-                        edge="end"
-                      >
-                        {showPassword ? <VisibilityOff /> : <Visibility />}
-                      </IconButton>
-                    </InputAdornment>
-                  }
-                  autoComplete="current-password"
-                  label="Senha"
-                  inputProps={{
-                    maxLength: 15,
-                  }}
-                  {...register("senha", {
-                    required: "Senha obrigatória",
-                    minLength: {
-                      value: 8,
-                      message: "Senha precisa ter entre 8 e 15 caracteres",
-                    },
-                  })}
-                />
-                {errors.senha && (
-                  <FormHelperText sx={{ color: "#bf6560" }}>
-                    {errors.senha.message}
-                  </FormHelperText>
-                )}
-                <Typography
-                  sx={{
-                    color: "#3b8786",
-                    fontWeight: "bold",
-                    fontSize: 12,
-                    marginTop: 2,
-                  }}
-                >
-                  Segurança da senha
-                </Typography>
-                <ul>
-                  <li className="item-lista">No mínimo 8 caracteres;</li>
-                  <li className="item-lista">
-                    Pelo menos uma letra minúscula;
-                  </li>
-                  <li className="item-lista">
-                    Pelo menos uma letra maiúscula;
-                  </li>
-                  <li className="item-lista">
-                    Pelo menos um caractere especial.
-                  </li>
-                </ul>
-              </FormControl>
-              <SubmitButton text="Entrar" onClick={handleSubmit(onSubmit)} />
-              <Grid container>
-                <Grid item mt={2}>
-                  Não tem uma conta?{" "}
-                  <Link
-                    to="/cadastro"
-                    className={css`
-                      text-decoration: none;
-                      color: #3b8786;
-
-                      &:hover {
-                        color: #41696e;
-                      }
-                    `}
-                  >
-                    Cadastre-se
-                  </Link>
-                </Grid>
-              </Grid>
-            </Box>
-          </Box>
-        </Grid>
+    <Grid container component="main" sx={{ height: "100vh" }}>
+      <Grid item xs={12} sm={4} md={7}>
+        <video
+          src={water}
+          autoPlay
+          loop
+          muted
+          className={css`
+            object-fit: cover;
+            width: 100vw;
+            min-height: 100vh;
+            position: absolute;
+            z-index: -1;
+          `}
+        />{" "}
       </Grid>
-    </Styles>
+      <Grid
+        item
+        xs={12}
+        sm={8}
+        md={5}
+        component={Paper}
+        elevation={6}
+        square
+        bgcolor="#c7d9d8"
+      >
+        <Box
+          sx={{
+            my: 8,
+            mx: 4,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <Avatar sx={{ m: 1, bgcolor: "primary.main" }}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Faça o login
+          </Typography>
+          <Box component="form" noValidate sx={{ mt: 1, width: "30ch" }}>
+            <FormControl sx={{ width: "30ch" }}>
+              <TextField
+                id="component-error"
+                margin="normal"
+                fullWidth
+                label="Email"
+                name="email"
+                autoComplete="email"
+                inputProps={{
+                  maxLength: 40,
+                }}
+                {...register("email", {
+                  required: "Email obrigatório",
+                  pattern: {
+                    value: /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/,
+                    message: "Email incompleto ou inválido",
+                  },
+                })}
+              />
+              {errors.email && (
+                <FormHelperText sx={{ color: "#bf6560" }}>
+                  {errors.email.message}
+                </FormHelperText>
+              )}
+            </FormControl>
+
+            <FormControl sx={{ mb: 3, width: "30ch" }} variant="outlined">
+              <InputLabel htmlFor="outlined-adornment-password">
+                Senha
+              </InputLabel>
+              <OutlinedInput
+                type={showPassword ? "text" : "password"}
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      onMouseDown={handleMouseDownPassword}
+                      edge="end"
+                    >
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                }
+                autoComplete="current-password"
+                label="Senha"
+                inputProps={{
+                  maxLength: 15,
+                }}
+                {...register("senha", {
+                  required: "Senha obrigatória",
+                  minLength: {
+                    value: 8,
+                    message: "Senha precisa ter entre 8 e 15 caracteres",
+                  },
+                })}
+              />
+              {errors.senha && (
+                <FormHelperText sx={{ color: "#bf6560" }}>
+                  {errors.senha.message}
+                </FormHelperText>
+              )}
+            </FormControl>
+            <SubmitButton text="Entrar" onClick={handleSubmit(onSubmit)} />
+            <Grid container>
+              <Grid item mt={2}>
+                Não tem uma conta?{" "}
+                <Link
+                  to="/cadastro"
+                  className={css`
+                    text-decoration: none;
+                    color: #3b8786;
+
+                    &:hover {
+                      color: #41696e;
+                    }
+                  `}
+                >
+                  Cadastre-se
+                </Link>
+              </Grid>
+            </Grid>
+          </Box>
+        </Box>
+      </Grid>
+    </Grid>
   );
 }
 
