@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 
 import Avatar from "@mui/material/Avatar";
 import TextField from "@mui/material/TextField";
@@ -18,9 +19,7 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { css } from "@emotion/css";
 
-import { Link } from "react-router-dom";
-
-import water from "../../img/pexels-water.mp4";
+import Video from "../layout/Video";
 import SubmitButton from "../layout/SubmitButton";
 
 function Login() {
@@ -43,19 +42,7 @@ function Login() {
   return (
     <Grid container component="main" sx={{ height: "100vh" }}>
       <Grid item xs={12} sm={4} md={7}>
-        <video
-          src={water}
-          autoPlay
-          loop
-          muted
-          className={css`
-            object-fit: cover;
-            width: 100vw;
-            min-height: 100vh;
-            position: absolute;
-            z-index: -1;
-          `}
-        />{" "}
+        <Video />
       </Grid>
       <Grid
         item

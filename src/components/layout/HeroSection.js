@@ -1,15 +1,11 @@
 import React from "react";
 
 import Container from "@mui/material/Container";
-
+import { Box } from "@mui/material";
+import { AiOutlineWhatsApp, AiOutlineMail } from "react-icons/ai";
 import { css } from "@emotion/css";
 
-import { Box } from "@mui/material";
-
-import { AiOutlineWhatsApp, AiOutlineMail } from "react-icons/ai";
-
-import water from "../../img/pexels-water.mp4";
-
+import Video from "./Video";
 import NavButton from "./NavButton";
 
 function HeroSection({
@@ -35,19 +31,7 @@ function HeroSection({
         minHeight: "95vh",
       }}
     >
-      <video
-        src={water}
-        autoPlay
-        loop
-        muted
-        className={css`
-          object-fit: cover;
-          width: 100vw;
-          min-height: 100vh;
-          position: absolute;
-          z-index: -1;
-        `}
-      />
+      <Video />
       <Container maxWidth="lg">
         <h1
           className={css`
