@@ -2,6 +2,10 @@ import React from "react";
 
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
+import ManageAccountsOutlinedIcon from "@mui/icons-material/ManageAccountsOutlined";
+import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
+import { Link } from "react-router-dom";
 
 import NavigationBar from "../layout/NavigationBar";
 
@@ -24,6 +28,51 @@ function Homepage() {
           </span>
           !
         </Typography>
+        <Grid
+          container
+          marginTop={8}
+          justifyContent="center"
+          direction="row"
+          flexWrap="wrap"
+        >
+          <Button
+            variant="contained"
+            startIcon={<HomeOutlinedIcon />}
+            sx={{ marginRight: 5 }}
+          >
+            <Link
+              to="/imoveis"
+              className={css`
+                text-decoration: none;
+                color: #fff;
+
+                &:hover {
+                  color: #fff;
+                }
+              `}
+            >
+              Meus Imóveis{" "}
+            </Link>
+          </Button>
+          <Button
+            variant="contained"
+            startIcon={<ManageAccountsOutlinedIcon />}
+          >
+            <Link
+              to="/perfil"
+              className={css`
+                text-decoration: none;
+                color: #fff;
+
+                &:hover {
+                  color: #fff;
+                }
+              `}
+            >
+              Meu Perfil
+            </Link>
+          </Button>
+        </Grid>
       </Grid>
     </Grid>
   );
