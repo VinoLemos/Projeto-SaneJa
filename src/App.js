@@ -14,6 +14,7 @@ import RegisterProperty from "./components/pages/RegisterProperty";
 import UpdateProfile from "./components/pages/UpdateProfile";
 import Visits from "./components/pages/Visits";
 import Administrator from "./components/pages/Administrator";
+import Agent from "./components/pages/Agent";
 
 function App() {
   return (
@@ -58,6 +59,7 @@ function App() {
         <Route exact path="/perfil" element={<UpdateProfile />} />
         <Route exact path="/visitas" element={<Visits />} />
         <Route exact path="/admin" element={<Administrator />} />
+        <Route exact path="/agente" element={<Agent />} />
       </Routes>
     </Router>
   );
