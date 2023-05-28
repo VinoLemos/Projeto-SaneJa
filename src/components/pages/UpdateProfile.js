@@ -1,25 +1,24 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
-import Avatar from "@mui/material/Avatar";
+import {
+  Grid,
+  Box,
+  Avatar,
+  Typography,
+  FormHelperText,
+  TextField,
+  InputLabel,
+  InputAdornment,
+  FormControl,
+  OutlinedInput,
+  IconButton,
+} from "@mui/material";
 import ManageAccountsOutlinedIcon from "@mui/icons-material/ManageAccountsOutlined";
-import Typography from "@mui/material/Typography";
-import FormHelperText from "@mui/material/FormHelperText";
-import TextField from "@mui/material/TextField";
-import InputLabel from "@mui/material/InputLabel";
-import InputAdornment from "@mui/material/InputAdornment";
-import FormControl from "@mui/material/FormControl";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import OutlinedInput from "@mui/material/OutlinedInput";
-import IconButton from "@mui/material/IconButton";
 
 import NavigationBar from "../layout/NavigationBar";
-
-import { css } from "@emotion/css";
-
 import SubmitButton from "../layout/SubmitButton";
 
 function UpdateProfile() {

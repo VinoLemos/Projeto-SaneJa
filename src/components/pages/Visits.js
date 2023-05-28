@@ -1,14 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import Grid from "@mui/material/Grid";
-import Button from "@mui/material/Button";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import Typography from "@mui/material/Typography";
+import {
+  Grid,
+  Button,
+  Card,
+  CardContent,
+  Typography,
+  Badge,
+} from "@mui/material";
 import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
-import Badge from "@mui/material/Badge";
-
 import { css } from "@emotion/css";
 
 import NavigationBar from "../layout/NavigationBar";

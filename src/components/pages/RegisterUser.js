@@ -1,8 +1,7 @@
 import React from "react";
 
-import Grid from "@mui/material/Grid";
+import { Grid, Paper } from "@mui/material";
 import AccountBoxOutlinedIcon from "@mui/icons-material/AccountBoxOutlined";
-import Paper from "@mui/material/Paper";
 
 import FormUser from "../layout/FormUser";
 import Video from "../layout/Video";

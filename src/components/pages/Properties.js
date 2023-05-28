@@ -1,16 +1,11 @@
 import React from "react";
 
-import Grid from "@mui/material/Grid";
-import Button from "@mui/material/Button";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import Typography from "@mui/material/Typography";
+import { Link } from "react-router-dom";
+import { Grid, Button, Card, CardContent, Typography } from "@mui/material";
 import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
-
 import { css } from "@emotion/css";
 
 import NavigationBar from "../layout/NavigationBar";
-import { Link } from "react-router-dom";
 
 function Properties() {
   return (

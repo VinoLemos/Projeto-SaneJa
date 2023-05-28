@@ -1,7 +1,6 @@
 import React from "react";
 
-import Container from "@mui/material/Container";
-import { Box } from "@mui/material";
+import { Container, Box } from "@mui/material";
 import { AiOutlineWhatsApp, AiOutlineMail } from "react-icons/ai";
 import { css } from "@emotion/css";
 

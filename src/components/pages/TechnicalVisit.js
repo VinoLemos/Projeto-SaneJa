@@ -1,19 +1,19 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 
-import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
-import FormHelperText from "@mui/material/FormHelperText";
-import FormControl from "@mui/material/FormControl";
-import FormLabel from "@mui/material/FormLabel";
-import TextField from "@mui/material/TextField";
-import Select from "@mui/material/Select";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
+import {
+  Grid,
+  Typography,
+  Box,
+  FormHelperText,
+  FormControl,
+  FormLabel,
+  TextField,
+  Select,
+  InputLabel,
+} from "@mui/material";
 
 import NavigationBar from "../layout/NavigationBar";
-
 import SubmitButton from "../layout/SubmitButton";
 
 function TechnicalVisit() {

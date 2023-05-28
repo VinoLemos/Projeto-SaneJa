@@ -1,17 +1,18 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
-import Avatar from "@mui/material/Avatar";
+import {
+  Grid,
+  Box,
+  Avatar,
+  Typography,
+  TextField,
+  FormHelperText,
+  CircularProgress,
+} from "@mui/material";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
-import Typography from "@mui/material/Typography";
-import TextField from "@mui/material/TextField";
-import FormHelperText from "@mui/material/FormHelperText";
-import CircularProgress from "@mui/material/CircularProgress";
 
 import NavigationBar from "../layout/NavigationBar";
-
 import SubmitButton from "../layout/SubmitButton";
 
 function RegisterProperty() {
