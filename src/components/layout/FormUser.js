@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import axios from "axios";
 
@@ -74,6 +74,8 @@ function FormUser({
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
 
+  const navigate = useNavigate();
+
   const onSubmit = async (data) => {
     await axios
       .post(
@@ -87,6 +89,9 @@ function FormUser({
           setSuccess(false);
         }, 3000);
         setLoading(false);
+        setTimeout(() => {
+          navigate("/login");
+        }, 5000);
       })
       .catch((error) => {
         setError(true);
