@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 
 import axios from "axios";
 
@@ -33,6 +33,7 @@ import ErrorAlert from "../layout/ErrorAlert";
 function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [redirect, setRedirect] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
 
@@ -69,6 +70,7 @@ function Login() {
         setSuccess(true);
         setTimeout(() => {
           setSuccess(false);
+          setRedirect(true);
         }, 3000);
       })
       .catch((err) => {
@@ -111,6 +113,7 @@ function Login() {
             {loading ? <CircularProgress /> : "Faça o login"} <br />
             {success && <SuccessAlert message="Login efetuado com suceeso!" />}
             {error && <ErrorAlert message="Login ou senha inválidos." />}
+            {redirect && <Navigate to="/home" />}
           </Typography>
           <Box component="form" noValidate sx={{ mt: 1, width: "30ch" }}>
             <FormControl sx={{ width: "30ch" }}>
