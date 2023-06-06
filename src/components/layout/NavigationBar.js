@@ -2,8 +2,8 @@ import React from "react";
 
 import { Nav, Navbar } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import Button from "@mui/material/Button";
 
+import LogoutButton from "./LogoutButton";
 import logo from "../../img/logo-name.png";
 
 import styled from "styled-components";
@@ -73,7 +73,7 @@ function NavigationBar() {
               <Link to="/perfil">Meu Perfil</Link>
             </Nav.Item>
             <Nav.Item>
-              <Button variant="contained">Sair</Button>
+              <LogoutButton>Sair</LogoutButton>
             </Nav.Item>
           </Nav>
         </Navbar.Collapse>

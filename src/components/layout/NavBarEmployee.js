@@ -1,12 +1,12 @@
 import React from "react";
 
 import { Nav, Navbar } from "react-bootstrap";
-import Button from "@mui/material/Button";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import styled from "styled-components";
 import { css } from "@emotion/css";
 
+import LogoutButton from "./LogoutButton";
 import logo from "../../img/logo-name.png";
 
 const NavBarStyle = styled.div`
@@ -58,7 +58,7 @@ function NavBarEmployee() {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
             <Nav.Item>
-              <Button variant="contained">Sair</Button>
+              <LogoutButton>Sair</LogoutButton>
             </Nav.Item>
           </Nav>
         </Navbar.Collapse>
