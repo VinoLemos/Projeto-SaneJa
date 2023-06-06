@@ -1,4 +1,9 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 
 import Footer from "./components/layout/Footer";
 
@@ -15,6 +20,16 @@ import UpdateProfile from "./components/pages/UpdateProfile";
 import Visits from "./components/pages/Visits";
 import Administrator from "./components/pages/Administrator";
 import Agent from "./components/pages/Agent";
+
+const Private = ({ children }) => {
+  const authenticated = localStorage.getItem("token");
+
+  if (!authenticated) {
+    return <Navigate to="/login" />;
+  }
+
+  return children;
+};
 
 function App() {
   return (
@@ -52,14 +67,78 @@ function App() {
         />
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/cadastro" element={<RegisterUser />} />
-        <Route exact path="/home" element={<Homepage />} />
-        <Route exact path="/agendamento" element={<TechnicalVisit />} />
-        <Route exact path="/imoveis" element={<Properties />} />
-        <Route exact path="/cadastro-imovel" element={<RegisterProperty />} />
-        <Route exact path="/perfil" element={<UpdateProfile />} />
-        <Route exact path="/visitas" element={<Visits />} />
-        <Route exact path="/admin" element={<Administrator />} />
-        <Route exact path="/agente" element={<Agent />} />
+        <Route
+          exact
+          path="/home"
+          element={
+            <Private>
+              <Homepage />
+            </Private>
+          }
+        />
+        <Route
+          exact
+          path="/agendamento"
+          element={
+            <Private>
+              <TechnicalVisit />
+            </Private>
+          }
+        />
+        <Route
+          exact
+          path="/imoveis"
+          element={
+            <Private>
+              <Properties />
+            </Private>
+          }
+        />
+        <Route
+          exact
+          path="/cadastro-imovel"
+          element={
+            <Private>
+              <RegisterProperty />
+            </Private>
+          }
+        />
+        <Route
+          exact
+          path="/perfil"
+          element={
+            <Private>
+              <UpdateProfile />
+            </Private>
+          }
+        />
+        <Route
+          exact
+          path="/visitas"
+          element={
+            <Private>
+              <Visits />
+            </Private>
+          }
+        />
+        <Route
+          exact
+          path="/admin"
+          element={
+            <Private>
+              <Administrator />
+            </Private>
+          }
+        />
+        <Route
+          exact
+          path="/agente"
+          element={
+            <Private>
+              <Agent />
+            </Private>
+          }
+        />
       </Routes>
     </Router>
   );

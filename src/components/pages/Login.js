@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 
+import axios from "axios";
+
 import {
   Avatar,
   TextField,
@@ -15,6 +17,7 @@ import {
   Box,
   Grid,
   Typography,
+  CircularProgress,
 } from "@mui/material";
 
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
@@ -24,9 +27,14 @@ import { css } from "@emotion/css";
 
 import Video from "../layout/Video";
 import SubmitButton from "../layout/SubmitButton";
+import SuccessAlert from "../layout/SuccessAlert";
+import ErrorAlert from "../layout/ErrorAlert";
 
 function Login() {
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -40,7 +48,37 @@ function Login() {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = async (data) => {
+    const userData = {
+      email: data.email,
+      password: data.password,
+      confirmedPassword: data.password,
+      showPassword,
+    };
+    console.log(userData);
+    await axios
+      .post(
+        "https://localhost:7021/api/Authorize/login",
+        userData,
+        setLoading(true)
+      )
+      .then((res) => {
+        const token = res.data.token;
+        localStorage.setItem("token", token);
+        setLoading(false);
+        setSuccess(true);
+        setTimeout(() => {
+          setSuccess(false);
+        }, 3000);
+      })
+      .catch((err) => {
+        setLoading(false);
+        setError(true);
+        setTimeout(() => {
+          setError(false);
+        }, 3000);
+      });
+  };
 
   return (
     <Grid container component="main" sx={{ height: "100vh" }}>
@@ -70,7 +108,9 @@ function Login() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Faça o login
+            {loading ? <CircularProgress /> : "Faça o login"} <br />
+            {success && <SuccessAlert message="Login efetuado com suceeso!" />}
+            {error && <ErrorAlert message="Login ou senha inválidos." />}
           </Typography>
           <Box component="form" noValidate sx={{ mt: 1, width: "30ch" }}>
             <FormControl sx={{ width: "30ch" }}>
@@ -122,7 +162,7 @@ function Login() {
                 inputProps={{
                   maxLength: 15,
                 }}
-                {...register("senha", {
+                {...register("password", {
                   required: "Senha obrigatória",
                   minLength: {
                     value: 8,
@@ -130,9 +170,9 @@ function Login() {
                   },
                 })}
               />
-              {errors.senha && (
+              {errors.password && (
                 <FormHelperText sx={{ color: "#bf6560" }}>
-                  {errors.senha.message}
+                  {errors.password.message}
                 </FormHelperText>
               )}
             </FormControl>
