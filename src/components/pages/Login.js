@@ -65,7 +65,7 @@ function Login() {
       )
       .then((res) => {
         const token = res.data.token;
-        const role = res.data.role;
+        const role = res.data.userRoles;
         localStorage.setItem("token", token);
         localStorage.setItem("role", role);
         setLoading(false);
