@@ -31,6 +31,26 @@ const Private = ({ children }) => {
   return children;
 };
 
+const IsAdmin = ({ children }) => {
+  const admin = localStorage.getItem("role");
+
+  if (admin !== "Supervisor") {
+    return <Navigate to="/login" />;
+  }
+
+  return children;
+};
+
+const IsAgent = ({ children }) => {
+  const agent = localStorage.getItem("role");
+
+  if (agent !== "Agent") {
+    return <Navigate to="/login" />;
+  }
+
+  return children;
+};
+
 function App() {
   return (
     <Router>
@@ -125,18 +145,18 @@ function App() {
           exact
           path="/admin"
           element={
-            <Private>
+            <IsAdmin>
               <Administrator />
-            </Private>
+            </IsAdmin>
           }
         />
         <Route
           exact
           path="/agente"
           element={
-            <Private>
+            <IsAgent>
               <Agent />
-            </Private>
+            </IsAgent>
           }
         />
       </Routes>
