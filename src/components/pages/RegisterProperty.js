@@ -38,7 +38,7 @@ function RegisterProperty() {
   const onSubmit = async (data) => {
     await axios
       .post(
-        `${API_URL}/residentialproperty/register-property"`,
+        `${API_URL}/residentialproperty/register-property`,
         data,
         {
           headers: {
