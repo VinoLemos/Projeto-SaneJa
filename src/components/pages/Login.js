@@ -56,10 +56,9 @@ function Login() {
       confirmedPassword: data.password,
       showPassword,
     };
-    console.log(userData);
     await axios
       .post(
-        "https://localhost:7021/api/Authorize/login",
+        "http://localhost:30585/api/Authorize/login",
         userData,
         setLoading(true)
       )
@@ -77,6 +76,7 @@ function Login() {
       })
       .catch((err) => {
         setLoading(false);
+        console.log(err);
         setError(true);
         setTimeout(() => {
           setError(false);
