@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
+import { API_URL } from "../../env";
 
 import axios from "axios";
 
@@ -79,7 +80,7 @@ function FormUser({
   const onSubmit = async (data) => {
     await axios
       .post(
-        "https://localhost:7021/api/Authorize/register-person",
+        `${API_URL}/Authorize/register-person`,
         data,
         setLoading(true)
       )

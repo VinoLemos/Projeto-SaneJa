@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, Navigate } from "react-router-dom";
 
+import { API_URL } from "../../env";
+
 import axios from "axios";
 
 import {
@@ -58,7 +60,7 @@ function Login() {
     };
     await axios
       .post(
-        "http://localhost:30585/api/Authorize/login",
+        `${API_URL}/Authorize/login`,
         userData,
         setLoading(true)
       )

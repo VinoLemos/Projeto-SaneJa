@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { API_URL } from "../../env";
 
-import axios from "axios";
 import { Link } from "react-router-dom";
 import {
   Grid,
@@ -44,7 +44,7 @@ function Properties() {
 
   useEffect(() => {
     fetch(
-      "http://localhost:30585/api/ResidentialProperty/get-user-properties",
+      `${API_URL}/ResidentialProperty/get-user-properties`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -88,8 +88,8 @@ function Properties() {
           flexWrap: "wrap",
         }}
       >
-        {!properties && (
-          <Typography sx={{ fontSize: 20 }} color="primary.main">
+        {properties.length === 0 && (
+          <Typography sx={{ fontSize: 20 }} color="primary.main" mt={4}>
             Você ainda não possui imóvel cadastrado.
           </Typography>
         )}

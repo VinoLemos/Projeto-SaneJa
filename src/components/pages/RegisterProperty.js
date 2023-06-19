@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { API_URL } from "../../env";
 
 import axios from "axios";
 import {
@@ -37,7 +38,7 @@ function RegisterProperty() {
   const onSubmit = async (data) => {
     await axios
       .post(
-        "http://localhost:30585/api/residentialproperty/register-property",
+        `${API_URL}/residentialproperty/register-property"`,
         data,
         {
           headers: {
