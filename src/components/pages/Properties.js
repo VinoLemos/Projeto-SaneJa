@@ -101,6 +101,7 @@ function Properties() {
               marginTop: 6,
               bgcolor: "secondary.main",
             }}
+            key={property.id}
           >
             <CardContent>
               <Typography sx={{ fontSize: 20 }} color="primary.main">
