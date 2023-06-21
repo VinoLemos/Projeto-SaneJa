@@ -20,6 +20,7 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
 import NavigationBar from "../layout/NavigationBar";
 import SubmitButton from "../layout/SubmitButton";
+import Loading from "../layout/Loading";
 
 function UpdateProfile() {
   const {
@@ -27,6 +28,8 @@ function UpdateProfile() {
     handleSubmit,
     formState: { errors },
   } = useForm();
+
+  const [loading, setLoading] = useState(false);
 
   const onSubmit = (data) => console.log(data);
 
@@ -205,7 +208,7 @@ function UpdateProfile() {
                   </FormHelperText>
                 )}
               </FormControl>
-              <SubmitButton text="Atualizar" onClick={handleSubmit(onSubmit)} />
+              <SubmitButton text={loading ? <Loading/> : "Atualizar"} onClick={handleSubmit(onSubmit)} />
             </Box>
           </Box>
         </Grid>

@@ -12,8 +12,7 @@ import {
   TextField,
   Select,
   InputLabel,
-  MenuItem,
-  CircularProgress
+  MenuItem
 } from "@mui/material";
 
 import NavigationBar from "../layout/NavigationBar";
@@ -21,6 +20,7 @@ import SubmitButton from "../layout/SubmitButton";
 import SuccessAlert from "../layout/SuccessAlert";
 import ErrorAlert from "../layout/ErrorAlert";
 import axios from "axios";
+import Loading from "../layout/Loading";
 
 function TechnicalVisit() {
   const {
@@ -50,7 +50,7 @@ function TechnicalVisit() {
       .then((response) => response.json())
       .then((json) => { setProperties(json); if (json.length > 0) { setSelectedPropertyId(json[0].id) } })
       .catch((err) => console.log(err));
-  }, []);
+  }, [token]);
 
   const onSubmit = async (data) => {
     const propertyId = selectedPropertyId;
@@ -142,7 +142,7 @@ function TechnicalVisit() {
 
           </FormControl>
 
-          <SubmitButton text={loading ? <CircularProgress sx={{ color: "#3b8786", alignItems: "center" }} /> : "Agendar"} onClick={handleSubmit(onSubmit)} />
+          <SubmitButton text={loading ? <Loading /> : "Agendar"} onClick={handleSubmit(onSubmit)} />
         </FormControl>
       </Box>
     </Grid>

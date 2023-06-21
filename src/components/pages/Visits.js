@@ -33,7 +33,7 @@ function Visits() {
       .then((response) => response.json())
       .then((json) => setVisits(json))
       .catch((err) => console.log(err));
-  }, []);
+  }, [token]);
 
   useEffect(() => {
     fetch(
@@ -47,7 +47,7 @@ function Visits() {
       .then((response) => response.json())
       .then((json) => setStatuses(json))
       .catch((err) => console.log(err));
-  }, []);
+  }, [token]);
 
   useEffect(() => {
     fetch(
@@ -61,7 +61,7 @@ function Visits() {
       .then((response) => response.json())
       .then((json) => setProperties(json))
       .catch((err) => console.log(err));
-  }, []);
+  }, [token]);
 
   function formatDateTime(dateTimeString) {
     const dateTime = new Date(dateTimeString);
@@ -104,6 +104,11 @@ function Visits() {
           flexWrap: "wrap",
         }}
       >
+        {visits.length === 0 && (
+          <Typography sx={{ fontSize: 20 }} color="primary.main" mt={4}>
+            Você ainda não possui visitas agendadas.
+          </Typography>
+        )}
         {visits.map((visit) => {
           const property = properties.find(
             (property) => property.id === visit.residentialPropertyId

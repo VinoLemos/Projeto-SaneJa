@@ -11,12 +11,12 @@ import {
   Typography,
   TextField,
   FormHelperText,
-  CircularProgress,
 } from "@mui/material";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 
 import NavigationBar from "../layout/NavigationBar";
 import SubmitButton from "../layout/SubmitButton";
+import Loading from "../layout/Loading";
 import SuccessAlert from "../layout/SuccessAlert";
 import ErrorAlert from "../layout/ErrorAlert";
 
@@ -103,9 +103,6 @@ function RegisterProperty() {
           <Typography component="h1" variant="h5">
             Cadastre seu imóvel
           </Typography>
-          {loading && (
-            <CircularProgress sx={{ color: "#3b8786", alignItems: "center" }} />
-          )}
           {success && <SuccessAlert message="Imóvel cadastrado com sucesso!" />}
           {error && (
             <ErrorAlert message="Ops, algo deu errado. Tente novamente mais tarde." />
@@ -236,7 +233,7 @@ function RegisterProperty() {
                 )}
               </Grid>
             </Grid>
-            <SubmitButton text="Cadastrar" onClick={handleSubmit(onSubmit)} />
+            <SubmitButton text={loading ? <Loading/> : "Cadastrar"} onClick={handleSubmit(onSubmit)} />
           </Box>
         </Box>
       </Grid>

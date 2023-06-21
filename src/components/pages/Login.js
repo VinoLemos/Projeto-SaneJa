@@ -19,7 +19,6 @@ import {
   Box,
   Grid,
   Typography,
-  CircularProgress,
 } from "@mui/material";
 
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
@@ -28,6 +27,7 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { css } from "@emotion/css";
 
 import Video from "../layout/Video";
+import Loading from "../layout/Loading";
 import SubmitButton from "../layout/SubmitButton";
 import SuccessAlert from "../layout/SuccessAlert";
 import ErrorAlert from "../layout/ErrorAlert";
@@ -59,11 +59,7 @@ function Login() {
       showPassword,
     };
     await axios
-      .post(
-        `${API_URL}/Authorize/login`,
-        userData,
-        setLoading(true)
-      )
+      .post(`${API_URL}/Authorize/login`, userData, setLoading(true))
       .then((res) => {
         const token = res.data.token;
         const role = res.data.userRoles;
@@ -114,11 +110,11 @@ function Login() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            {loading ? <CircularProgress /> : "Faça o login"} <br />
-            {success && <SuccessAlert message="Login efetuado com suceeso!" />}
-            {error && <ErrorAlert message="Login ou senha inválidos." />}
-            {redirect && <Navigate to="/home" />}
+            Faça o login
           </Typography>
+          {success && <SuccessAlert message="Login efetuado com suceeso!" />}
+          {error && <ErrorAlert message="Login ou senha inválidos." />}
+          {redirect && <Navigate to="/home" />}
           <Box component="form" noValidate sx={{ mt: 1, width: "30ch" }}>
             <FormControl sx={{ width: "30ch" }}>
               <TextField
@@ -183,7 +179,10 @@ function Login() {
                 </FormHelperText>
               )}
             </FormControl>
-            <SubmitButton text="Entrar" onClick={handleSubmit(onSubmit)} />
+            <SubmitButton
+              text={loading ? <Loading /> : "Entrar"}
+              onClick={handleSubmit(onSubmit)}
+            />
             <Grid container>
               <Grid item mt={2}>
                 Não tem uma conta?{" "}

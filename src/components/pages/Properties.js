@@ -159,7 +159,7 @@ function Properties() {
       .then((response) => response.json())
       .then((json) => setProperties(json))
       .catch((err) => console.log(err));
-  }, [isPropertyUpdated]);
+  }, [token, isPropertyUpdated]);
 
   function handleUpdateClick(property) {
     setSelectedProperty(property);
