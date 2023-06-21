@@ -36,6 +36,7 @@ function UpdateProfile() {
   const token = localStorage.getItem("token");
   const [loading, setLoading] = useState(false);
   const [formattedBirthDate, setFormattedBirthDate] = useState("");
+  const [userName, setUserName] = useState("");
   const [userId, setUserId] = useState("");
 
   const onSubmit = (data) => console.log(data);
@@ -57,6 +58,7 @@ function UpdateProfile() {
       })
       .then((data) => {
         setUserId(data.data.id);
+        setUserName(data.data.name);
 
         const birthDate = new Date(data.data.birthday);
         const formattedDate = birthDate.toLocaleDateString();
@@ -65,7 +67,7 @@ function UpdateProfile() {
         setValue("name", data.data.name);
         setValue("cpf", data.data.cpf);
         setValue("rg", data.data.rg);
-        setValue("phonenumber", data.data.phone);
+        setValue("phoneNumber", data.data.phoneNumber);
         setValue("email", data.data.email);
       })
       .catch((err) => console.log(err));
@@ -89,7 +91,7 @@ function UpdateProfile() {
               <ManageAccountsOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
-              Nome Usuário
+              {userName}
             </Typography>
             <Box component="form" noValidate sx={{ mt: 1 }}>
               <Grid container spacing={1}>
@@ -153,7 +155,6 @@ function UpdateProfile() {
                     fullWidth
                     name="birthDay"
                     value={formattedBirthDate}
-                    {...register("birthDay")}
                   />
                 </Grid>
               </Grid>
