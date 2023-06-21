@@ -53,19 +53,19 @@ function TechnicalVisit() {
   }, []);
 
   const onSubmit = async (data) => {
-    const propertyId = localStorage.getItem("propertyId");
+    const propertyId = selectedPropertyId;
     const requestVisitData = {
       "residentialPropertyId": propertyId,
       "statusId": statusId,
       "visitDate": data.visitDate
     }
-
     await axios.post(`${API_URL}/technicalvisit/request-visit`, requestVisitData,
       {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       },
+      console.log(requestVisitData),
       setLoading(true))
       .then(() => {
         setSuccess(true);
@@ -132,9 +132,9 @@ function TechnicalVisit() {
               onChange={(event) => setSelectedPropertyId(event.target.value)}
               label="Selecione o imóvel"
               sx={{ marginBottom: "1em" }}
+              key={selectedPropertyId}
             >
               {properties.map((property) => (
-                localStorage.setItem("propertyId", property.id),
                 <MenuItem value={property.id} key={property.id}>{property.street}</MenuItem>
               ))}
 
