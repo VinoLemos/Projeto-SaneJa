@@ -311,7 +311,7 @@ function Properties() {
                     </Button>
                   </DialogActions>
                 </Dialog>
-                <Modal open={selectedProperty !== null ? open : close}
+                <Modal open={selectedProperty !== null ? open : ""}
                   onClose={handleClose}
                   aria-labelledby="modal-modal-title">
                   <Box sx={modalStyle}>
