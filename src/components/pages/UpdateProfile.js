@@ -1,5 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { API_URL } from "../../env";
+
+import axios from "axios";
 
 import {
   Grid,
@@ -26,10 +29,14 @@ function UpdateProfile() {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm();
 
+  const token = localStorage.getItem("token");
   const [loading, setLoading] = useState(false);
+  const [formattedBirthDate, setFormattedBirthDate] = useState("");
+  const [userId, setUserId] = useState("");
 
   const onSubmit = (data) => console.log(data);
 
@@ -40,6 +47,29 @@ function UpdateProfile() {
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
+
+  useEffect(() => {
+    axios
+      .get(`${API_URL}/person/get-client-details`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((data) => {
+        setUserId(data.data.id);
+
+        const birthDate = new Date(data.data.birthday);
+        const formattedDate = birthDate.toLocaleDateString();
+        setFormattedBirthDate(formattedDate);
+
+        setValue("name", data.data.name);
+        setValue("cpf", data.data.cpf);
+        setValue("rg", data.data.rg);
+        setValue("phonenumber", data.data.phone);
+        setValue("email", data.data.email);
+      })
+      .catch((err) => console.log(err));
+  });
 
   return (
     <Grid container direction="row" justifyContent="center" alignItems="center">
@@ -69,9 +99,9 @@ function UpdateProfile() {
                     margin="normal"
                     fullWidth
                     label="Nome completo"
-                    name="nome"
+                    name="name"
                     type="text"
-                    {...register("nome", {
+                    {...register("name", {
                       required: "Nome obrigatório",
                       pattern: {
                         value: /^[a-zA-Z]+ [a-zA-Z]+$/,
@@ -79,9 +109,9 @@ function UpdateProfile() {
                       },
                     })}
                   />
-                  {errors.nome && (
+                  {errors.name && (
                     <FormHelperText sx={{ color: "#bf6560" }}>
-                      {errors.nome.message}
+                      {errors.name.message}
                     </FormHelperText>
                   )}
                 </Grid>
@@ -121,9 +151,9 @@ function UpdateProfile() {
                   <TextField
                     disabled
                     fullWidth
-                    name="dataNascimento"
-                    type="date"
-                    {...register("dataNascimento")}
+                    name="birthDay"
+                    value={formattedBirthDate}
+                    {...register("birthDay")}
                   />
                 </Grid>
               </Grid>
@@ -135,15 +165,15 @@ function UpdateProfile() {
                     margin="normal"
                     fullWidth
                     label="Celular"
-                    name="celular"
+                    name="phoneNumber"
                     type="text"
-                    {...register("celular", {
+                    {...register("phoneNumber", {
                       required: "Celular obrigatório",
                     })}
                   />
-                  {errors.celular && (
+                  {errors.phoneNumber && (
                     <FormHelperText sx={{ color: "#bf6560" }}>
-                      {errors.celular.message}
+                      {errors.phoneNumber.message}
                     </FormHelperText>
                   )}
                 </Grid>
@@ -194,7 +224,7 @@ function UpdateProfile() {
                     </InputAdornment>
                   }
                   label="Senha"
-                  {...register("senha", {
+                  {...register("password", {
                     required: "Senha obrigatória",
                     minLength: {
                       value: 4,
@@ -202,13 +232,16 @@ function UpdateProfile() {
                     },
                   })}
                 />
-                {errors.senha && (
+                {errors.password && (
                   <FormHelperText sx={{ color: "#bf6560" }}>
-                    {errors.senha.message}
+                    {errors.password.message}
                   </FormHelperText>
                 )}
               </FormControl>
-              <SubmitButton text={loading ? <Loading/> : "Atualizar"} onClick={handleSubmit(onSubmit)} />
+              <SubmitButton
+                text={loading ? <Loading /> : "Atualizar"}
+                onClick={handleSubmit(onSubmit)}
+              />
             </Box>
           </Box>
         </Grid>
