@@ -94,7 +94,7 @@ function UpdateProfile() {
         setValue("email", data.data.email);
       })
       .catch((err) => console.log(err));
-  },[isUserUpdated, updateCount]);
+  },[isUserUpdated, updateCount, token, setValue]);
 
   return (
     <Grid container direction="row" justifyContent="center" alignItems="center">
