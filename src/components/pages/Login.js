@@ -113,7 +113,7 @@ function Login() {
           <Typography component="h1" variant="h5">
             Faça o login
           </Typography>
-          {success && <SuccessAlert message="Login efetuado com suceeso!" />}
+          {success && <SuccessAlert message="Login efetuado com sucesso!" />}
           {error && <ErrorAlert message="Login ou senha inválidos." />}
           
           {redirect && (role === "Person") ? <Navigate to="/home" /> : (role === "Supervisor") ? <Navigate to="/admin" /> : (role === "Agent") ? <Navigate to="/agente"/> : ""}

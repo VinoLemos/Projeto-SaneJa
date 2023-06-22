@@ -132,10 +132,6 @@ function UpdateProfile() {
                     type="text"
                     {...register("name", {
                       required: "Nome obrigatório",
-                      pattern: {
-                        value: /^[a-zA-Z]+ [a-zA-Z]+$/,
-                        message: "Nome incompleto ou inválido",
-                      },
                     })}
                   />
                   {errors.name && (
