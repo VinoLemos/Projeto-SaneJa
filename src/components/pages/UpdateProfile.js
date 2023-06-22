@@ -11,18 +11,14 @@ import {
   Typography,
   FormHelperText,
   TextField,
-  InputLabel,
-  InputAdornment,
-  FormControl,
-  OutlinedInput,
-  IconButton,
+  InputLabel
 } from "@mui/material";
 import ManageAccountsOutlinedIcon from "@mui/icons-material/ManageAccountsOutlined";
-import Visibility from "@mui/icons-material/Visibility";
-import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
 import NavigationBar from "../layout/NavigationBar";
 import SubmitButton from "../layout/SubmitButton";
+import SuccessAlert from "../layout/SuccessAlert";
+import ErrorAlert from "../layout/ErrorAlert";
 import Loading from "../layout/Loading";
 
 function UpdateProfile() {
@@ -35,18 +31,45 @@ function UpdateProfile() {
 
   const token = localStorage.getItem("token");
   const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState(false);
   const [formattedBirthDate, setFormattedBirthDate] = useState("");
   const [userName, setUserName] = useState("");
   const [userId, setUserId] = useState("");
+  const [isUserUpdated, setUserUpdated] = useState(false);
+  const [updateCount, setUpdateCount] = useState(0);
 
-  const onSubmit = (data) => console.log(data);
-
-  const [showPassword, setShowPassword] = useState(false);
-
-  const handleClickShowPassword = () => setShowPassword((show) => !show);
-
-  const handleMouseDownPassword = (event) => {
-    event.preventDefault();
+  const onSubmit = (data) => {
+    const userUpdatedData = {
+      "id": userId,
+      "name": data.name,
+      "email": data.email,
+      "phoneNumber": data.phoneNumber,
+      "birthday": data.birthDay
+    }
+    axios.put(`${API_URL}/person/update-client`, userUpdatedData,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then(() => {
+        setSuccess(true);
+        setUserUpdated(true);
+        setUpdateCount((prevCount) => prevCount + 1);
+        setTimeout(() => {
+          setSuccess(false);
+        }, 3000);
+        setLoading(false);
+      })
+      .catch((error) => {
+        setError(true);
+        setTimeout(() => {
+          setError(false);
+        }, 3000);
+        setLoading(false);
+        console.log(error);
+      });
   };
 
   useEffect(() => {
@@ -71,7 +94,7 @@ function UpdateProfile() {
         setValue("email", data.data.email);
       })
       .catch((err) => console.log(err));
-  });
+  },[isUserUpdated, updateCount]);
 
   return (
     <Grid container direction="row" justifyContent="center" alignItems="center">
@@ -93,6 +116,10 @@ function UpdateProfile() {
             <Typography component="h1" variant="h5">
               {userName}
             </Typography>
+            {success && <SuccessAlert message="Dados atualizados com sucesso!" />}
+            {error && (
+              <ErrorAlert message="Ops, algo deu errado. Tente novamente mais tarde." />
+            )}
             <Box component="form" noValidate sx={{ mt: 1 }}>
               <Grid container spacing={1}>
                 <Grid item xs={6} sm={6}>
@@ -155,6 +182,7 @@ function UpdateProfile() {
                     fullWidth
                     name="birthDay"
                     value={formattedBirthDate}
+                    {...register("birthDay")}
                   />
                 </Grid>
               </Grid>
@@ -204,41 +232,6 @@ function UpdateProfile() {
                 </Grid>
               </Grid>
 
-              <FormControl
-                sx={{ mt: 2, mb: 2, width: "100%" }}
-                variant="outlined"
-              >
-                <InputLabel>Senha</InputLabel>
-                <OutlinedInput
-                  type={showPassword ? "text" : "password"}
-                  autoComplete="current-password"
-                  endAdornment={
-                    <InputAdornment position="end">
-                      <IconButton
-                        aria-label="toggle password visibility"
-                        onClick={handleClickShowPassword}
-                        onMouseDown={handleMouseDownPassword}
-                        edge="end"
-                      >
-                        {showPassword ? <VisibilityOff /> : <Visibility />}
-                      </IconButton>
-                    </InputAdornment>
-                  }
-                  label="Senha"
-                  {...register("password", {
-                    required: "Senha obrigatória",
-                    minLength: {
-                      value: 4,
-                      message: "Senha precisa ter entre 4 e 8 caracteres",
-                    },
-                  })}
-                />
-                {errors.password && (
-                  <FormHelperText sx={{ color: "#bf6560" }}>
-                    {errors.password.message}
-                  </FormHelperText>
-                )}
-              </FormControl>
               <SubmitButton
                 text={loading ? <Loading /> : "Atualizar"}
                 onClick={handleSubmit(onSubmit)}
