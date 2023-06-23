@@ -8,7 +8,7 @@ import {
   Card,
   CardContent,
   Typography,
-  Badge,
+  Box,
 } from "@mui/material";
 import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
 import { css } from "@emotion/css";
@@ -17,49 +17,17 @@ import NavigationBar from "../layout/NavigationBar";
 
 function Visits() {
   const [visits, setVisits] = useState([]);
-  const [statuses, setStatuses] = useState([]);
-  const [properties, setProperties] = useState([]);
+  const [agentName, setAgentName] = useState("");
   const token = localStorage.getItem("token");
 
   useEffect(() => {
-    fetch(
-      `${API_URL}/technicalvisit/get-person-visits`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    )
+    fetch(`${API_URL}/technicalvisit/get-person-visits`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
       .then((response) => response.json())
       .then((json) => setVisits(json))
-      .catch((err) => console.log(err));
-  }, [token]);
-
-  useEffect(() => {
-    fetch(
-      `${API_URL}/technicalvisit/list-visit-statuses`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    )
-      .then((response) => response.json())
-      .then((json) => setStatuses(json))
-      .catch((err) => console.log(err));
-  }, [token]);
-
-  useEffect(() => {
-    fetch(
-      `${API_URL}/ResidentialProperty/get-user-properties`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    )
-      .then((response) => response.json())
-      .then((json) => setProperties(json))
       .catch((err) => console.log(err));
   }, [token]);
 
@@ -68,7 +36,37 @@ function Visits() {
     const options = {
       dateStyle: "short",
     };
-    return dateTimeString != null ? dateTime.toLocaleString(undefined, options) : " ";
+    return dateTimeString != null
+      ? dateTime.toLocaleString(undefined, options)
+      : " ";
+  }
+
+  function getStatusColor(status) {
+    if (status === "Pending") {
+      return {
+        backgroundColor: "warning.main",
+        color: "warning.contrastText",
+      };
+    }
+    if (status === "In Progress") {
+      return {
+        backgroundColor: "info.main",
+        color: "info.contrastText",
+      };
+    }
+    if (status === "Finished") {
+      return {
+        backgroundColor: "success.main",
+        color: "success.contrastText",
+      };
+    }
+    if (status === "Canceled") {
+      return {
+        backgroundColor: "error.main",
+        color: "error.contrastText",
+      };
+    }
+    return {};
   }
 
   return (
@@ -104,58 +102,61 @@ function Visits() {
           flexWrap: "wrap",
         }}
       >
-        {visits.length === 0 && (
+        {visits.length === 0 ? (
           <Typography sx={{ fontSize: 20 }} color="primary.main" mt={4}>
             Você ainda não possui visitas agendadas.
           </Typography>
+        ) : (
+          visits.map((visit) => {
+            const statusColor = getStatusColor(visit.visitStatus);
+            return (
+              <Card
+                variant="outlined"
+                sx={{
+                  minWidth: 250,
+                  marginTop: 6,
+                  bgcolor: "secondary.main",
+                }}
+                key={visit.id}
+              >
+                <CardContent key={visit.id}>
+                  <Typography sx={{ fontSize: 20 }} color="primary.main">
+                    Imóvel: {visit.property.street}, {visit.property.number}
+                  </Typography>
+                  <Typography sx={{ fontSize: 16, color: "#666" }}>
+                    {visit.agentName !== null
+                      ? setAgentName(visit.agentName) && { agentName }
+                      : ""}
+                  </Typography>
+                  <Typography sx={{ fontSize: 14 }}>
+                    Data: {formatDateTime(visit.visitRequestDate)}
+                  </Typography>
+                  <Grid
+                    container
+                    justifyContent="center"
+                    alignItems="center"
+                    mt={3}
+                  >
+                    <Box
+                      key={visit.id}
+                      sx={{
+                        display: "inline-block",
+                        padding: "4px 8px",
+                        borderRadius: "4px",
+                        ...statusColor,
+                      }}
+                    >
+                      {visit.visitStatus === "Pending" && "Pendente"}
+                      {visit.visitStatus === "In Progress" && "Em Progresso"}
+                      {visit.visitStatus === "Finished" && "Finalizada"}
+                      {visit.visitStatus === "Canceled" && "Cancelada"}
+                    </Box>
+                  </Grid>
+                </CardContent>
+              </Card>
+            );
+          })
         )}
-        {visits.map((visit) => {
-          const property = properties.find(
-            (property) => property.id === visit.residentialPropertyId
-          );
-
-          if (!property) {
-            return null;
-          }
-          const propertyStreet = property.street;
-          const propertyNumber = property.number;
-
-          const statusInfo = statuses.find((status) => status.id === visit.statusId);
-
-          if (!statusInfo) {
-            return null
-          }
-
-          const statusMessage = statusInfo.status;
-
-          return (
-            <Card
-              variant="outlined"
-              sx={{
-                minWidth: 250,
-                marginTop: 6,
-                bgcolor: "secondary.main",
-              }}
-              key={visit.id}
-            >
-              <CardContent key={visit.id}>
-                <Typography sx={{ fontSize: 20 }} color="primary.main" >
-                  Imóvel: {propertyStreet}, {propertyNumber}
-                </Typography>
-                <Typography sx={{ fontSize: 16, color: "#666" }}>
-                  {visit.userId !== null ? "Nome agente" : "Visita pendente de aceitação."}
-                </Typography>
-                <Typography sx={{ fontSize: 14 }}>
-                  Data: {formatDateTime(visit.visitDate)}
-                </Typography>
-                <Grid container justifyContent="center" alignItems="center" mt={3}>
-                  <Badge badgeContent={statusMessage === "Pending" ? "Pendente" : statusMessage === "In Progress" ? "Em Progresso" : statusMessage === "Finished" ? "Finalizada" : "Cancelada"} color={statusMessage === "Pending" ? "warning" : statusMessage === "In Progress" ? "info" : statusMessage === "Finished" ? "success" : "error"} key={visit.id}/>
-                </Grid>
-              </CardContent>
-            </Card>
-          );
-        })}
-
       </Grid>
     </Grid>
   );
