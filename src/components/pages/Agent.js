@@ -1,9 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { API_URL } from "../../env";
 
-import { Grid, Typography, Modal, Box, Button } from "@mui/material";
+import {
+  Grid,
+  Typography,
+  Modal,
+  Box,
+  Button,
+} from "@mui/material";
 
-import NavBarEmployee from "../layout/NavBarEmployee";
+import NavBarAgent from "../layout/NavBarAgent";
 import PendingVisitsData from "../layout/PendingVisitsData";
 import SuccessAlert from "../layout/SuccessAlert";
 import ErrorAlert from "../layout/ErrorAlert";
@@ -124,7 +130,6 @@ function Agent() {
   }
 
   const handleAccept = () => {
-    console.log(details.visitId);
     fetch(`${API_URL}/technicalvisit/accept-visit`, {
       method: "PUT",
       headers: {
@@ -153,7 +158,7 @@ function Agent() {
 
   return (
     <Grid>
-      <NavBarEmployee />
+      <NavBarAgent />
       <Grid sx={{ textAlign: "center", marginTop: 5 }}>
         <Typography component="h1" variant="h5" marginBottom={2}>
           Área do Agente
@@ -183,6 +188,7 @@ function Agent() {
           />
         </Box>
       )}
+
       {details.length !== 0 && (
         <Modal
           open={open}

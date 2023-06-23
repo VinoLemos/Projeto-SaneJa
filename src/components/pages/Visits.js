@@ -14,8 +14,13 @@ import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOu
 import { css } from "@emotion/css";
 
 import NavigationBar from "../layout/NavigationBar";
+import SuccessAlert from "../layout/SuccessAlert";
+import ErrorAlert from "../layout/ErrorAlert";
 
 function Visits() {
+  const [loading, setLoading] = useState(false);
+  const [ error, setError] = useState(false);
+  const [ success, setSuccess] = useState(false);
   const [visits, setVisits] = useState([]);
   const [agentName, setAgentName] = useState("");
   const token = localStorage.getItem("token");
@@ -69,6 +74,40 @@ function Visits() {
     return {};
   }
 
+  const handleCancel = async (visitId) => {
+    try {
+      setLoading(true);
+      const response = await fetch(`${API_URL}/technicalvisit/cancel-visit`, {
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+          visitId: visitId,
+        },
+      });
+
+      if (response.ok) {
+        setSuccess(true);
+        setTimeout(() => {
+          setSuccess(false);
+        }, 3000);
+      } else {
+        setError(true);
+        setTimeout(() => {
+          setError(false);
+        }, 3000);
+      }
+    } catch (error) {
+      setError(true);
+      setTimeout(() => {
+        setError(false);
+      }, 3000);
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <Grid container direction="row" justifyContent="center" alignItems="center">
       <NavigationBar />
@@ -102,6 +141,10 @@ function Visits() {
           flexWrap: "wrap",
         }}
       >
+        {success && <SuccessAlert message="Visita cancelada com sucesso!" />}
+        {error && (
+          <ErrorAlert message="Ops, algo deu errado. Tente novamente mais tarde." />
+        )}
         {visits.length === 0 ? (
           <Typography sx={{ fontSize: 20 }} color="primary.main" mt={4}>
             Você ainda não possui visitas agendadas.
@@ -151,6 +194,16 @@ function Visits() {
                       {visit.visitStatus === "Finished" && "Finalizada"}
                       {visit.visitStatus === "Canceled" && "Cancelada"}
                     </Box>
+                    {visit.visitStatus === "Pending" && (
+                      <Button
+                        variant="contained"
+                        color="error"
+                        onClick={() => handleCancel(visit.visitId)}
+                        sx={{ marginLeft: 2 }}
+                      >
+                        Cancelar
+                      </Button>
+                    )}
                   </Grid>
                 </CardContent>
               </Card>

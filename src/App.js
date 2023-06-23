@@ -20,6 +20,7 @@ import UpdateProfile from "./components/pages/UpdateProfile";
 import Visits from "./components/pages/Visits";
 import Administrator from "./components/pages/Administrator";
 import Agent from "./components/pages/Agent";
+import AgentVisits from "./components/pages/AgentVisits";
 
 const Private = ({ children }) => {
   const authenticated = localStorage.getItem("token");
@@ -156,6 +157,15 @@ function App() {
           element={
             <IsAgent>
               <Agent />
+            </IsAgent>
+          }
+        />
+        <Route
+          exact
+          path="/agente-visitas"
+          element={
+            <IsAgent>
+              <AgentVisits />
             </IsAgent>
           }
         />

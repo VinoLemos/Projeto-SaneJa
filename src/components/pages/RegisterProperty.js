@@ -207,8 +207,19 @@ function RegisterProperty() {
                   label="RGI"
                   name="rgi"
                   type="number"
+                  inputProps={{
+                    maxLength: 11,
+                  }}
                   {...register("rgi", {
                     required: "RGI obrigatório",
+                    minLength: {
+                      value: 11,
+                      message: "O RGI deve ter 11 dígitos",
+                    },
+                    maxLength: {
+                      value: 11,
+                      message: "O RGI deve ter 11 dígitos",
+                    },
                   })}
                 />
                 {errors.rgi && (
@@ -233,7 +244,10 @@ function RegisterProperty() {
                 )}
               </Grid>
             </Grid>
-            <SubmitButton text={loading ? <Loading/> : "Cadastrar"} onClick={handleSubmit(onSubmit)} />
+            <SubmitButton
+              text={loading ? <Loading /> : "Cadastrar"}
+              onClick={handleSubmit(onSubmit)}
+            />
           </Box>
         </Box>
       </Grid>
