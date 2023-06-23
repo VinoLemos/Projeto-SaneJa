@@ -9,9 +9,27 @@ import SuccessAlert from "../layout/SuccessAlert";
 import ErrorAlert from "../layout/ErrorAlert";
 
 const columns = [
-  { field: "visitDate", headerName: "Data", width: 100 },
-  { field: "status", headerName: "Status", width: 100 },
-  { field: "propertyOwner", headerName: "Solicitante", width: 300 },
+  {
+    field: "visitDate",
+    headerName: "Data",
+    width: 100,
+    headerClassName: "super-app-theme--header",
+    headerAlign: "center",
+  },
+  {
+    field: "status",
+    headerName: "Status",
+    width: 100,
+    headerClassName: "super-app-theme--header",
+    headerAlign: "center",
+  },
+  {
+    field: "propertyOwner",
+    headerName: "Solicitante",
+    width: 300,
+    headerClassName: "super-app-theme--header",
+    headerAlign: "center",
+  },
 ];
 
 const modalStyle = {
@@ -149,12 +167,21 @@ function Agent() {
         </Typography>
       </Grid>
       {visits.lenght !== 0 && (
-        <PendingVisitsData
-          rows={visits}
-          columns={columns}
-          handleClick={handleClick}
-          handleOpen={handleOpen}
-        />
+        <Box
+          sx={{
+            "& .super-app-theme--header": {
+              fontStyle: "italic",
+              backgroundColor: "rgba(120, 130, 125, 0.55)",
+            },
+          }}
+        >
+          <PendingVisitsData
+            rows={visits}
+            columns={columns}
+            handleClick={handleClick}
+            handleOpen={handleOpen}
+          />
+        </Box>
       )}
       {details.length !== 0 && (
         <Modal

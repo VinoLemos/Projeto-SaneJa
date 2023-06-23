@@ -13,25 +13,40 @@ const gridStyle = {
 
 function VisitsData({ rows, columns, handleClick, handleOpen }) {
   return (
-    <Grid container>
-      {rows.length === 0 ? (
-        <Box sx={{display: "flex", justifyContent: "center", width: "100vw"}}>
-          <Typography variant="p" >
-          Não existem visitas pendentes no momento.
-        </Typography>
-        </Box>
-        
-      ) : (
-        <DataGrid
-          rows={rows}
-          columns={columns}
-          style={gridStyle}
-          onRowClick={(params) => {
-            handleClick(params.row);
-            handleOpen();
-          }}
-        />
-      )}
+    <Grid container sx={{ display: "flex", justifyContent: "center" }}>
+      <Grid
+        width="50vw"
+        sx={{ display: "flex", justifyContent: "center", textAlign: "center" }}
+      >
+        {rows.length === 0 ? (
+          <Box>
+            <Typography variant="p">
+              Não existem visitas pendentes no momento.
+            </Typography>
+          </Box>
+        ) : (
+          <DataGrid
+            rows={rows}
+            columns={columns}
+            style={gridStyle}
+            onRowClick={(params) => {
+              handleClick(params.row);
+              handleOpen();
+            }}
+            sx={{
+              boxShadow: 2,
+              border: 2,
+              borderColor: "primary.light",
+              "& .MuiDataGrid-cell": {
+                borderColor: "primary.light"
+              },
+              "& .MuiDataGrid-cell:hover": {
+                color: "primary.main",
+              },
+            }}
+          />
+        )}
+      </Grid>
     </Grid>
   );
 }
