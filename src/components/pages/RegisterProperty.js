@@ -28,6 +28,7 @@ function RegisterProperty() {
     formState: { errors },
   } = useForm();
 
+  const [errorCEP, setErrorCEP] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
 
@@ -81,6 +82,11 @@ function RegisterProperty() {
         setValue("city", data.city);
         setValue("uf", data.state);
         setLoading(false);
+      }).catch(() => {
+        setErrorCEP(true);
+        setTimeout(() => {
+          setErrorCEP(false);
+        }, 2000);
       });
   };
 
@@ -106,6 +112,9 @@ function RegisterProperty() {
           {success && <SuccessAlert message="Imóvel cadastrado com sucesso!" />}
           {error && (
             <ErrorAlert message="Ops, algo deu errado. Tente novamente mais tarde." />
+          )}
+          {errorCEP && (
+            <ErrorAlert message="CEP inválido" />
           )}
           <Box component="form" noValidate sx={{ mt: 1, maxWidth: "50vw" }}>
             <Grid container spacing={1} marginBottom={2}>
@@ -206,20 +215,12 @@ function RegisterProperty() {
                   fullWidth
                   label="RGI"
                   name="rgi"
-                  type="number"
+                  type="text"
                   inputProps={{
                     maxLength: 11,
                   }}
                   {...register("rgi", {
                     required: "RGI obrigatório",
-                    minLength: {
-                      value: 11,
-                      message: "O RGI deve ter 11 dígitos",
-                    },
-                    maxLength: {
-                      value: 11,
-                      message: "O RGI deve ter 11 dígitos",
-                    },
                   })}
                 />
                 {errors.rgi && (
@@ -233,6 +234,11 @@ function RegisterProperty() {
                   label="Hidrômetro"
                   name="hidrometer"
                   type="number"
+                  onInput={(e) => {
+                    e.target.value = Math.max(0, parseInt(e.target.value))
+                      .toString()
+                      .slice(0, 6);
+                  }}
                   {...register("hidrometer", {
                     required: "Hidrômetro obrigatório",
                   })}

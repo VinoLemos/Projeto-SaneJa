@@ -19,8 +19,8 @@ import ErrorAlert from "../layout/ErrorAlert";
 
 function Visits() {
   const [loading, setLoading] = useState(false);
-  const [ error, setError] = useState(false);
-  const [ success, setSuccess] = useState(false);
+  const [error, setError] = useState(false);
+  const [success, setSuccess] = useState(false);
   const [visits, setVisits] = useState([]);
   const [agentName, setAgentName] = useState("");
   const token = localStorage.getItem("token");
@@ -84,6 +84,7 @@ function Visits() {
           "Content-Type": "application/json",
           visitId: visitId,
         },
+
       });
 
       if (response.ok) {
@@ -91,6 +92,7 @@ function Visits() {
         setTimeout(() => {
           setSuccess(false);
         }, 3000);
+        location.reload();
       } else {
         setError(true);
         setTimeout(() => {
@@ -129,6 +131,10 @@ function Visits() {
           </Link>
         </Button>
       </Grid>
+      {success && <SuccessAlert message="Visita cancelada com sucesso!" />}
+      {error && (
+        <ErrorAlert message="Ops, algo deu errado. Tente novamente mais tarde." />
+      )}
 
       <Grid
         item
@@ -141,10 +147,7 @@ function Visits() {
           flexWrap: "wrap",
         }}
       >
-        {success && <SuccessAlert message="Visita cancelada com sucesso!" />}
-        {error && (
-          <ErrorAlert message="Ops, algo deu errado. Tente novamente mais tarde." />
-        )}
+
         {visits.length === 0 ? (
           <Typography sx={{ fontSize: 20 }} color="primary.main" mt={4}>
             Você ainda não possui visitas agendadas.

@@ -11,11 +11,6 @@ import {
   Card,
   CardContent,
   Typography,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
   Modal,
   Box,
   TextField,
@@ -56,33 +51,16 @@ function Properties() {
 
   const [properties, setProperties] = useState([]);
   const token = localStorage.getItem("token");
-  const [openDialog, setOpenDialog] = React.useState(false);
   const [open, setOpen] = React.useState(false);
   const [selectedProperty, setSelectedProperty] = useState({});
   const [isPropertyUpdated, setPropertyUpdated] = useState(false);
   const [loading, setLoading] = React.useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
-
-  const handleClickOpenDialog = (property) => {
-    setSelectedProperty(property);
-    setOpenDialog(true);
-  };
-
-  const handleCloseDialog = () => {
-    setOpenDialog(false);
-  };
+  const [errorCEP, setErrorCEP] = useState(false);
 
   const handleClose = () => {
     setOpen(false);
-  };
-
-  const handleDeleteProperty = () => {
-    setProperties((currentProperties) =>
-      currentProperties.filter((property) => property.id !== selectedProperty)
-    );
-
-    handleClose();
   };
 
   const checkCEP = (e) => {
@@ -96,6 +74,11 @@ function Properties() {
         setValue("city", data.city);
         setValue("uf", data.state);
         setLoading(false);
+      }).catch(() => {
+        setErrorCEP(true);
+        setTimeout(() => {
+          setErrorCEP(false);
+        }, 2000);
       });
   };
 
@@ -113,7 +96,7 @@ function Properties() {
       "rgi": data.rgi,
       "hidrometer": data.hidrometer,
     }
-  
+
     await axios
       .put(
         `${API_URL}/residentialproperty/update-property`,
@@ -163,19 +146,19 @@ function Properties() {
 
   function handleUpdateClick(property) {
     setSelectedProperty(property);
-    const rgi = property.rgi;
+
     setOpen(true);
     setPropertyUpdated(false);
+    const rgi =  property.rgi;
     const fetchProperty = async () => {
       try {
         setLoading(true);
         const response = await axios.get(
-          `${API_URL}/residentialproperty/get-property-by-rgi`,
+          `${API_URL}/residentialproperty/get-property-by-rgi?Rgi=${rgi}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
-              "rgi": `${parseInt(rgi, 10)}`
-            },
+            }
           }
         );
         const property = response.data;
@@ -195,6 +178,9 @@ function Properties() {
         console.log(error);
         setLoading(false);
         setError(true);
+        setTimeout(() => {
+          setError(false);
+        },3000)
       }
     };
 
@@ -271,46 +257,13 @@ function Properties() {
                 sx={{
                   marginTop: 2,
                   display: "flex",
-                  flexDirection: "row",
-                  flexWrap: "wrap",
-                  justifyContent: "space-between",
+                  flexDirection: "column"
                 }}
               >
                 <Button variant="outlined" color="success" onClick={() => handleUpdateClick(property)}>
                   Alterar
                 </Button>
-                <Button
-                  variant="outlined"
-                  color="error"
-                  onClick={() => handleClickOpenDialog(property.id)}
-                >
-                  Excluir
-                </Button>
-                <Dialog
-                  open={openDialog}
-                  onClose={handleCloseDialog}
-                  aria-labelledby="alert-dialog-title"
-                  aria-describedby="alert-dialog-description"
-                >
-                  <DialogTitle id="alert-dialog-title">
-                    {"Excluir imóvel"}
-                  </DialogTitle>
-                  <DialogContent>
-                    <DialogContentText id="alert-dialog-description">
-                      Deseja excluir o imóvel?
-                    </DialogContentText>
-                  </DialogContent>
-                  <DialogActions>
-                    <Button onClick={handleCloseDialog}>Cancelar</Button>
-                    <Button
-                      color="error"
-                      onClick={handleDeleteProperty}
-                      autoFocus
-                    >
-                      Excluir
-                    </Button>
-                  </DialogActions>
-                </Dialog>
+
                 <Modal open={selectedProperty !== null ? open : ""}
                   onClose={handleClose}
                   aria-labelledby="modal-modal-title">
@@ -321,6 +274,9 @@ function Properties() {
                     {success && <SuccessAlert message="Imóvel atualizado com sucesso!" />}
                     {error && (
                       <ErrorAlert message="Ops, algo deu errado. Tente novamente mais tarde." />
+                    )}
+                    {errorCEP && (
+                      <ErrorAlert message="CEP inválido" />
                     )}
                     <Box component="form" noValidate sx={{ mt: 1, maxWidth: "50vw" }}>
                       <Grid container spacing={1} marginBottom={2}>
@@ -422,7 +378,10 @@ function Properties() {
                             fullWidth
                             label="RGI"
                             name="rgi"
-                            type="number"
+                            type="text"
+                            inputProps={{
+                              maxLength: 11,
+                            }}
                             {...register("rgi", {
                               required: "RGI obrigatório",
                             })}
@@ -450,7 +409,7 @@ function Properties() {
                           )}
                         </Grid>
                       </Grid>
-                      <SubmitButton text={loading ? <CircularProgress sx={{ color: "#3b8786", alignItems: "center" }}/> : "Atualizar"} onClick={handleSubmit(onSubmit)} />
+                      <SubmitButton text={loading ? <CircularProgress sx={{ color: "#3b8786", alignItems: "center" }} /> : "Atualizar"} onClick={handleSubmit(onSubmit)} />
                     </Box>
                   </Box>
                 </Modal>
