@@ -143,6 +143,11 @@ function RegisterProperty() {
                   label="Número"
                   name="number"
                   type="number"
+                  onInput={(e) => {
+                    e.target.value = Math.max(0, parseInt(e.target.value))
+                      .toString()
+                      .slice(0, 6);
+                  }}
                   {...register("number", {
                     required: "Numero obrigatório",
                   })}
@@ -169,6 +174,7 @@ function RegisterProperty() {
                   fullWidth
                   label="Complemento"
                   name="complement"
+                  inputProps={{ maxLength: 20 }}
                   type="text"
                   {...register("complement", {
                     required: "Complemento obrigatório",
@@ -207,20 +213,11 @@ function RegisterProperty() {
                   label="RGI"
                   name="rgi"
                   type="number"
-                  inputProps={{
-                    maxLength: 11,
+                  onInput={(e) => {
+                    e.target.value = Math.max(0, parseInt(e.target.value))
+                      .toString()
+                      .slice(0, 11);
                   }}
-                  {...register("rgi", {
-                    required: "RGI obrigatório",
-                    minLength: {
-                      value: 11,
-                      message: "O RGI deve ter 11 dígitos",
-                    },
-                    maxLength: {
-                      value: 11,
-                      message: "O RGI deve ter 11 dígitos",
-                    },
-                  })}
                 />
                 {errors.rgi && (
                   <FormHelperText sx={{ color: "#bf6560" }}>
@@ -236,6 +233,11 @@ function RegisterProperty() {
                   {...register("hidrometer", {
                     required: "Hidrômetro obrigatório",
                   })}
+                  onInput={(e) => {
+                    e.target.value = Math.max(0, parseInt(e.target.value))
+                      .toString()
+                      .slice(0, 6);
+                  }}
                 />
                 {errors.hidrometer && (
                   <FormHelperText sx={{ color: "#bf6560" }}>
