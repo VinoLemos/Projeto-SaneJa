@@ -23,7 +23,7 @@ import Agent from "./components/pages/Agent";
 import AgentVisits from "./components/pages/AgentVisits";
 
 const Private = ({ children }) => {
-  const authenticated = localStorage.getItem("token");
+  const authenticated = sessionStorage.getItem("token");
 
   if (!authenticated) {
     return <Navigate to="/login" />;
@@ -33,7 +33,7 @@ const Private = ({ children }) => {
 };
 
 const IsAdmin = ({ children }) => {
-  const admin = localStorage.getItem("role");
+  const admin = sessionStorage.getItem("role");
 
   if (admin !== "Supervisor") {
     return <Navigate to="/login" />;
@@ -43,7 +43,7 @@ const IsAdmin = ({ children }) => {
 };
 
 const IsAgent = ({ children }) => {
-  const agent = localStorage.getItem("role");
+  const agent = sessionStorage.getItem("role");
 
   if (agent !== "Agent") {
     return <Navigate to="/login" />;

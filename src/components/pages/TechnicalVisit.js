@@ -32,7 +32,7 @@ function TechnicalVisit() {
   const [properties, setProperties] = useState([]);
   const [selectedPropertyId, setSelectedPropertyId] = useState('');
   const [loading, setLoading] = React.useState(false);
-  const token = localStorage.getItem("token");
+  const token = sessionStorage.getItem("token");
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
 

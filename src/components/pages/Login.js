@@ -38,7 +38,7 @@ function Login() {
   const [redirect, setRedirect] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
-  const role = localStorage.getItem("role");
+  const role = sessionStorage.getItem("role");
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -64,8 +64,8 @@ function Login() {
       .then((res) => {
         const token = res.data.token;
         const role = res.data.userRoles;
-        localStorage.setItem("token", token);
-        localStorage.setItem("role", role);
+        sessionStorage.setItem("token", token);
+        sessionStorage.setItem("role", role);
         setLoading(false);
         setSuccess(true);
         setTimeout(() => {
@@ -115,8 +115,8 @@ function Login() {
           </Typography>
           {success && <SuccessAlert message="Login efetuado com sucesso!" />}
           {error && <ErrorAlert message="Login ou senha inválidos." />}
-          
-          {redirect && (role === "Person") ? <Navigate to="/home" /> : (role === "Supervisor") ? <Navigate to="/admin" /> : (role === "Agent") ? <Navigate to="/agente"/> : ""}
+
+          {redirect && (role === "Person") ? <Navigate to="/home" /> : (role === "Supervisor") ? <Navigate to="/admin" /> : (role === "Agent") ? <Navigate to="/agente" /> : ""}
           <Box component="form" noValidate sx={{ mt: 1, width: "30ch" }}>
             <FormControl sx={{ width: "30ch" }}>
               <TextField

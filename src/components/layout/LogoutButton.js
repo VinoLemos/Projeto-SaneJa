@@ -7,8 +7,8 @@ function LogoutButton() {
   const [redirect, setRedirect] = useState(false);
 
   const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("role");
+    sessionStorage.removeItem("token");
+    sessionStorage.removeItem("role");
     setRedirect(true);
   };
 

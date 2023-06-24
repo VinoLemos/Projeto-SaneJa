@@ -23,7 +23,7 @@ function Visits() {
   const [ success, setSuccess] = useState(false);
   const [visits, setVisits] = useState([]);
   const [agentName, setAgentName] = useState("");
-  const token = localStorage.getItem("token");
+  const token = sessionStorage.getItem("token");
 
   useEffect(() => {
     fetch(`${API_URL}/technicalvisit/get-person-visits`, {

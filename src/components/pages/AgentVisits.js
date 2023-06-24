@@ -121,7 +121,7 @@ function AgentVisits() {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
   const [needsReturn, setNeedsReturn] = useState(false);
-  const token = localStorage.getItem("token");
+  const token = sessionStorage.getItem("token");
 
   const handleOpenAgentVisits = () => setOpenAgentVisits(true);
   const handleCloseAgentVisits = () => setOpenAgentVisits(false);

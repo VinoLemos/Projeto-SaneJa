@@ -13,7 +13,7 @@ import NavigationBar from "../layout/NavigationBar";
 import { css } from "@emotion/css";
 
 function Homepage() {
-  const token = localStorage.getItem("token");
+  const token = sessionStorage.getItem("token");
   const [userName, setUserName] = useState("");
 
   useEffect(() => {

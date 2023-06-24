@@ -33,7 +33,7 @@ function RegisterProperty() {
 
   const navigate = useNavigate();
 
-  const token = localStorage.getItem("token");
+  const token = sessionStorage.getItem("token");
 
   const onSubmit = async (data) => {
     await axios

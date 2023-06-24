@@ -83,7 +83,7 @@ function Agent() {
   const [open, setOpen] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
-  const token = localStorage.getItem("token");
+  const token = sessionStorage.getItem("token");
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);

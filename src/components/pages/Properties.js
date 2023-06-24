@@ -55,7 +55,7 @@ function Properties() {
   } = useForm();
 
   const [properties, setProperties] = useState([]);
-  const token = localStorage.getItem("token");
+  const token = sessionStorage.getItem("token");
   const [openDialog, setOpenDialog] = React.useState(false);
   const [open, setOpen] = React.useState(false);
   const [selectedProperty, setSelectedProperty] = useState({});
@@ -100,7 +100,7 @@ function Properties() {
   };
 
   const onSubmit = async (data) => {
-    const id = localStorage.getItem("id");
+    const id = sessionStorage.getItem("id");
     const propertyUpdatedData = {
       "id": id,
       "street": data.street,
@@ -240,7 +240,7 @@ function Properties() {
           </Typography>
         )}
         {properties.map((property) => (
-          localStorage.setItem("id", selectedProperty.id),
+          sessionStorage.setItem("id", selectedProperty.id),
           <Card
             variant="outlined"
             sx={{

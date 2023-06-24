@@ -29,7 +29,7 @@ function UpdateProfile() {
     formState: { errors },
   } = useForm();
 
-  const token = localStorage.getItem("token");
+  const token = sessionStorage.getItem("token");
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);

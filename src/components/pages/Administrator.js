@@ -72,7 +72,7 @@ function Administrator() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const token = localStorage.getItem("token");
+  const token = sessionStorage.getItem("token");
 
   const onSubmit = async (data) => {
     try {
