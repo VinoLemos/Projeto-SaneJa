@@ -18,7 +18,6 @@ import SuccessAlert from "../layout/SuccessAlert";
 import ErrorAlert from "../layout/ErrorAlert";
 
 function Visits() {
-  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [success, setSuccess] = useState(false);
   const [visits, setVisits] = useState([]);
@@ -76,7 +75,6 @@ function Visits() {
 
   const handleCancel = async (visitId) => {
     try {
-      setLoading(true);
       const response = await fetch(`${API_URL}/technicalvisit/cancel-visit`, {
         method: "PUT",
         headers: {
@@ -105,8 +103,6 @@ function Visits() {
         setError(false);
       }, 3000);
       console.log(error);
-    } finally {
-      setLoading(false);
     }
   };
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useCallback } from "react";
 import { API_URL } from "../../env";
 import { useForm } from "react-hook-form";
 import axios from "axios";
@@ -126,11 +126,7 @@ function AgentVisits() {
   const handleOpenAgentVisits = () => setOpenAgentVisits(true);
   const handleCloseAgentVisits = () => setOpenAgentVisits(false);
 
-  useEffect(() => {
-    fetchAgentVisits();
-  }, []);
-
-  function fetchAgentVisits() {
+  const fetchAgentVisits = useCallback(() => {
     fetch(`${API_URL}/technicalvisit/get-agent-visits`, {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -152,10 +148,10 @@ function AgentVisits() {
             visit.status === "Pending"
               ? "Pendente"
               : visit.status === "In Progress"
-              ? "Em Progresso"
-              : visit.status === "Finished"
-              ? "Concluída"
-              : "Cancelada";
+                ? "Em Progresso"
+                : visit.status === "Finished"
+                  ? "Concluída"
+                  : "Cancelada";
           const formatedHomolog = visit.homologated ? "Sim" : "Não";
           return {
             ...visit,
@@ -169,7 +165,7 @@ function AgentVisits() {
         setAgentVisits(formatedVisits);
       })
       .catch((err) => console.log(err));
-  }
+  }, [token]);
 
   const formatedHomologationDate = (event) => new Date(event).toLocaleDateString();
 
@@ -189,33 +185,6 @@ function AgentVisits() {
       .catch((err) => console.log(err));
   }
 
-  const handleFinish = () => {
-    fetch(`${API_URL}/technicalvisit/finish-visit`, {
-      method: "PUT",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        visitId: detailsAgentVisit.visitId,
-      },
-    })
-      .then((response) => {
-        if (response.status === 200) {
-          handleCloseAgentVisits();
-          setSuccess(true);
-          setTimeout(() => {
-            setSuccess(false);
-          }, 3000);
-          fetchAgentVisits();
-          window.location.reload();
-        }
-      })
-      .catch((err) => {
-        setError(true);
-        setTimeout(() => {
-          setError(false);
-        }, 3000);
-        console.log(err);
-      });
-  };
   const handleReturn = (data) => {
     const returnData = {
       VisitId: detailsAgentVisit.visitId,

@@ -58,6 +58,7 @@ function Properties() {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
   const [errorCEP, setErrorCEP] = useState(false);
+  localStorage.setItem("id", selectedProperty.id);
 
   const handleClose = () => {
     setOpen(false);
@@ -225,8 +226,8 @@ function Properties() {
             Você ainda não possui imóvel cadastrado.
           </Typography>
         )}
+        
         {properties.map((property) => (
-          localStorage.setItem("id", selectedProperty.id),
           <Card
             variant="outlined"
             sx={{
