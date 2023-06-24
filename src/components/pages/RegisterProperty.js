@@ -37,6 +37,7 @@ function RegisterProperty() {
   const token = localStorage.getItem("token");
 
   const onSubmit = async (data) => {
+    console.log(data);
     await axios
       .post(
         `${API_URL}/residentialproperty/register-property`,
@@ -44,6 +45,7 @@ function RegisterProperty() {
         {
           headers: {
             Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json'
           },
         },
         setLoading(true)
@@ -64,7 +66,7 @@ function RegisterProperty() {
           setError(false);
         }, 3000);
         setLoading(false);
-        console.log(error);
+        console.log(error.response.data);
       });
   };
 

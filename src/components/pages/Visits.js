@@ -92,7 +92,7 @@ function Visits() {
         setTimeout(() => {
           setSuccess(false);
         }, 3000);
-        location.reload();
+        // location.reload();
       } else {
         setError(true);
         setTimeout(() => {

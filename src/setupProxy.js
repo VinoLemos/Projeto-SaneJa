@@ -1,14 +1,23 @@
 const { createProxyMiddleware } = require("http-proxy-middleware");
-const corsConfig = require('./cors.js');
+const cors = require('cors');
 
 module.exports = function (app) {
-  corsConfig(app);
+
+  const corsOptions = {
+    origin: '*',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    preflightContinue: false,
+    optionsSuccessStatus: 204,
+  };
+
+  app.use(cors(corsOptions));
 
   app.use(
-    "/api",
+    '/api',
     createProxyMiddleware({
-      target: "https://localhost:7021",
+      target: "https://sanejaapi.azurewebsites.net",
       changeOrigin: true,
+      pathRewrite: { "^/api": "" }
     })
   );
 };
